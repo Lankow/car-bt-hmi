@@ -19,6 +19,7 @@ qt_add_qml_module(apphyundai-bt-hmi
         Main.qml
         SOURCES DataProvider.h DataProvider.cpp
         SOURCES ObdReader.h ObdReader.cpp
+        QML_FILES Gauge.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
