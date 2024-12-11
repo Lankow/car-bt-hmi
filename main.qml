@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import com.voknal.gauge 1.0
 
 Window {
     flags: Qt.FramelessWindowHint
@@ -19,9 +20,13 @@ Window {
     visible: true
     title: qsTr("Hyundai-BT-HMI")
 
-    Rectangle{
-        id: background
-        anchors.fill: parent
-        color: "red"
+    Gauge{
+        Text{text: qsTr("Gauge")}
     }
+
+    // Rectangle{
+    //     id: background
+    //     anchors.fill: parent
+    //     color: "red"
+    // }
 }
