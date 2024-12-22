@@ -23,10 +23,4 @@ Window {
     Gauge{
         Text{text: qsTr("Gauge")}
     }
-
-    // Rectangle{
-    //     id: background
-    //     anchors.fill: parent
-    //     color: "red"
-    // }
 }
