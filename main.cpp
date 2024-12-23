@@ -13,12 +13,19 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
+
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+
+    QObject *object = engine.rootObjects()[0];
+    QObject *speedGauge = object->findChild<QObject*>("speedGauge");
+
+    Gauge *ptrSpeedGauge = dynamic_cast<Gauge*>(speedGauge);
+    ptrSpeedGauge->setGaugeValue(120);
 
     return app.exec();
 }

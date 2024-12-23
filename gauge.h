@@ -8,17 +8,17 @@ class Gauge : public QQuickPaintedItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(qreal gaugeValue READ getgaugeValue WRITE setgaugeValue NOTIFY gaugeValueChanged)
+    Q_PROPERTY(qreal gaugeValue READ getGaugeValue WRITE setGaugeValue NOTIFY gaugeValueChanged)
     Q_PROPERTY(qreal gaugeSize READ getGaugeSize WRITE setGaugeSize NOTIFY gaugeSizeChanged)
-    Q_PROPERTY(qreal startAngle READ getstartAngle WRITE setstartAngle NOTIFY startAngleChanged)
-    Q_PROPERTY(qreal alignAngle READ getalignAngle WRITE setalignAngle NOTIFY alignAngleChanged)
-    Q_PROPERTY(qreal lowestRange READ getlowestRange WRITE setlowestRange NOTIFY lowestRangeChanged)
-    Q_PROPERTY(qreal highestRange READ gethighestRange WRITE sethighestRange NOTIFY highestRangeChanged)
-    Q_PROPERTY(int arcWidth READ getarcWidth WRITE setarcWidth NOTIFY arcWidthChanged)
-    Q_PROPERTY(QColor outerColor READ getouterColor WRITE setouterColor NOTIFY outerColorChanged)
-    Q_PROPERTY(QColor innerColor READ getinnerColor WRITE setinnerColor NOTIFY innerColorChanged)
-    Q_PROPERTY(QColor textColor READ gettextColor WRITE settextColor NOTIFY textColorChanged)
-    Q_PROPERTY(QColor backgroundColor READ getbackgroundColor WRITE setbackgroundColor NOTIFY backgroundColorChanged)
+    Q_PROPERTY(qreal startAngle READ getStartAngle WRITE setStartAngle NOTIFY startAngleChanged)
+    Q_PROPERTY(qreal alignAngle READ getAlignAngle WRITE setAlignAngle NOTIFY alignAngleChanged)
+    Q_PROPERTY(qreal lowestRange READ getLowestRange WRITE setLowestRange NOTIFY lowestRangeChanged)
+    Q_PROPERTY(qreal highestRange READ getHighestRange WRITE setHighestRange NOTIFY highestRangeChanged)
+    Q_PROPERTY(int arcWidth READ getArcWidth WRITE setArcWidth NOTIFY arcWidthChanged)
+    Q_PROPERTY(QColor outerColor READ getOuterColor WRITE setOuterColor NOTIFY outerColorChanged)
+    Q_PROPERTY(QColor innerColor READ getInnerColor WRITE setInnerColor NOTIFY innerColorChanged)
+    Q_PROPERTY(QColor textColor READ getTextColor WRITE setTextColor NOTIFY textColorChanged)
+    Q_PROPERTY(QColor backgroundColor READ getBackgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged)
 
 public:
     Gauge(QQuickItem *parent = 0);
@@ -47,6 +47,7 @@ public:
     void setInnerColor(QColor innerColor);
     void setTextColor(QColor textColor);
     void setBackgroundColor(QColor backgroundColor);
+
 signals:
     void gaugeSizeChanged();
     void startAngleChanged();
