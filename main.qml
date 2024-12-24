@@ -68,9 +68,8 @@ Window {
         anchors.leftMargin: 30
         width: gaugeSize
         height: gaugeSize
-        lowestRange: lowestRange
-        highestRange: highestRange
-        outerColor: outerColor
+        lowestRange: 0
+        highestRange: 200
     }
 
     Gauge{
@@ -83,8 +82,7 @@ Window {
         anchors.rightMargin: 30
         width: gaugeSize
         height: gaugeSize
-        lowestRange: lowestRange
-        highestRange: highestRange
-        outerColor: outerColor
+        lowestRange: 0
+        highestRange: 5000
     }
 }

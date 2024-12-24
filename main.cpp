@@ -34,9 +34,13 @@ int main(int argc, char *argv[])
 
     QObject *object = engine.rootObjects()[0];
     QObject *speedGauge = object->findChild<QObject*>("speedGauge");
+    QObject *rpmGauge = object->findChild<QObject*>("rpmGauge");
 
     Gauge *ptrSpeedGauge = dynamic_cast<Gauge*>(speedGauge);
-    ptrSpeedGauge->setGaugeValue(120);
+    Gauge *ptrRpmGauge = dynamic_cast<Gauge*>(rpmGauge);
+
+    ptrSpeedGauge->setGaugeValue(80);
+    ptrRpmGauge->setGaugeValue(2000);
 
     return app.exec();
 }

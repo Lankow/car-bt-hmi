@@ -17,7 +17,6 @@ class Gauge : public QQuickPaintedItem
     Q_PROPERTY(qreal gaugeSize READ getGaugeSize WRITE setGaugeSize NOTIFY gaugeSizeChanged)
     Q_PROPERTY(qreal lowestRange READ getLowestRange WRITE setLowestRange NOTIFY lowestRangeChanged)
     Q_PROPERTY(qreal highestRange READ getHighestRange WRITE setHighestRange NOTIFY highestRangeChanged)
-    Q_PROPERTY(QColor outerColor READ getOuterColor WRITE setOuterColor NOTIFY outerColorChanged)
     Q_PROPERTY(QString gaugeUnit READ getGaugeUnit WRITE setGaugeUnit NOTIFY gaugeUnitChanged)
 
 public:
@@ -29,7 +28,6 @@ public:
     qreal getGaugeSize() const;
     qreal getLowestRange() const;
     qreal getHighestRange() const;
-    QColor getOuterColor() const;
     QString getGaugeUnit() const;
 
     // Setters
@@ -37,7 +35,6 @@ public:
     void setGaugeSize(qreal gaugeSize);
     void setLowestRange(qreal lowestRange);
     void setHighestRange(qreal highestRange);
-    void setOuterColor(QColor outerColor);
     void setGaugeUnit(QString gaugeUnit);
 
 signals:
@@ -45,7 +42,6 @@ signals:
     void gaugeSizeChanged();
     void lowestRangeChanged();
     void highestRangeChanged();
-    void outerColorChanged();
     void gaugeUnitChanged();
 
 private:
@@ -53,7 +49,6 @@ private:
     qreal m_lowestRange; ///< Lowest range of the gauge.
     qreal m_highestRange; ///< Highest range of the gauge.
     qreal m_gaugeValue; ///< Current value displayed on the gauge.
-    QColor m_outerColor; ///< Color of the outer gauge arc.
     QString m_gaugeUnit; ///< Unit displayed on the gauge.
 
     void drawBackgroundArc(QPainter *painter, const QRectF &rect);
@@ -61,6 +56,8 @@ private:
     void drawValueText(QPainter *painter, const QRectF &rect);
     void drawUnitText(QPainter *painter, const QRectF &rect);
     void drawOuterArc(QPainter *painter, const QRectF &rect);
+
+    QColor getOuterColor();
 };
 
 #endif // GAUGE_H
