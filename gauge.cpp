@@ -1,206 +1,169 @@
 #include "gauge.h"
 #include <QPainter>
 
+// Constants
+namespace {
+constexpr qreal defaultGaugeValue = 50;
+constexpr qreal defaultGaugeSize = 500;
+
+constexpr qreal defaultLowestRange = 0;
+constexpr qreal defaultHighestRange = 200;
+
+const QColor outerMinColor(240, 15, 30);
+const QColor outerMaxColor(160, 10, 20);
+const QColor textColor(207, 204, 204);
+const QColor innerColor(41, 40, 40);
+
+constexpr qreal startArcAngle = 50;
+constexpr qreal alignArcAngle = 260; // 360 - 2 * startArcAngle
+
+constexpr int arcWidth = 20;
+
+constexpr int valueFontSize = 60;
+constexpr int unitFontSize = 30;
+
+constexpr char defaultFontFamily[] = "Orbitron";
+}
+
 Gauge::Gauge(QQuickItem *parent)
-    :QQuickPaintedItem(parent),
-    m_gaugeValue(50),
-    m_gaugeSize(500),
-    m_startAngle(50),
-    m_alignAngle(260), // 360 - 2 * m_startAngle
-    m_lowestRange(0),
-    m_highestRange(200),
-    m_arcWidth(20),
-    m_outerColor(QColor(100, 100, 100)),
-    m_innerColor(QColor(41, 40, 40)),
-    m_textColor(QColor(207, 204, 204)),
-    m_backgroundColor(QColor(Qt::transparent))
-{
+    : QQuickPaintedItem(parent),
+    m_gaugeValue(defaultGaugeValue),
+    m_gaugeSize(defaultGaugeSize),
+    m_lowestRange(defaultLowestRange),
+    m_highestRange(defaultHighestRange),
+    m_gaugeUnit("") {}
+
+// Setters with Notifications
+void Gauge::setGaugeValue(qreal gaugeValue) {
+    if (m_gaugeValue != gaugeValue) {
+        m_gaugeValue = gaugeValue;
+        emit gaugeValueChanged();
+        update(); // Trigger a repaint when the value changes.
+    }
 }
 
-void Gauge::paint(QPainter *painter)
-{
-    QRectF rect = this->boundingRect();
-    painter->setRenderHint(QPainter::Antialiasing);
-    QPen pen = painter->pen();
-    pen.setCapStyle(Qt::RoundCap);
-
-    // Inner Part
-    double startAngle;
-    double spanAngle;
-
-    startAngle = m_startAngle - 190;
-    spanAngle = 0 - m_alignAngle;
-
-    painter->save();
-    pen.setWidth(m_arcWidth);
-    pen.setColor(m_innerColor);
-
-    painter->setPen(pen);
-    painter->drawArc(rect.adjusted(m_arcWidth, m_arcWidth, -m_arcWidth, -m_arcWidth), startAngle * 16, spanAngle * 16);
-    painter->restore();
-
-    // Text
-    painter->save();
-    QFont font("Halvetica", 70, QFont::Bold);
-    painter->setFont(font);
-    pen.setColor(m_textColor);
-    painter->setPen(pen);
-    painter->drawText(rect.adjusted(m_gaugeSize/30, m_gaugeSize/30, -m_gaugeSize/30, -m_gaugeSize/5), Qt::AlignCenter, QString::number(m_gaugeValue));
-    painter->restore();
-
-    // Outer Part
-    painter->save();
-    pen.setWidth(m_arcWidth);
-    pen.setColor(m_outerColor);
-    qreal valueToAngle = ((m_gaugeValue - m_lowestRange)/(m_highestRange - m_lowestRange)) * spanAngle;
-    painter->setPen(pen);
-    painter->drawArc(rect.adjusted(m_arcWidth, m_arcWidth, -m_arcWidth, -m_arcWidth), startAngle * 16, valueToAngle * 16);
-    painter->restore();
+void Gauge::setGaugeSize(qreal gaugeSize) {
+    if (m_gaugeSize != gaugeSize) {
+        m_gaugeSize = gaugeSize;
+        emit gaugeSizeChanged();
+    }
 }
 
-//Setters
-void Gauge::setGaugeValue(qreal gaugeValue)
-{
-    if(m_gaugeValue == gaugeValue) return;
-
-    m_gaugeValue = gaugeValue;
-    update(); // Drawer update when value represented on gauge has changed
-    emit gaugeValueChanged(); // signal to QML side
+void Gauge::setLowestRange(qreal lowestRange) {
+    if (m_lowestRange != lowestRange) {
+        m_lowestRange = lowestRange;
+        emit lowestRangeChanged();
+    }
 }
 
-void Gauge::setGaugeSize(qreal size)
-{
-    if(m_gaugeSize == size) return;
-
-    m_gaugeSize = size;
-    emit gaugeSizeChanged(); // signal to QML side
+void Gauge::setHighestRange(qreal highestRange) {
+    if (m_highestRange != highestRange) {
+        m_highestRange = highestRange;
+        emit highestRangeChanged();
+    }
 }
 
-void Gauge::setStartAngle(qreal startAngle)
-{
-    if(m_startAngle == startAngle) return;
-
-    m_startAngle = startAngle;
-    emit startAngleChanged(); // signal to QML side
+void Gauge::setOuterColor(QColor outerColor) {
+    if (m_outerColor != outerColor) {
+        m_outerColor = outerColor;
+        emit outerColorChanged();
+    }
 }
 
-void Gauge::setAlignAngle(qreal alignAngle)
-{
-    if(m_alignAngle == alignAngle) return;
-
-    m_alignAngle = alignAngle;
-    emit alignAngleChanged(); // signal to QML side
-}
-
-void Gauge::setLowestRange(qreal lowestRange)
-{
-    if(m_lowestRange == lowestRange) return;
-
-    m_lowestRange = lowestRange;
-    emit lowestRangeChanged(); // signal to QML side
-}
-
-void Gauge::setHighestRange(qreal highestRange)
-{
-    if(m_highestRange == highestRange) return;
-
-    m_highestRange = highestRange;
-    emit highestRangeChanged(); // signal to QML side
-}
-
-void Gauge::setArcWidth(int arcWidth)
-{
-    if(m_arcWidth == arcWidth) return;
-
-    m_arcWidth = arcWidth;
-    emit arcWidthChanged(); // signal to QML side
-}
-
-void Gauge::setOuterColor(QColor outerColor)
-{
-    if(m_outerColor == outerColor) return;
-
-    m_outerColor = outerColor;
-    emit outerColorChanged(); // signal to QML side
-}
-
-void Gauge::setInnerColor(QColor innerColor)
-{
-    if(m_innerColor == innerColor) return;
-
-    m_innerColor = innerColor;
-    emit innerColorChanged(); // signal to QML side
-}
-
-void Gauge::setTextColor(QColor textColor)
-{
-    if(m_textColor == textColor) return;
-
-    m_textColor = textColor;
-    emit textColorChanged(); // signal to QML side
-}
-
-void Gauge::setBackgroundColor(QColor backgroundColor)
-{
-    if(m_backgroundColor == backgroundColor) return;
-
-    m_backgroundColor = backgroundColor;
-    emit backgroundColorChanged(); // signal to QML side
+void Gauge::setGaugeUnit(QString gaugeUnit) {
+    if (m_gaugeUnit != gaugeUnit) {
+        m_gaugeUnit = gaugeUnit;
+        emit gaugeUnitChanged();
+    }
 }
 
 // Getters
-qreal Gauge::getGaugeValue()
+qreal Gauge::getGaugeValue() const { return m_gaugeValue; }
+qreal Gauge::getGaugeSize() const { return m_gaugeSize; }
+qreal Gauge::getLowestRange() const { return m_lowestRange; }
+qreal Gauge::getHighestRange() const { return m_highestRange; }
+QString Gauge::getGaugeUnit() const { return m_gaugeUnit; }
+QColor Gauge::getOuterColor() const { return m_outerColor; }
+
+void Gauge::paint(QPainter *painter)
 {
-    return m_gaugeValue;
+    QRectF rect = boundingRect();
+    painter->setRenderHint(QPainter::Antialiasing);
+
+    drawBackgroundArc(painter, rect);
+    drawInnerArc(painter, rect);
+    drawValueText(painter, rect);
+    drawUnitText(painter, rect);
+    drawOuterArc(painter, rect);
 }
 
-qreal Gauge::getGaugeSize()
+// Helper Methods
+void Gauge::drawBackgroundArc(QPainter *painter, const QRectF &rect)
 {
-    return m_gaugeSize;
-}
-qreal Gauge::getStartAngle()
-{
-    return m_startAngle;
-}
+    double startAngle = startArcAngle - 190;
+    double spanAngle = 0 - alignArcAngle;
+    int pieSize = m_gaugeSize * 0.95;
 
-qreal Gauge::getAlignAngle()
-{
-    return m_alignAngle;
-}
+    painter->save();
+    QPen pen(Qt::NoPen);
+    painter->setPen(pen);
 
-qreal Gauge::getLowestRange()
-{
-    return m_lowestRange;
-}
+    // Radial Gradient
+    QRadialGradient radialGradient(rect.center(), pieSize / 2);
+    radialGradient.setColorAt(0.7, Qt::transparent);
+    radialGradient.setColorAt(1.0, outerMaxColor);
 
-qreal Gauge::getHighestRange()
-{
-    return m_highestRange;
+    painter->setBrush(radialGradient);
+    painter->drawPie(rect.adjusted(pieSize, pieSize, -pieSize, -pieSize), startAngle * 16, spanAngle * 16);
+    painter->restore();
 }
 
-int Gauge::getArcWidth()
+void Gauge::drawInnerArc(QPainter *painter, const QRectF &rect)
 {
-    return m_arcWidth;
+    double startAngle = startArcAngle - 190;
+    double spanAngle = 0 - alignArcAngle;
+
+    painter->save();
+    QPen pen(innerColor, arcWidth, Qt::SolidLine, Qt::FlatCap);
+    painter->setPen(pen);
+    painter->drawArc(rect.adjusted(arcWidth, arcWidth, -arcWidth, -arcWidth), startAngle * 16, spanAngle * 16);
+    painter->restore();
 }
 
-QColor Gauge::getOuterColor()
+void Gauge::drawValueText(QPainter *painter, const QRectF &rect)
 {
-    return m_outerColor;
+    painter->save();
+    QFont font(defaultFontFamily, valueFontSize);
+    painter->setFont(font);
+    QPen pen(textColor);
+    painter->setPen(pen);
+
+    QRectF textRect = rect.adjusted(m_gaugeSize / 30, m_gaugeSize / 30, -m_gaugeSize / 30, -m_gaugeSize / 5);
+    painter->drawText(textRect, Qt::AlignCenter, QString::number(m_gaugeValue));
+    painter->restore();
 }
 
-QColor Gauge::getInnerColor()
+void Gauge::drawUnitText(QPainter *painter, const QRectF &rect)
 {
-    return m_innerColor;
+    painter->save();
+    QFont font(defaultFontFamily, unitFontSize);
+    painter->setFont(font);
+    QPen pen(textColor);
+    painter->setPen(pen);
+
+    QRectF textRect = rect.adjusted(m_gaugeSize / 30, m_gaugeSize / 2, -m_gaugeSize / 30, -m_gaugeSize / 4);
+    painter->drawText(textRect, Qt::AlignCenter, m_gaugeUnit);
+    painter->restore();
 }
 
-QColor Gauge::getTextColor()
+void Gauge::drawOuterArc(QPainter *painter, const QRectF &rect)
 {
-    return m_textColor;
+    double startAngle = startArcAngle - 190;
+    double spanAngle = ((m_gaugeValue - m_lowestRange) / (m_highestRange - m_lowestRange)) * (-alignArcAngle);
+
+    painter->save();
+    QPen pen(outerMinColor, arcWidth, Qt::SolidLine, Qt::FlatCap);
+    painter->setPen(pen);
+    painter->drawArc(rect.adjusted(arcWidth, arcWidth, -arcWidth, -arcWidth), startAngle * 16, spanAngle * 16);
+    painter->restore();
 }
-
-QColor Gauge::getBackgroundColor()
-{
-    return m_backgroundColor;
-}
-
-

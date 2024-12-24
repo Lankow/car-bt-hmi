@@ -20,13 +20,28 @@ Window {
 
     visible: true
     title: qsTr("Hyundai-BT-HMI")
-    color:"#000"
+    color:"#141414"
+
+    // Vignette Effect Layer
+        Canvas {
+            anchors.fill: parent
+            opacity: 0.7
+            onPaint: {
+                var ctx = getContext("2d");
+                var gradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, Math.max(width, height) / 2);
+                gradient.addColorStop(0.7, "transparent");
+                gradient.addColorStop(1.0, "black");
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            }
+        }
 
     Text{
         objectName: "clock"
-        text: "--:--"
+        text: "12:34"
         color: "#fff"
         font.pointSize: 30
+        font.family: "Orbitron"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 30
@@ -34,9 +49,10 @@ Window {
 
     Text{
         objectName: "carMileage"
-        text: "---- km"
+        text: "---- Km"
         color: "#fff"
         font.pointSize: 30
+        font.family: "Orbitron"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 30
@@ -45,40 +61,30 @@ Window {
     Gauge{
         objectName: "speedGauge"
         gaugeValue: gaugeValue
+        gaugeUnit: "Km/h"
         gaugeSize: 350
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: 30
         width: gaugeSize
         height: gaugeSize
-        startAngle: startAngle
-        alignAngle: alignAngle
         lowestRange: lowestRange
         highestRange: highestRange
-        arcWidth: arcWidth
         outerColor: outerColor
-        innerColor: innerColor
-        textColor: textColor
-        backgroundColor: backgroundColor
     }
 
     Gauge{
         objectName: "rpmGauge"
         gaugeValue: gaugeValue
+        gaugeUnit: "RPM"
         gaugeSize: 350
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.rightMargin: 30
         width: gaugeSize
         height: gaugeSize
-        startAngle: startAngle
-        alignAngle: alignAngle
         lowestRange: lowestRange
         highestRange: highestRange
-        arcWidth: arcWidth
         outerColor: outerColor
-        innerColor: innerColor
-        textColor: textColor
-        backgroundColor: backgroundColor
     }
 }

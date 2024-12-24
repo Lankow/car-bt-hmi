@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QFontDatabase>
 #include "gauge.h"
 
 int main(int argc, char *argv[])
@@ -8,6 +9,16 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
     QGuiApplication app(argc, argv);
+
+    int id = QFontDatabase::addApplicationFont(":/Orbitron.ttf");
+    if (id == -1) {
+        qWarning() << "Failed to load Orbitron font.";
+    } else {
+        QStringList loadedFamilies = QFontDatabase::applicationFontFamilies(id);
+        if (!loadedFamilies.isEmpty()) {
+            qDebug() << "Font loaded successfully:" << loadedFamilies.first();
+        }
+    }
 
     qmlRegisterType<Gauge>("com.voknal.gauge", 1, 0, "Gauge");
 
