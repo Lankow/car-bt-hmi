@@ -45,13 +45,13 @@ int main(int argc, char *argv[])
     QString clockValue = QDateTime::currentDateTime().toString("hh:mm");
     QString mileageValue = "12345 Km";
 
-    ptrSpeedGauge->setGaugeValue(0);
-    ptrRpmGauge->setGaugeValue(0);
+    ptrSpeedGauge->setValue(0);
+    ptrRpmGauge->setValue(0);
 
     QTimer timer;
     QObject::connect(&timer, &QTimer::timeout, [&]()
                      {
-                ptrSpeedGauge->setGaugeValue(ptrSpeedGauge->getGaugeValue()+1);
+                ptrSpeedGauge->setValue(ptrSpeedGauge->getValue()+1);
                      }
                      );
     timer.start(50);

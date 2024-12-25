@@ -3,11 +3,11 @@
 
 // Constants
 namespace {
-constexpr qreal defaultGaugeValue = 0;
-constexpr qreal defaultGaugeSize = 500;
+constexpr qreal defaultValue = 0;
+constexpr qreal defaultSize = 500;
 
-constexpr qreal defaultLowestRange = 0;
-constexpr qreal defaultHighestRange = 200;
+constexpr qreal defaultMinValue = 0;
+constexpr qreal defaultMaxValue = 200;
 
 const QColor outerMinColor(40, 195, 70);
 const QColor outerMaxColor(160, 10, 20);
@@ -28,55 +28,55 @@ constexpr char defaultFontFamily[] = "Orbitron";
 
 Gauge::Gauge(QQuickItem *parent)
     : QQuickPaintedItem(parent),
-    m_gaugeValue(defaultGaugeValue),
-    m_gaugeSize(defaultGaugeSize),
-    m_lowestRange(defaultLowestRange),
-    m_highestRange(defaultHighestRange),
-    m_gaugeUnit("") {}
+    m_value(defaultValue),
+    m_size(defaultSize),
+    m_minValue(defaultMinValue),
+    m_maxValue(defaultMaxValue),
+    m_unit("") {}
 
 // Setters with Notifications
-void Gauge::setGaugeValue(qreal gaugeValue) {
-    if (m_gaugeValue != gaugeValue && gaugeValue >= m_lowestRange && gaugeValue <= m_highestRange) {
-        m_gaugeValue = gaugeValue;
-        emit gaugeValueChanged();
+void Gauge::setValue(qreal value) {
+    if (m_value != value && value >= m_minValue && value <= m_maxValue) {
+        m_value = value;
+        emit valueChanged();
         update(); // Trigger a repaint when the value changes.
     }
 }
 
-void Gauge::setGaugeSize(qreal gaugeSize) {
-    if (m_gaugeSize != gaugeSize) {
-        m_gaugeSize = gaugeSize;
-        emit gaugeSizeChanged();
+void Gauge::setSize(qreal size) {
+    if (m_size != size) {
+        m_size = size;
+        emit sizeChanged();
     }
 }
 
-void Gauge::setLowestRange(qreal lowestRange) {
-    if (m_lowestRange != lowestRange) {
-        m_lowestRange = lowestRange;
-        emit lowestRangeChanged();
+void Gauge::setMinValue(qreal minValue) {
+    if (m_minValue != minValue) {
+        m_minValue = minValue;
+        emit minValueChanged();
     }
 }
 
-void Gauge::setHighestRange(qreal highestRange) {
-    if (m_highestRange != highestRange) {
-        m_highestRange = highestRange;
-        emit highestRangeChanged();
+void Gauge::setMaxValue(qreal maxValue) {
+    if (m_maxValue != maxValue) {
+        m_maxValue = maxValue;
+        emit maxValueChanged();
     }
 }
 
-void Gauge::setGaugeUnit(QString gaugeUnit) {
-    if (m_gaugeUnit != gaugeUnit) {
-        m_gaugeUnit = gaugeUnit;
-        emit gaugeUnitChanged();
+void Gauge::setUnit(QString unit) {
+    if (m_unit != unit) {
+        m_unit = unit;
+        emit unitChanged();
     }
 }
 
 // Getters
-qreal Gauge::getGaugeValue() const { return m_gaugeValue; }
-qreal Gauge::getGaugeSize() const { return m_gaugeSize; }
-qreal Gauge::getLowestRange() const { return m_lowestRange; }
-qreal Gauge::getHighestRange() const { return m_highestRange; }
-QString Gauge::getGaugeUnit() const { return m_gaugeUnit; }
+qreal Gauge::getValue() const { return m_value; }
+qreal Gauge::getSize() const { return m_size; }
+qreal Gauge::getMinValue() const { return m_minValue; }
+qreal Gauge::getMaxValue() const { return m_maxValue; }
+QString Gauge::getUnit() const { return m_unit; }
 
 void Gauge::paint(QPainter *painter)
 {
@@ -95,7 +95,7 @@ void Gauge::drawBackgroundArc(QPainter *painter, const QRectF &rect)
 {
     double startAngle = startArcAngle - 190;
     double spanAngle = 0 - alignArcAngle;
-    int pieSize = m_gaugeSize * 0.95;
+    int pieSize = m_size * 0.95;
 
     painter->save();
     QPen pen(Qt::NoPen);
@@ -132,8 +132,8 @@ void Gauge::drawValueText(QPainter *painter, const QRectF &rect)
     QPen pen(textColor);
     painter->setPen(pen);
 
-    QRectF textRect = rect.adjusted(m_gaugeSize / 30, m_gaugeSize / 30, -m_gaugeSize / 30, -m_gaugeSize / 5);
-    painter->drawText(textRect, Qt::AlignCenter, QString::number(m_gaugeValue));
+    QRectF textRect = rect.adjusted(m_size / 30, m_size / 30, -m_size / 30, -m_size / 5);
+    painter->drawText(textRect, Qt::AlignCenter, QString::number(m_value));
     painter->restore();
 }
 
@@ -145,15 +145,15 @@ void Gauge::drawUnitText(QPainter *painter, const QRectF &rect)
     QPen pen(textColor);
     painter->setPen(pen);
 
-    QRectF textRect = rect.adjusted(m_gaugeSize / 30, m_gaugeSize / 2, -m_gaugeSize / 30, -m_gaugeSize / 4);
-    painter->drawText(textRect, Qt::AlignCenter, m_gaugeUnit);
+    QRectF textRect = rect.adjusted(m_size / 30, m_size / 2, -m_size / 30, -m_size / 4);
+    painter->drawText(textRect, Qt::AlignCenter, m_unit);
     painter->restore();
 }
 
 void Gauge::drawOuterArc(QPainter *painter, const QRectF &rect)
 {
     double startAngle = startArcAngle - 190;
-    double valuePercentage = (m_gaugeValue - m_lowestRange) / (m_highestRange - m_lowestRange);
+    double valuePercentage = (m_value - m_minValue) / (m_maxValue - m_minValue);
     double spanAngle = ( valuePercentage * (-alignArcAngle));
 
     QColor outerColor = getOuterColor();
@@ -166,7 +166,7 @@ void Gauge::drawOuterArc(QPainter *painter, const QRectF &rect)
 }
 
 QColor Gauge::getOuterColor(){
-    double valuePercentage = (m_gaugeValue - m_lowestRange) / (m_highestRange - m_lowestRange);
+    double valuePercentage = (m_value - m_minValue) / (m_maxValue - m_minValue);
 
     int r = outerMinColor.red() + (valuePercentage * (outerMaxColor.red()-outerMinColor.red()));
     int g = outerMinColor.green() + (valuePercentage * (outerMaxColor.green()-outerMinColor.green()));
