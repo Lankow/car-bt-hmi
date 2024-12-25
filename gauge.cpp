@@ -9,8 +9,9 @@ constexpr qreal defaultGaugeSize = 500;
 constexpr qreal defaultLowestRange = 0;
 constexpr qreal defaultHighestRange = 200;
 
-const QColor outerMinColor(160, 10, 20);
-const QColor outerMaxColor(240, 15, 30);
+const QColor outerMinColor(40, 195, 70);
+const QColor outerMaxColor(160, 10, 20);
+
 const QColor textColor(207, 204, 204);
 const QColor innerColor(41, 40, 40);
 
@@ -35,7 +36,7 @@ Gauge::Gauge(QQuickItem *parent)
 
 // Setters with Notifications
 void Gauge::setGaugeValue(qreal gaugeValue) {
-    if (m_gaugeValue != gaugeValue) {
+    if (m_gaugeValue != gaugeValue && gaugeValue >= m_lowestRange && gaugeValue <= m_highestRange) {
         m_gaugeValue = gaugeValue;
         emit gaugeValueChanged();
         update(); // Trigger a repaint when the value changes.

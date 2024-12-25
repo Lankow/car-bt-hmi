@@ -48,7 +48,7 @@ Window {
     }
 
     Text{
-        objectName: "carMileage"
+        objectName: "mileage"
         text: "---- Km"
         color: "#fff"
         font.pointSize: 30

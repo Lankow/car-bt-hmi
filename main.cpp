@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QFontDatabase>
+#include <QTimer>
 #include "gauge.h"
 
 int main(int argc, char *argv[])
@@ -33,14 +34,26 @@ int main(int argc, char *argv[])
     engine.load(url);
 
     QObject *object = engine.rootObjects()[0];
+
     QObject *speedGauge = object->findChild<QObject*>("speedGauge");
     QObject *rpmGauge = object->findChild<QObject*>("rpmGauge");
 
     Gauge *ptrSpeedGauge = dynamic_cast<Gauge*>(speedGauge);
     Gauge *ptrRpmGauge = dynamic_cast<Gauge*>(rpmGauge);
 
-    ptrSpeedGauge->setGaugeValue(80);
-    ptrRpmGauge->setGaugeValue(2000);
+    // Expose variables for clock and mileage updates
+    QString clockValue = QDateTime::currentDateTime().toString("hh:mm");
+    QString mileageValue = "12345 Km";
 
+    ptrSpeedGauge->setGaugeValue(0);
+    ptrRpmGauge->setGaugeValue(0);
+
+    QTimer timer;
+    QObject::connect(&timer, &QTimer::timeout, [&]()
+                     {
+                ptrSpeedGauge->setGaugeValue(ptrSpeedGauge->getGaugeValue()+1);
+                     }
+                     );
+    timer.start(50);
     return app.exec();
 }
