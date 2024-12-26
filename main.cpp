@@ -3,6 +3,7 @@
 #include <QFontDatabase>
 #include <QTimer>
 #include "gauge.h"
+#include "obdhandler.h"
 
 int main(int argc, char *argv[])
 {
@@ -40,10 +41,6 @@ int main(int argc, char *argv[])
 
     Gauge *ptrSpeedGauge = dynamic_cast<Gauge*>(speedGauge);
     Gauge *ptrRpmGauge = dynamic_cast<Gauge*>(rpmGauge);
-
-    // Expose variables for clock and mileage updates
-    QString clockValue = QDateTime::currentDateTime().toString("hh:mm");
-    QString mileageValue = "12345 Km";
 
     ptrSpeedGauge->setValue(0);
     ptrRpmGauge->setValue(0);

@@ -49,7 +49,7 @@ Window {
     }
 
     Text{
-        objectName: "mileage"
+        objectName: "odometer"
         text: "---- Km"
         color: "#fff"
         font.pointSize: 30
