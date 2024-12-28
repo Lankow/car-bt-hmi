@@ -13,12 +13,10 @@ public:
     void connectToELM327();
     qint64 getRPM();
     qint64 getSpeed();
-    qint64 getOdometer();
 
 signals:
-    void rpmUpdated(qint64 rpm);
-    void speedUpdated(qint64 speed);
-    void odometerUpdated(qint64 odometer);
+    void rpmUpdated(qreal  rpm);
+    void speedUpdated(qreal  speed);
 
 private:
     QBluetoothSocket *socket;

@@ -45,12 +45,20 @@ int main(int argc, char *argv[])
     ptrSpeedGauge->setValue(0);
     ptrRpmGauge->setValue(0);
 
+    // Initialize OBD-II handler
+    ObdHandler obdHandler;
+    obdHandler.connectToELM327();
+
+    QObject::connect(&obdHandler, &ObdHandler::speedUpdated, ptrSpeedGauge, &Gauge::setValue);
+    QObject::connect(&obdHandler, &ObdHandler::rpmUpdated, ptrRpmGauge, &Gauge::setValue);
+
     QTimer timer;
     QObject::connect(&timer, &QTimer::timeout, [&]()
                      {
-                ptrSpeedGauge->setValue(ptrSpeedGauge->getValue()+1);
+                        obdHandler.getSpeed();
+                        obdHandler.getRPM();
                      }
                      );
-    timer.start(50);
+    timer.start(100);
     return app.exec();
 }

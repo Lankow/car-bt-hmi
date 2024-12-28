@@ -21,13 +21,15 @@ void ObdHandler::connectToELM327() {
         qDebug() << "Socket error:" << error;
     });
 
-    socket->connectToService(QBluetoothAddress("XX:XX:XX:XX:XX:XX"), 1);
+    socket->connectToService(QBluetoothAddress("XX:XX:XX:XX:XX:XX"), 1); // OBD2 Interface BT Mac Address
 }
 
 void ObdHandler::sendCommand(const QString &command) {
+    QByteArray byteArray = QByteArray(command.toUtf8() + "\r", command.length() + 1);
+
     if (socket && socket->isOpen()) {
-        qDebug() << "Sending command:" << command;
-        socket->write(command.toUtf8() + "\r");
+        qDebug() << "Sending command as bytes:" << byteArray.toHex(' ');
+        socket->write(byteArray);
     } else {
         qWarning() << "Socket not connected!";
     }
