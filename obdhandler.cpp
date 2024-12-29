@@ -12,16 +12,11 @@ void ObdHandler::connectToELM327() {
         qDebug() << "Connected to ELM327 device";
     });
 
-    QObject::connect(socket, &QBluetoothSocket::readyRead, this, [this]() {
-        QByteArray data = socket->readAll();
-        qDebug() << "Received:" << data;
-    });
-
     QObject::connect(socket, &QBluetoothSocket::errorOccurred, [](QBluetoothSocket::SocketError error) {
         qDebug() << "Socket error:" << error;
     });
 
-    socket->connectToService(QBluetoothAddress("XX:XX:XX:XX:XX:XX"), 1); // OBD2 Interface BT Mac Address
+    socket->connectToService(QBluetoothAddress("XX:XX:XX:XX:XX:XX"), 2); // TODO: OBD-II Interface Bluetooth Mac Address extraction
 }
 
 void ObdHandler::sendCommand(const QString &command) {
@@ -42,6 +37,8 @@ qint64 ObdHandler::parseHexToDecimal(const QByteArray &data, int startByte, int 
     }
 
     QByteArray hexValue = data.mid(startByte, byteCount);
+    hexValue.replace(" ", "");
+
     bool ok;
     return hexValue.toUInt(&ok, 16);
 }
@@ -53,8 +50,9 @@ qint64 ObdHandler::getRPM() {
         QByteArray response = socket->readAll();
 
         if (response.startsWith("41 0C")) {
-            qint64 rawRPM = parseHexToDecimal(response, 2, 2);
+            qint64 rawRPM = parseHexToDecimal(response, 6, 5);
             qint64 rpm = (rawRPM / 4);
+            qDebug() << "RPM: " << rpm;
             emit rpmUpdated(rpm);
         }
     });
@@ -69,7 +67,8 @@ qint64 ObdHandler::getSpeed() {
         QByteArray response = socket->readAll();
 
         if (response.startsWith("41 0D")) {
-            qint64 speed = parseHexToDecimal(response, 2, 1);
+            qint64 speed = parseHexToDecimal(response, 6, 2);
+            qDebug() << "Speed: " << speed;
             emit speedUpdated(speed);
         }
     });

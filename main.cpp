@@ -55,10 +55,12 @@ int main(int argc, char *argv[])
     QTimer timer;
     QObject::connect(&timer, &QTimer::timeout, [&]()
                      {
-                        obdHandler.getSpeed();
-                        obdHandler.getRPM();
-                     }
-                     );
-    timer.start(100);
+                         obdHandler.getSpeed();
+                         QTimer::singleShot(100, [&]() {
+                             obdHandler.getRPM();
+                         });
+                     });
+    timer.start(200);
+
     return app.exec();
 }
