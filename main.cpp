@@ -5,6 +5,8 @@
 #include "gauge.h"
 #include "obdhandler.h"
 
+//#define DEMO_MODE
+
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -45,22 +47,62 @@ int main(int argc, char *argv[])
     ptrSpeedGauge->setValue(0);
     ptrRpmGauge->setValue(0);
 
-    // Initialize OBD-II handler
+#ifndef DEMO_MODE
     ObdHandler obdHandler;
     obdHandler.init();
 
     QObject::connect(&obdHandler, &ObdHandler::speedUpdated, ptrSpeedGauge, &Gauge::setValue);
     QObject::connect(&obdHandler, &ObdHandler::rpmUpdated, ptrRpmGauge, &Gauge::setValue);
+#else
+    bool speedDirection = true; // true: increasing, false: decreasing
+    bool rpmDirection = true;   // true: increasing, false: decreasing
+#endif
 
     QTimer timer;
     QObject::connect(&timer, &QTimer::timeout, [&]()
                      {
+#ifndef DEMO_MODE
                          obdHandler.getSpeed();
-                         QTimer::singleShot(100, [&]() {
-                             obdHandler.getRPM();
-                         });
-                     });
-    timer.start(200);
+                         QTimer::singleShot(100, [&]()
+                                            {
+                                                obdHandler.getRPM();
+                                            });
+#else
+            int speedValue = ptrSpeedGauge->getValue();
+            if (speedDirection) {
+                if (speedValue < ptrSpeedGauge->getMaxValue()) {
+                    ptrSpeedGauge->setValue(speedValue + 1);
+                } else {
+                    speedDirection = false;
+                }
+            } else {
+                if (speedValue > ptrSpeedGauge->getMinValue()) {
+                    ptrSpeedGauge->setValue(speedValue - 1);
+                } else {
+                    speedDirection = true;
+                }
+            }
 
+            int rpmValue = ptrRpmGauge->getValue();
+            if (rpmDirection) {
+                if (rpmValue < ptrRpmGauge->getMaxValue()) {
+                    ptrRpmGauge->setValue(rpmValue + 100);
+                } else {
+                    rpmDirection = false;
+                }
+            } else {
+                if (rpmValue > ptrRpmGauge->getMinValue()) {
+                    ptrRpmGauge->setValue(rpmValue - 100);
+                } else {
+                    rpmDirection = true;
+                }
+            }
+#endif
+                     });
+#ifndef DEMO_MODE
+    timer.start(200);
+#else
+    timer.start(40);
+#endif
     return app.exec();
 }
