@@ -5,7 +5,7 @@
 ObdHandler::ObdHandler(QObject *parent)
     : QObject(parent), socket(nullptr) {}
 
-void ObdHandler::connectToELM327() {
+void ObdHandler::init() {
     socket = new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol);
 
     QObject::connect(socket, &QBluetoothSocket::connected, []() {
@@ -34,7 +34,7 @@ void ObdHandler::connectToELM327() {
         }
     });
 
-    socket->connectToService(QBluetoothAddress("00:10:cc:4f:36:03"), 2);
+    socket->connectToService(QBluetoothAddress("00:10:cc:4f:36:03"), 2); // Example Bluetooth MAC Address of ELM327
 }
 
 void ObdHandler::sendCommand(const QString &command) {

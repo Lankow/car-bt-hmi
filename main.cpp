@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 
     // Initialize OBD-II handler
     ObdHandler obdHandler;
-    obdHandler.connectToELM327();
+    obdHandler.init();
 
     QObject::connect(&obdHandler, &ObdHandler::speedUpdated, ptrSpeedGauge, &Gauge::setValue);
     QObject::connect(&obdHandler, &ObdHandler::rpmUpdated, ptrRpmGauge, &Gauge::setValue);

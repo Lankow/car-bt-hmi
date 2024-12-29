@@ -10,7 +10,7 @@ class ObdHandler : public QObject {
 public:
     explicit ObdHandler(QObject *parent = nullptr);
 
-    void connectToELM327();
+    void init();
     qint64 getRPM();
     qint64 getSpeed();
 

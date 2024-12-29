@@ -19,7 +19,7 @@ Window {
     maximumHeight: displayHeight
 
     visible: true
-    title: qsTr("Hyundai-BT-HMI")
+    title: qsTr("CAR-BT-HMI")
     color:"#141414"
 
     // Vignette Effect Layer
