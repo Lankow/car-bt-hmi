@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/car-bt-hmi">
-    <file alias="qmldir">C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/car-bt-hmi/qmldir</file>
-  </qresource>
-</RCC>
-

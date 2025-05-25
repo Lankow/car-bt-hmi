@@ -4,7 +4,7 @@ project(car-bt-hmi VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Quick)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Bluetooth)
 
 qt_standard_project_setup()
 
@@ -17,6 +17,7 @@ qt_add_qml_module(appcar-bt-hmi
     VERSION 1.0
     QML_FILES
         Main.qml
+        SOURCES bluetoothmanager.hpp bluetoothmanager.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -31,7 +32,7 @@ set_target_properties(appcar-bt-hmi PROPERTIES
 )
 
 target_link_libraries(appcar-bt-hmi
-    PRIVATE Qt6::Quick
+    PRIVATE Qt6::Quick Qt6::Bluetooth
 )
 
 include(GNUInstallDirs)

@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/car-bt-hmi/">
-    <file alias="Main.qml">C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/Main.qml</file>
-  </qresource>
-</RCC>
-
