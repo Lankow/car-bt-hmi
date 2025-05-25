@@ -1,0 +1,5 @@
+module car-bt-hmi
+typeinfo appcar-bt-hmi.qmltypes
+prefer :/car-bt-hmi/
+Main 1.0 Main.qml
+

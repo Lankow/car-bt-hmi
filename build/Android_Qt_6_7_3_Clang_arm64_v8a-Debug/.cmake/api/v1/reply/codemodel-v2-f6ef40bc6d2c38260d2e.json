@@ -1,0 +1,232 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-5255ce0d811c6a51d359.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "car-bt-hmi",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "_qt_internal_apk_dependencies::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-_qt_internal_apk_dependencies-Debug-eff4ac96add3f8596de6.json",
+					"name" : "_qt_internal_apk_dependencies",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "aab::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-aab-Debug-a18ccf3bc21e661592c9.json",
+					"name" : "aab",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint-Debug-a1b6a53d451b2b925f2c.json",
+					"name" : "all_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_json-Debug-e7f577c4529c537d4834.json",
+					"name" : "all_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmllint_module-Debug-515513c9bfebabefd647.json",
+					"name" : "all_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "all_qmltyperegistrations::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-all_qmltyperegistrations-Debug-07562d402427489fac17.json",
+					"name" : "all_qmltyperegistrations",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "apk::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-apk-Debug-e2f19f99e524617dfef3.json",
+					"name" : "apk",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "apk_all::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-apk_all-Debug-9c501303a90dc11a734a.json",
+					"name" : "apk_all",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appcar-bt-hmi::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appcar-bt-hmi-Debug-9d1a0fb100af58f26327.json",
+					"name" : "appcar-bt-hmi",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appcar-bt-hmi_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appcar-bt-hmi_autogen-Debug-1cb298de35b7af33443c.json",
+					"name" : "appcar-bt-hmi_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appcar-bt-hmi_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appcar-bt-hmi_autogen_timestamp_deps-Debug-a96814991fc99ba06d80.json",
+					"name" : "appcar-bt-hmi_autogen_timestamp_deps",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appcar-bt-hmi_make_aab::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appcar-bt-hmi_make_aab-Debug-4150ac24c02cc57a4f9f.json",
+					"name" : "appcar-bt-hmi_make_aab",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appcar-bt-hmi_make_apk::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appcar-bt-hmi_make_apk-Debug-28d7f4ad2d5bf53f7078.json",
+					"name" : "appcar-bt-hmi_make_apk",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appcar-bt-hmi_prepare_apk_dir::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appcar-bt-hmi_prepare_apk_dir-Debug-3cab8e2ba911cb9e03ec.json",
+					"name" : "appcar-bt-hmi_prepare_apk_dir",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appcar-bt-hmi_qmllint::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appcar-bt-hmi_qmllint-Debug-b4f0f4ca7a1de3210c2d.json",
+					"name" : "appcar-bt-hmi_qmllint",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appcar-bt-hmi_qmllint_json::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appcar-bt-hmi_qmllint_json-Debug-bb2897b17fc3233874cf.json",
+					"name" : "appcar-bt-hmi_qmllint_json",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appcar-bt-hmi_qmllint_module::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appcar-bt-hmi_qmllint_module-Debug-d4ab1d4bfd8b49ab35f6.json",
+					"name" : "appcar-bt-hmi_qmllint_module",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appcar-bt-hmi_qmltyperegistration::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appcar-bt-hmi_qmltyperegistration-Debug-4ac56fb65d5f73ffd39b.json",
+					"name" : "appcar-bt-hmi_qmltyperegistration",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "appcar-bt-hmi_tooling::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-appcar-bt-hmi_tooling-Debug-61f9c16d008f943c8ec8.json",
+					"name" : "appcar-bt-hmi_tooling",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "qt_internal_plugins::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-qt_internal_plugins-Debug-a879c149361b994471a0.json",
+					"name" : "qt_internal_plugins",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug",
+		"source" : "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

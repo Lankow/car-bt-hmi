@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi
+-cmake-output
+-output-file
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/.qt/qml_imports/appcar-bt-hmi_build.cmake
+-importPath
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/car-bt-hmi
+-importPath
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug
+-importPath
+C:/Qt/6.7.3/msvc2022_64/qml
+-qrcFiles
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/.qt/rcc/qmake_car-bt-hmi.qrc
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Desktop_Qt_6_7_3_MSVC2022_64bit-Debug/.qt/rcc/appcar-bt-hmi_raw_qml_0.qrc

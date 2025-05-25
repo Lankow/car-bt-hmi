@@ -1,0 +1,500 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineSystem.cmake:200 (message)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      The target system is: Android - 23 - aarch64
+      The host system is: Windows - 10.0.19045 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+      Compiler: C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe 
+      Build flags: -DQT_QML_DEBUG
+      Id flags:  
+      
+      The output was:
+      1
+      lld: error: unable to find library -lstdc++
+      lld: error: unable to find library -lmingw32
+      lld: error: unable to find library -lgcc_s
+      lld: error: unable to find library -lgcc
+      lld: error: unable to find library -lmoldname
+      lld: error: unable to find library -lmingwex
+      lld: error: unable to find library -lmsvcrt
+      lld: error: unable to find library -ladvapi32
+      lld: error: unable to find library -lshell32
+      lld: error: unable to find library -luser32
+      lld: error: unable to find library -lkernel32
+      lld: error: unable to find library -lmingw32
+      lld: error: unable to find library -lgcc_s
+      lld: error: unable to find library -lgcc
+      lld: error: unable to find library -lmoldname
+      lld: error: unable to find library -lmingwex
+      lld: error: unable to find library -lmsvcrt
+      lld: error: unable to find library -lkernel32
+      clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe 
+      Build flags: -DQT_QML_DEBUG
+      Id flags: -c 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      
+      The CXX compiler identification is Clang, found in:
+        C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/3.29.3/CompilerIdCXX/CMakeCXXCompilerId.o
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:67 (try_compile)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-n2xze3"
+      binary: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-n2xze3"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      ANDROID_USE_LEGACY_TOOLCHAIN_FILE: "OFF"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--gc-sections -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-n2xze3'
+        
+        Run Build Command(s): C:/Qt/Tools/Ninja/ninja.exe -v cmTC_0490c
+        [1/2] C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot   -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -fPIE -fansi-escape-codes -fcolor-diagnostics   -v -MD -MT CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles\\cmTC_0490c.dir\\CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -c C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp
+        Android (10552028, based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)
+        Target: aarch64-none-linux-android23
+        Thread model: posix
+        InstalledDir: C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin
+         (in-process)
+         "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe" -cc1 -triple aarch64-none-linux-android23 -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -mllvm -treat-scalable-fixed-error-as-warning -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-n2xze3 -resource-dir C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17 -dependency-file "CMakeFiles\\\\cmTC_0490c.dir\\\\CMakeCXXCompilerABI.cpp.o.d" -MT CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D QT_QML_DEBUG -D ANDROID -D _FORTIFY_SOURCE=2 -D NDEBUG -isysroot C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -internal-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1 -internal-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/include -internal-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include -internal-externc-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include -internal-externc-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include -O2 -Wformat -fdeprecated-macro -fdebug-compilation-dir=C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-n2xze3 -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fcolor-diagnostics -fansi-escape-codes -vectorize-loops -vectorize-slp -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -x c++ C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 17.0.2 based upon LLVM 17.0.2 default target x86_64-w64-windows-gnu
+        ignoring nonexistent directory "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include"
+        ignoring nonexistent directory "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1
+         C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/include
+         C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android
+         C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include\x0d
+        End of search list.\x0d
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--gc-sections -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections -v CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_0490c  -latomic -lm && cd ."
+        Android (10552028, based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)
+        Target: aarch64-none-linux-android23
+        Thread model: posix
+        InstalledDir: C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin
+         "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld" --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -pie -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_0490c C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtbegin_dynamic.o -LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/aarch64 -LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23 -LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android -LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --gc-sections --no-undefined --gc-sections CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -latomic -lm -lc++ -lm C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtend_android.o\x0d
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:137 (message)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1]
+          add: [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/include]
+          add: [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android]
+          add: [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include]
+        end of search list found
+        collapse include dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1] ==> [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1]
+        collapse include dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/include] ==> [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/include]
+        collapse include dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android] ==> [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android]
+        collapse include dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include] ==> [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include]
+        implicit include dirs: [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1;C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/include;C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android;C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:173 (message)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: 'C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-n2xze3']
+        ignore line: []
+        ignore line: [Run Build Command(s): C:/Qt/Tools/Ninja/ninja.exe -v cmTC_0490c]
+        ignore line: [[1/2] C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot   -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -fPIE -fansi-escape-codes -fcolor-diagnostics   -v -MD -MT CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles\\cmTC_0490c.dir\\CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -c C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Android (10552028  based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)]
+        ignore line: [Target: aarch64-none-linux-android23]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin]
+        ignore line: [ (in-process)]
+        ignore line: [ "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe" -cc1 -triple aarch64-none-linux-android23 -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -mllvm -treat-scalable-fixed-error-as-warning -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-n2xze3 -resource-dir C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17 -dependency-file "CMakeFiles\\\\cmTC_0490c.dir\\\\CMakeCXXCompilerABI.cpp.o.d" -MT CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -D QT_QML_DEBUG -D ANDROID -D _FORTIFY_SOURCE=2 -D NDEBUG -isysroot C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -internal-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1 -internal-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/include -internal-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include -internal-externc-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include -internal-externc-isystem C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include -O2 -Wformat -fdeprecated-macro -fdebug-compilation-dir=C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-n2xze3 -ferror-limit 19 -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -fcolor-diagnostics -fansi-escape-codes -vectorize-loops -vectorize-slp -target-feature +outline-atomics -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -x c++ C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang -cc1 version 17.0.2 based upon LLVM 17.0.2 default target x86_64-w64-windows-gnu]
+        ignore line: [ignoring nonexistent directory "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/c++/v1]
+        ignore line: [ C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/include]
+        ignore line: [ C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/aarch64-linux-android]
+        ignore line: [ C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include\x0d]
+        ignore line: [End of search list.\x0d]
+        ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl --build-id=sha1 -Wl --no-rosegment -Wl --no-undefined-version -Wl --fatal-warnings -Wl --gc-sections -Qunused-arguments -Wl --no-undefined  -Wl --gc-sections -v CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_0490c  -latomic -lm && cd ."]
+        ignore line: [Android (10552028  based on r487747d) clang version 17.0.2 (https://android.googlesource.com/toolchain/llvm-project d9f89f4d16663d5012e5c09495f3b30ece3d2362)]
+        ignore line: [Target: aarch64-none-linux-android23]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin]
+        link line: [ "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld" --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -pie -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=gnu --eh-frame-hdr -m aarch64linux -dynamic-linker /system/bin/linker64 -o cmTC_0490c C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtbegin_dynamic.o -LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/aarch64 -LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23 -LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android -LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --gc-sections --no-undefined --gc-sections CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o -latomic -lm -lc++ -lm C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtend_android.o\x0d]
+          arg [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld] ==> ignore
+          arg [--sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-EL] ==> ignore
+          arg [--fix-cortex-a53-843419] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-zmax-page-size=4096] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [aarch64linux] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/system/bin/linker64] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_0490c] ==> ignore
+          arg [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtbegin_dynamic.o] ==> obj [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtbegin_dynamic.o]
+          arg [-LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/aarch64] ==> dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/aarch64]
+          arg [-LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23] ==> dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23]
+          arg [-LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android]
+          arg [-LC:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib] ==> dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib]
+          arg [--build-id=sha1] ==> ignore
+          arg [--no-rosegment] ==> ignore
+          arg [--no-undefined-version] ==> ignore
+          arg [--fatal-warnings] ==> ignore
+          arg [--gc-sections] ==> ignore
+          arg [--no-undefined] ==> ignore
+          arg [--gc-sections] ==> ignore
+          arg [CMakeFiles/cmTC_0490c.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-latomic] ==> lib [atomic]
+          arg [-lm] ==> lib [m]
+          arg [-lc++] ==> lib [c++]
+          arg [-lm] ==> lib [m]
+          arg [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [-lc] ==> lib [c]
+          arg [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a] ==> lib [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+          arg [-l:libunwind.a] ==> lib [-l:libunwind.a]
+          arg [-ldl] ==> lib [dl]
+          arg [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtend_android.o] ==> obj [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtend_android.o]
+        linker tool for 'CXX': C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld
+        remove lib [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        remove lib [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/libclang_rt.builtins-aarch64-android.a]
+        collapse library dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/aarch64] ==> [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/aarch64]
+        collapse library dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23] ==> [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23]
+        collapse library dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android] ==> [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android]
+        collapse library dir [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib] ==> [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib]
+        implicit libs: [atomic;m;c++;m;-l:libunwind.a;dl;c;-l:libunwind.a;dl]
+        implicit objs: [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtbegin_dynamic.o;C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/crtend_android.o]
+        implicit dirs: [C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/lib/clang/17/lib/linux/aarch64;C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23;C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android;C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake:210 (cmake_determine_linker_id)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Running the CXX compiler's linker: "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/bin/ld.lld" "-v"
+      LLD 17.0.2 (compatible with GNU linkers)
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindThreads.cmake:99 (CHECK_CXX_SOURCE_COMPILES)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Dependencies.cmake:27 (_qt_internal_find_third_party_dependencies)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake:124 (include)"
+      - "CMakeLists.txt:7 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-txirhk"
+      binary: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-txirhk"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      ANDROID_USE_LEGACY_TOOLCHAIN_FILE: "OFF"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--gc-sections -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_MODULE_PATH: "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6;C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-txirhk'
+        
+        Run Build Command(s): C:/Qt/Tools/Ninja/ninja.exe -v cmTC_d872c
+        [1/2] C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DCMAKE_HAVE_LIBC_PTHREAD  -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -fPIE -fansi-escape-codes -fcolor-diagnostics -MD -MT CMakeFiles/cmTC_d872c.dir/src.cxx.o -MF CMakeFiles\\cmTC_d872c.dir\\src.cxx.o.d -o CMakeFiles/cmTC_d872c.dir/src.cxx.o -c C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-txirhk/src.cxx
+        \x1b[31mFAILED: \x1b[0mCMakeFiles/cmTC_d872c.dir/src.cxx.o 
+        C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DCMAKE_HAVE_LIBC_PTHREAD  -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -fPIE -fansi-escape-codes -fcolor-diagnostics -MD -MT CMakeFiles/cmTC_d872c.dir/src.cxx.o -MF CMakeFiles\\cmTC_d872c.dir\\src.cxx.o.d -o CMakeFiles/cmTC_d872c.dir/src.cxx.o -c C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-txirhk/src.cxx
+        \x1b[1mC:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-txirhk/src.cxx:13:3: \x1b[0m\x1b[0;1;31merror: \x1b[0m\x1b[1muse of undeclared identifier 'pthread_cancel'\x1b[0m\x0d
+          pthread_cancel(thread);\x0d
+        \x1b[0;1;32m  ^\x0d
+        \x1b[0m1 error generated.\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindThreads.cmake:136 (try_compile)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindThreads.cmake:169 (_threads_check_flag_pthread)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Dependencies.cmake:27 (_qt_internal_find_third_party_dependencies)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake:124 (include)"
+      - "CMakeLists.txt:7 (find_package)"
+    checks:
+      - "Check if compiler accepts -pthread"
+    directories:
+      source: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-is3wzs"
+      binary: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-is3wzs"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      ANDROID_USE_LEGACY_TOOLCHAIN_FILE: "OFF"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--gc-sections -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_MODULE_PATH: "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6;C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+    buildResult:
+      variable: "THREADS_HAVE_PTHREAD_ARG"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-is3wzs'
+        
+        Run Build Command(s): C:/Qt/Tools/Ninja/ninja.exe -v cmTC_94fb8
+        [1/2] C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot   -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -fPIE -fansi-escape-codes -fcolor-diagnostics -MD -MT CMakeFiles/cmTC_94fb8.dir/CheckForPthreads.cxx.o -MF CMakeFiles\\cmTC_94fb8.dir\\CheckForPthreads.cxx.o.d -o CMakeFiles/cmTC_94fb8.dir/CheckForPthreads.cxx.o -c C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-is3wzs/CheckForPthreads.cxx
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--gc-sections -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections CMakeFiles/cmTC_94fb8.dir/CheckForPthreads.cxx.o -o cmTC_94fb8  -pthread   -latomic -lm && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/FindWrapAtomic.cmake:36 (check_cxx_source_compiles)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Core/Qt6CoreDependencies.cmake:33 (_qt_internal_find_third_party_dependencies)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Core/Qt6CoreConfig.cmake:45 (include)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:111 (find_dependency)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake:42 (_qt_internal_find_qt_dependencies)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake:43 (include)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake:169 (find_package)"
+      - "CMakeLists.txt:7 (find_package)"
+    checks:
+      - "Performing Test HAVE_STDATOMIC"
+    directories:
+      source: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-4vqm72"
+      binary: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-4vqm72"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      ANDROID_USE_LEGACY_TOOLCHAIN_FILE: "OFF"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--gc-sections -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_MODULE_PATH: "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6;C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+    buildResult:
+      variable: "HAVE_STDATOMIC"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-4vqm72'
+        
+        Run Build Command(s): C:/Qt/Tools/Ninja/ninja.exe -v cmTC_f2989
+        [1/2] C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DHAVE_STDATOMIC  -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -fPIE -fansi-escape-codes -fcolor-diagnostics -MD -MT CMakeFiles/cmTC_f2989.dir/src.cxx.o -MF CMakeFiles\\cmTC_f2989.dir\\src.cxx.o.d -o CMakeFiles/cmTC_f2989.dir/src.cxx.o -c C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-4vqm72/src.cxx
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--gc-sections -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections CMakeFiles/cmTC_f2989.dir/src.cxx.o -o cmTC_f2989  -latomic -lm && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules/FindEGL.cmake:127 (check_cxx_source_compiles)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/FindGLESv2.cmake:13 (find_package)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake:33 (_qt_internal_find_third_party_dependencies)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake:43 (include)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:111 (find_dependency)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake:42 (_qt_internal_find_qt_dependencies)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake:43 (include)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake:169 (find_package)"
+      - "CMakeLists.txt:7 (find_package)"
+    checks:
+      - "Performing Test HAVE_EGL"
+    directories:
+      source: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-dnzu5k"
+      binary: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-dnzu5k"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      ANDROID_USE_LEGACY_TOOLCHAIN_FILE: "OFF"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--gc-sections -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_MODULE_PATH: "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6;C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+    buildResult:
+      variable: "HAVE_EGL"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-dnzu5k'
+        
+        Run Build Command(s): C:/Qt/Tools/Ninja/ninja.exe -v cmTC_40b7e
+        [1/2] C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DHAVE_EGL  -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -fPIE -fansi-escape-codes -fcolor-diagnostics -MD -MT CMakeFiles/cmTC_40b7e.dir/src.cxx.o -MF CMakeFiles\\cmTC_40b7e.dir\\src.cxx.o.d -o CMakeFiles/cmTC_40b7e.dir/src.cxx.o -c C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-dnzu5k/src.cxx
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--gc-sections -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections CMakeFiles/cmTC_40b7e.dir/src.cxx.o -o cmTC_40b7e  C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/libEGL.so   -latomic -lm && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/FindGLESv2.cmake:27 (check_cxx_source_compiles)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake:33 (_qt_internal_find_third_party_dependencies)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake:43 (include)"
+      - "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:111 (find_dependency)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake:42 (_qt_internal_find_qt_dependencies)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake:43 (include)"
+      - "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake:169 (find_package)"
+      - "CMakeLists.txt:7 (find_package)"
+    checks:
+      - "Performing Test HAVE_GLESv2"
+    directories:
+      source: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-ryo253"
+      binary: "C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-ryo253"
+    cmakeVariables:
+      ANDROID_ABI: "arm64-v8a"
+      ANDROID_ARM_MODE: "thumb"
+      ANDROID_ARM_NEON: "TRUE"
+      ANDROID_PLATFORM: "android-23"
+      ANDROID_STL: "c++_shared"
+      ANDROID_TOOLCHAIN: "clang"
+      ANDROID_USE_LEGACY_TOOLCHAIN_FILE: "OFF"
+      CMAKE_ANDROID_STL_TYPE: "c++_shared"
+      CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS-NOTFOUND"
+      CMAKE_CXX_COMPILER_EXTERNAL_TOOLCHAIN: ""
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-none-linux-android23"
+      CMAKE_CXX_FLAGS: "-DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++"
+      CMAKE_CXX_FLAGS_DEBUG: "-g  -fno-limit-debug-info"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--gc-sections -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections"
+      CMAKE_MODULE_PATH: "C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6;C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.7.3/android_arm64_v8a/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_POSITION_INDEPENDENT_CODE: "TRUE"
+      CMAKE_SYSROOT: "C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot"
+    buildResult:
+      variable: "HAVE_GLESv2"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-ryo253'
+        
+        Run Build Command(s): C:/Qt/Tools/Ninja/ninja.exe -v cmTC_0c4d3
+        [1/2] C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DHAVE_GLESv2  -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -fPIE -fansi-escape-codes -fcolor-diagnostics -MD -MT CMakeFiles/cmTC_0c4d3.dir/src.cxx.o -MF CMakeFiles\\cmTC_0c4d3.dir\\src.cxx.o.d -o CMakeFiles/cmTC_0c4d3.dir/src.cxx.o -c C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/CMakeFiles/CMakeScratch/TryCompile-ryo253/src.cxx
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Users\\Voknal\\AppData\\Local\\Android\\Sdk\\ndk\\26.1.10909125\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=aarch64-none-linux-android23 --sysroot=C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DQT_QML_DEBUG   -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++  -O2 -g -DNDEBUG -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--gc-sections -Qunused-arguments -Wl,--no-undefined  -Wl,--gc-sections CMakeFiles/cmTC_0c4d3.dir/src.cxx.o -o cmTC_0c4d3  C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/libGLESv2.so  C:/Users/Voknal/AppData/Local/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/23/libEGL.so   -latomic -lm && cd ."
+        
+      exitCode: 0
+...

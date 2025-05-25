@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi
+-cmake-output
+-output-file
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/.qt/qml_imports/appcar-bt-hmi_conf.cmake
+-importPath
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/car-bt-hmi
+-importPath
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug
+-importPath
+C:/Qt/6.7.3/android_arm64_v8a/qml
+-qrcFiles
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/.qt/rcc/qmake_car-bt-hmi.qrc
+C:/Users/Voknal/Desktop/Coding/mainProjects/car-bt-hmi/car-bt-hmi/build/Android_Qt_6_7_3_Clang_arm64_v8a-Debug/.qt/rcc/appcar-bt-hmi_raw_qml_0.qrc
