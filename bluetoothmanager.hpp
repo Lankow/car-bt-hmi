@@ -14,8 +14,9 @@ class BluetoothManager : public QObject
 public:
     explicit BluetoothManager(QObject *parent = nullptr);
     Q_INVOKABLE void startDiscovery();
+    Q_INVOKABLE void stopDiscovery();
     Q_INVOKABLE void sendMessage(const QString &message);
-    Q_INVOKABLE void connectToESP32();
+    Q_INVOKABLE void connectToOBD();
 
     bool isConnected() const { return m_connected; }
 
@@ -35,7 +36,7 @@ private:
     QBluetoothDeviceDiscoveryAgent *m_discoveryAgent;
     QBluetoothSocket *m_socket;
     bool m_connected = false;
-    QBluetoothDeviceInfo m_esp32Device;
+    QBluetoothDeviceInfo m_obdDevice;
 };
 
 

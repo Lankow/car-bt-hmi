@@ -19,33 +19,32 @@ void BluetoothManager::startDiscovery()
     m_discoveryAgent->start();
 }
 
+void BluetoothManager::stopDiscovery()
+{
+    m_discoveryAgent->stop();  // Stop scanning
+}
+
 void BluetoothManager::deviceDiscovered(const QBluetoothDeviceInfo &device)
 {
     qDebug() << "Found device:" << device.name() << device.address().toString();
-
-    if (device.name() == "OBDII-ESP")  // Match ESP32 Bluetooth name
-    {
-        m_esp32Device = device;
-        emit deviceFound(device.name());
-        m_discoveryAgent->stop();  // Stop scanning
-    }
+    emit deviceFound(device.name());
 }
 
 void BluetoothManager::discoveryFinished()
 {
-    if (!m_esp32Device.isValid())
+    if (!m_obdDevice.isValid())
     {
-        qDebug() << "ESP32 not found.";
+        qDebug() << "OBD Device not found.";
         return;
     }
 
-    qDebug() << "Connecting to ESP32...";
-    m_socket->connectToService(m_esp32Device.address(), QBluetoothUuid(QStringLiteral("00001101-0000-1000-8000-00805F9B34FB")));
+    qDebug() << "Connecting to OBD Device...";
+    m_socket->connectToService(m_obdDevice.address(), QBluetoothUuid(QStringLiteral("00001101-0000-1000-8000-00805F9B34FB")));
 }
 
 void BluetoothManager::onConnected()
 {
-    qDebug() << "Connected to ESP32!";
+    qDebug() << "Connected to OBD Device!";
     m_connected = true;
     emit connectedChanged();
 }
@@ -63,23 +62,24 @@ void BluetoothManager::sendMessage(const QString &message)
         qDebug() << "Not connected!";
     }
 }
-void BluetoothManager::connectToESP32()
+
+void BluetoothManager::connectToOBD()
 {
-    if (!m_esp32Device.isValid()) {
-        qWarning() << "No ESP32 device found!";
+    if (!m_obdDevice.isValid()) {
+        qWarning() << "No OBD Device found!";
         return;
     }
 
-    qDebug() << "Connecting to ESP32 at" << m_esp32Device.address().toString();
+    qDebug() << "Connecting to OBD Device at" << m_obdDevice.address().toString();
 
     // Ensure socket is not already connected
     if (m_socket->state() == QBluetoothSocket::SocketState::ConnectedState) {
-        qDebug() << "Already connected to ESP32.";
+        qDebug() << "Already connected to OBD Device.";
         return;
     }
 
     // Connect to ESP32 Bluetooth Serial (RFCOMM)
-    m_socket->connectToService(m_esp32Device.address(), QBluetoothUuid(QStringLiteral("00001101-0000-1000-8000-00805F9B34FB")));
+    m_socket->connectToService(m_obdDevice.address(), QBluetoothUuid(QStringLiteral("00001101-0000-1000-8000-00805F9B34FB")));
 
     qDebug() << "Attempting to connect...";
 }
@@ -87,7 +87,7 @@ void BluetoothManager::connectToESP32()
 void BluetoothManager::onReadyRead()
 {
     QByteArray data = m_socket->readAll();
-    qDebug() << "Received from ESP32:" << QString::fromUtf8(data);
+    qDebug() << "Received from OBD Device:" << QString::fromUtf8(data);
     emit messageReceived(QString::fromUtf8(data));
 }
 
