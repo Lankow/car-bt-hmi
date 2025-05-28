@@ -1,33 +1,59 @@
-import QtQuick
-import QtQuick.Controls
-import com.app.bluetooth 1.0
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 
-Window {
-    width: 640
-    height: 480
+ApplicationWindow {
     visible: true
-    title: qsTr("CAR-BT-HMI")
+    width: 400
+    height: 600
+    title: "Bluetooth Devices"
 
-    BluetoothManager {
-        id: btManager
+    Button {
+        text: "Start Scan for OBD Device."
+        onClicked: bluetoothManager.startDiscovery()
     }
 
-    Column {
-        anchors.centerIn: parent
-        spacing: 10
-        Button {
-            text: "Start Scan for OBD Device."
-            onClicked: btManager.startDiscovery()
-        }
 
-        Button {
-            text: "Stop Scan for OBD Device."
-            onClicked: btManager.stopDiscovery()
-        }
+    ListView {
+        anchors.fill: parent
+        model: deviceModel
+        spacing: 8
+        delegate: Rectangle {
+            width: parent.width
+            height: 80
+            color: "whitesmoke"
+            border.color: "lightgray"
+            radius: 10
 
-        Button {
-            text: "Connect to OBD Device."
-            onClicked: btManager.connectToOBD()
+            Row {
+                anchors.fill: parent
+                spacing: 10
+                anchors.margins: 10
+
+                Column {
+                    width: parent.width * 0.7
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    Text {
+                        text: name
+                        font.bold: true
+                    }
+
+                    Text {
+                        text: address
+                        font.pointSize: 10
+                        color: "gray"
+                    }
+                }
+
+                Button {
+                    text: "Connect"
+                    anchors.verticalCenter: parent.verticalCenter
+                    onClicked: {
+                        bluetoothManager.connectToDevice(address);
+                    }
+                }
+            }
         }
-    }
+            }
+
 }

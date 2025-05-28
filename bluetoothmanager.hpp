@@ -2,6 +2,7 @@
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QBluetoothSocket>
 #include <QBluetoothDeviceInfo>
+#include "devicemodel.hpp"
 
 #ifndef BLUETOOTHMANAGER_HPP
 #define BLUETOOTHMANAGER_HPP
@@ -12,7 +13,7 @@ class BluetoothManager : public QObject
     Q_PROPERTY(bool connected READ isConnected NOTIFY connectedChanged)
 
 public:
-    explicit BluetoothManager(QObject *parent = nullptr);
+    explicit BluetoothManager(DeviceModel *model, QObject *parent = nullptr);
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
     Q_INVOKABLE void sendMessage(const QString &message);
@@ -37,6 +38,8 @@ private:
     QBluetoothSocket *m_socket;
     bool m_connected = false;
     QBluetoothDeviceInfo m_obdDevice;
+
+    DeviceModel *m_model;
 };
 
 

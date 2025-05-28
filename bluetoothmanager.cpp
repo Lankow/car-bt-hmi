@@ -1,8 +1,8 @@
 #include "bluetoothmanager.hpp"
 #include <QDebug>
 
-BluetoothManager::BluetoothManager(QObject *parent)
-    : QObject(parent), m_discoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
+BluetoothManager::BluetoothManager(DeviceModel *model, QObject *parent)
+    : m_model(model), QObject(parent), m_discoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
     m_socket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this))
 {
     connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceDiscovered, this, &BluetoothManager::deviceDiscovered);
@@ -24,10 +24,9 @@ void BluetoothManager::stopDiscovery()
     m_discoveryAgent->stop();  // Stop scanning
 }
 
-void BluetoothManager::deviceDiscovered(const QBluetoothDeviceInfo &device)
-{
+void BluetoothManager::deviceDiscovered(const QBluetoothDeviceInfo &device) {
     qDebug() << "Found device:" << device.name() << device.address().toString();
-    emit deviceFound(device.name());
+    m_model->addDevice(DeviceInfo(device));
 }
 
 void BluetoothManager::discoveryFinished()
