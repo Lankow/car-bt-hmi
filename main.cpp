@@ -1,18 +1,15 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>s
-#include "bluetoothmanager.hpp"
-#include "devicemodel.hpp"
+#include "BluetoothManager.hpp"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    DeviceModel deviceModel;
-    BluetoothManager btManager(&deviceModel);  // inject model
+    BluetoothManager btManager(nullptr);
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("deviceModel", &deviceModel);
     engine.rootContext()->setContextProperty("bluetoothManager", &btManager);
 
     const QUrl url(QStringLiteral("qrc:/car-bt-hmi/Main.qml"));

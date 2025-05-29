@@ -1,4 +1,4 @@
-#include "bluetoothmanager.hpp"
+#include "BluetoothManager.hpp"
 #include <QDebug>
 
 BluetoothManager::BluetoothManager(DeviceModel *model, QObject *parent)
@@ -26,7 +26,6 @@ void BluetoothManager::stopDiscovery()
 
 void BluetoothManager::deviceDiscovered(const QBluetoothDeviceInfo &device) {
     qDebug() << "Found device:" << device.name() << device.address().toString();
-    m_model->addDevice(DeviceInfo(device));
 }
 
 void BluetoothManager::discoveryFinished()

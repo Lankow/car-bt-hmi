@@ -1,11 +1,11 @@
+#ifndef BLUETOOTHMANAGER_H
+#define BLUETOOTHMANAGER_H
+
 #include <QObject>
 #include <QBluetoothDeviceDiscoveryAgent>
 #include <QBluetoothSocket>
 #include <QBluetoothDeviceInfo>
-#include "devicemodel.hpp"
-
-#ifndef BLUETOOTHMANAGER_HPP
-#define BLUETOOTHMANAGER_HPP
+#include "DeviceModel.hpp"
 
 class BluetoothManager : public QObject
 {
@@ -43,4 +43,4 @@ private:
 };
 
 
-#endif // BLUETOOTHMANAGER_HPP
+#endif // BLUETOOTHMANAGER_H

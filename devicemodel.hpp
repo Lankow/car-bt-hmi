@@ -2,29 +2,8 @@
 #define DEVICEMODEL_HPP
 
 #include <QAbstractListModel>
-#include "deviceinfo.hpp"
+#include "DeviceInfo.hpp"
 
-class DeviceModel : public QAbstractListModel {
-    Q_OBJECT
-
-public:
-    enum DeviceRoles {
-        NameRole = Qt::UserRole + 1,
-        AddressRole
-    };
-
-    explicit DeviceModel(QObject *parent = nullptr);
-
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    QVariant data(const QModelIndex &index, int role) const override;
-
-    QHash<int, QByteArray> roleNames() const override;
-
-    Q_INVOKABLE void clear();
-    void addDevice(const DeviceInfo &device);
-
-private:
-    QList<DeviceInfo> m_devices;
-};
+class DeviceModel : public QAbstractListModel {};
 
 #endif // DEVICEMODEL_HPP
