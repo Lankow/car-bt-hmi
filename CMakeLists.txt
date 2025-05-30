@@ -19,6 +19,8 @@ qt_add_qml_module(appcar-bt-hmi
         Main.qml
         SOURCES BluetoothManager.hpp BluetoothManager.cpp
         SOURCES DeviceInfo.hpp
+        SOURCES
+        QML_FILES DeviceList.qml
         SOURCES DeviceModel.hpp DeviceModel.cpp
 )
 

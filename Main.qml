@@ -7,8 +7,10 @@ ApplicationWindow {
     height: 600
     title: "Bluetooth Devices"
 
-    Button {
-        text: "Start Scan for OBD Device."
-        onClicked: bluetoothManager.startDiscovery()
-    }
+    // Button {
+    //     text: "Start Scan for OBD Device."
+    //     onClicked: bluetoothManager.startDiscovery()
+    // }
+
+    DeviceList{}
 }
