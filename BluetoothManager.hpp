@@ -1,5 +1,5 @@
-#ifndef BLUETOOTHMANAGER_H
-#define BLUETOOTHMANAGER_H
+#ifndef BLUETOOTHMANAGER_HPP
+#define BLUETOOTHMANAGER_HPP
 
 #include <QObject>
 #include <QBluetoothDeviceDiscoveryAgent>

@@ -18,9 +18,8 @@ qt_add_qml_module(appcar-bt-hmi
     QML_FILES
         Main.qml
         SOURCES BluetoothManager.hpp BluetoothManager.cpp
-        SOURCES
-        SOURCES deviceinfo.hpp
-        SOURCES devicemodel.hpp devicemodel.cpp
+        SOURCES DeviceInfo.hpp
+        SOURCES DeviceModel.hpp DeviceModel.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
