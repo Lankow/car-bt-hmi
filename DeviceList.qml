@@ -9,9 +9,22 @@ Frame {
         model: deviceModel
 
         delegate: Row {
-            Button{
-                text: model.address
-                onClicked: bluetoothManager.startDiscovery()
+            width: parent.width
+            height: 50
+
+            Rectangle{
+                width: parent.width
+                height: parent.height
+
+                Text{
+                    anchors.centerIn: parent
+                    text: model.name
+                }
+
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: bluetoothManager.connectToOBD(model.address)
+                }
             }
         }
     }
