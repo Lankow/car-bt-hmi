@@ -23,7 +23,7 @@ Frame {
 
                 MouseArea{
                     anchors.fill: parent
-                    onClicked: bluetoothManager.connectToOBD(model.address)
+                    onClicked: bluetoothManager.connectToOBD(model.device)
                 }
             }
         }

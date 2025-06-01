@@ -15,12 +15,16 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
 
     const auto &device = m_devices[index.row()];
 
-    switch(role){
-        case NameRole: return device.name;
-        case AddressRole: return device.address;
-        default: return {};
+    switch (role) {
+    case NameRole:
+        return device.name();
+    case AddressRole:
+        return device.address().toString();
+    case DeviceRole:
+        return QVariant::fromValue(device);
+    default:
+        return QVariant();
     }
-    return QVariant();
 }
 
 QHash<int, QByteArray> DeviceModel::roleNames() const
@@ -28,11 +32,18 @@ QHash<int, QByteArray> DeviceModel::roleNames() const
     QHash<int, QByteArray> names;
     names[NameRole] = "name";
     names[AddressRole] = "address";
+    names[DeviceRole] = "device";
     return names;
 }
 
-void DeviceModel::addDevice(const DeviceInfo &device) {
-    beginInsertRows(QModelIndex(), m_devices.count(), m_devices.count());
+void DeviceModel::addDevice(const QBluetoothDeviceInfo &device) {
+
+    for (const QBluetoothDeviceInfo &d : std::as_const(m_devices)) {
+        if (d.address() == device.address())
+            return;
+    }
+
+    beginInsertRows(QModelIndex(), m_devices.size(), m_devices.size());
     m_devices.append(device);
     endInsertRows();
 }

@@ -2,7 +2,8 @@
 #define DEVICEMODEL_HPP
 
 #include <QAbstractListModel>
-#include "DeviceInfo.hpp"
+#include <QBluetoothDeviceInfo>
+#include <QBluetoothSocket>
 
 class DeviceModel : public QAbstractListModel
 {
@@ -11,9 +12,10 @@ class DeviceModel : public QAbstractListModel
 public:
     explicit DeviceModel(QObject *parent = nullptr);
 
-    enum {
+    enum DeviceRoles {
         NameRole = Qt::UserRole,
-        AddressRole
+        AddressRole,
+        DeviceRole
     };
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -23,10 +25,10 @@ public:
     virtual QHash<int, QByteArray> roleNames() const override;
 
     Q_INVOKABLE void clear();
-    void addDevice(const DeviceInfo &device);
+    void addDevice(const QBluetoothDeviceInfo &device);
 
 private:
-    QList<DeviceInfo> m_devices;
+    QList<QBluetoothDeviceInfo> m_devices;
 };
 
 #endif // DEVICEMODEL_HPP
