@@ -31,20 +31,16 @@ void BluetoothManager::deviceDiscovered(const QBluetoothDeviceInfo &device) {
 
 void BluetoothManager::discoveryFinished()
 {
-    if (!m_obdDevice.isValid())
-    {
-        qDebug() << "OBD Device not found.";
-        return;
-    }
-
-    qDebug() << "Connecting to OBD Device...";
-    m_socket->connectToService(m_obdDevice.address(), QBluetoothUuid(QStringLiteral("00001101-0000-1000-8000-00805F9B34FB")));
+    qDebug() << "Discovery Finished.";
 }
 
 void BluetoothManager::onConnected()
 {
     qDebug() << "Connected to OBD Device!";
     m_connected = true;
+
+    stopDiscovery();
+
     emit connectedChanged();
 }
 
