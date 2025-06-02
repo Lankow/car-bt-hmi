@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import com.voknal.gauge 1.0
 
 ApplicationWindow {
     visible: true
@@ -43,6 +44,20 @@ ApplicationWindow {
             text: "Send 'VER'"
             enabled: bluetoothManager.connected
             onClicked: bluetoothManager.sendMessage("VER")
+        }
+
+        Gauge{
+            objectName: "speedGauge"
+            value: value
+            unit: "Km/h"
+            size: 350
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: 30
+            width: size
+            height: size
+            minValue: 0
+            maxValue: 200
         }
     }
 }
