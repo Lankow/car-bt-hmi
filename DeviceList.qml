@@ -3,8 +3,8 @@ import QtQuick.Controls 2.15
 
 Frame {
     ListView {
-        implicitWidth: 250
-        implicitHeight: 250
+        implicitWidth: 180
+        implicitHeight: 300
 
         model: deviceModel
 

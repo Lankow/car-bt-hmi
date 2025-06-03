@@ -3,61 +3,69 @@ import QtQuick.Controls 2.15
 import com.voknal.gauge 1.0
 
 ApplicationWindow {
+
+    // Uncomment below to keep frame borderless.
+    // flags: Qt.FramelessWindowHint
+
+    property int displayWidth: 800
+    property int displayHeight: 480
+
+    width: displayWidth
+    height: displayHeight
+
+    minimumWidth: displayWidth
+    minimumHeight: displayHeight
+
+    maximumWidth: displayWidth
+    maximumHeight: displayHeight
+
     visible: true
-    width: 400
-    height: 600
-    title: "Bluetooth Devices"
+    title: qsTr("CAR-BT-HMI")
+    color:"#141414"
 
-    Column{
+    Vignette {
+        anchors.fill: parent
+    }
 
-        Button {
-            text: "Start Scan"
-            onClicked: bluetoothManager.startDiscovery()
-        }
+    Button{
+        text: "Menu"
+        onClicked: sideMenu.showMenu()
+        anchors.top: parent.top
+        anchors.right: parent.right
+    }
 
-        Button {
-            text: "Cancel"
-            onClicked: bluetoothManager.stopDiscovery()
-        }
+    Gauge{
+        value: value
+        unit: "Km/h"
+        size: 350
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.leftMargin: 30
+        width: size
+        height: size
+        minValue: 0
+        maxValue: 200
+    }
 
-        DeviceList{}
+    Gauge{
+        value: value
+        unit: "RPM"
+        size: 350
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.rightMargin: 30
+        width: size
+        height: size
+        minValue: 0
+        maxValue: 5000
+    }
 
-        Button {
-            text: "Send '01 0D'"
-            enabled: bluetoothManager.connected
-            onClicked: bluetoothManager.sendMessage("010D")
-        }
-
-        Button {
-            text: "Send '01 0C'"
-            enabled: bluetoothManager.connected
-            onClicked: bluetoothManager.sendMessage("01 0C")
-        }
-
-        Button {
-            text: "Send Multiple"
-            enabled: bluetoothManager.connected
-            onClicked: bluetoothManager.sendMessage("01 0C \r 010D")
-        }
-
-        Button {
-            text: "Send 'VER'"
-            enabled: bluetoothManager.connected
-            onClicked: bluetoothManager.sendMessage("VER")
-        }
-
-        Gauge{
-            objectName: "speedGauge"
-            value: value
-            unit: "Km/h"
-            size: 350
-            anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.leftMargin: 30
-            width: size
-            height: size
-            minValue: 0
-            maxValue: 200
-        }
+    SideMenu {
+        id: sideMenu
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        width: 200
+        z: 100
     }
 }
