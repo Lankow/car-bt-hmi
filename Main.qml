@@ -27,6 +27,24 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
+    // TODO: Add Loading Screen with LOGO
+    // TODO : Separate component
+    Rectangle {
+        id: overlay
+        anchors.fill: parent
+        visible: sideMenu.visible
+        color: "#0000FFFF" // TODO : Semi Transparent Back
+        z: 99
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                sideMenu.hideMenu()
+            }
+        }
+    }
+
+    // TODO: Style Button
     Button{
         text: "Menu"
         onClicked: sideMenu.showMenu()
@@ -47,6 +65,7 @@ ApplicationWindow {
         maxValue: 200
     }
 
+    // TODO: Attach values to DataProvider
     Gauge{
         value: value
         unit: "RPM"
@@ -65,7 +84,6 @@ ApplicationWindow {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        width: 200
         z: 100
     }
 }

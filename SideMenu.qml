@@ -6,7 +6,9 @@ Rectangle {
     width: 200
     color: "#ffffff"
     visible: false
-    x: parent.width
+
+    // TODO: Attach values to DataProvider
+
 
     Column {
         id: menuContent
@@ -14,27 +16,82 @@ Rectangle {
         spacing: 10
         padding: 10
 
-        Button {
-            text: "Start Scan"
-            onClicked: bluetoothManager.startDiscovery()
+        // Default Menu Page
+        Loader {
+            id: menuLoader
+            sourceComponent: mainMenuComponent
         }
+    }
 
-        Button {
-            text: "Cancel"
-            onClicked: {
-                bluetoothManager.stopDiscovery()
-                hideMenu()
+    Component {
+        id: mainMenuComponent
+
+        Column {
+            spacing: 10
+
+            Button {
+                text: "Device"
+                onClicked: menuLoader.sourceComponent = deviceMenuComponent
+            }
+
+            Button {
+                text: "Settings"
+                onClicked: menuLoader.sourceComponent = settingsMenuComponent
             }
         }
+    }
 
-        DeviceList{}
+    Component {
+        id: deviceMenuComponent
+
+        Column {
+            spacing: 10
+
+            Button {
+                text: "< Back"
+                onClicked: menuLoader.sourceComponent = mainMenuComponent
+            }
+
+            Button {
+                text: "Start Scan"
+                onClicked: bluetoothManager.startDiscovery()
+            }
+
+            Button {
+                text: "Cancel"
+                onClicked: {
+                    bluetoothManager.stopDiscovery()
+                    hideMenu()
+                }
+            }
+
+            DeviceList{}
+        }
+    }
+
+    Component {
+        id: settingsMenuComponent
+
+        Column {
+            spacing: 10
+
+            Button {
+                text: "< Back"
+                onClicked: menuLoader.sourceComponent = mainMenuComponent
+            }
+
+            Label { text: "Settings here..." }
+        }
     }
 
     function showMenu() {
         visible = true
+        x = parent.width - width
     }
 
     function hideMenu() {
+        x = parent.width
+        menuLoader.sourceComponent = mainMenuComponent
         visible = false
     }
 }
