@@ -5,6 +5,10 @@ class DataProvider
 {
 public:
     DataProvider();
+
+private:
+    int m_vehicleSpeed;
+    int m_engineSpeed;
 };
 
 #endif // DATAPROVIDER_HPP

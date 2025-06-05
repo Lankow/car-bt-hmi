@@ -7,9 +7,9 @@ Rectangle {
     color: "#ffffff"
     visible: false
 
-    // TODO: Attach values to DataProvider
-
-
+    // TODO: Add Header for Menu
+    // TODO: Add Back Button for Menu
+    
     Column {
         id: menuContent
         anchors.fill: parent

@@ -28,6 +28,10 @@ qt_add_qml_module(appcar-bt-hmi
         RESOURCES Orbitron.ttf
         QML_FILES Vignette.qml
         QML_FILES SideMenu.qml
+        QML_FILES
+        QML_FILES
+        QML_FILES LoadingScreen.qml
+        QML_FILES ScreenOverlay.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
