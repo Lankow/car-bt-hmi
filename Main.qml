@@ -25,6 +25,7 @@ ApplicationWindow {
 
     Vignette {}
     LoadingScreen{}
+    ScreenOverlay{}
 
     // TODO: Style Button
     Button{
@@ -35,7 +36,7 @@ ApplicationWindow {
     }
 
     Gauge{
-        value: value
+        value: dataProvider.vehicleSpeed
         unit: "Km/h"
         size: 350
         anchors.left: parent.left
@@ -47,9 +48,8 @@ ApplicationWindow {
         maxValue: 200
     }
 
-    // TODO: Attach values to DataProvider
     Gauge{
-        value: value
+        value: dataProvider.engineSpeed
         unit: "RPM"
         size: 350
         anchors.right: parent.right

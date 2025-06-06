@@ -4,6 +4,7 @@
 #include <QQmlContext>
 #include "BluetoothManager.hpp"
 #include "DeviceModel.hpp"
+#include "DataProvider.hpp"
 #include "Gauge.hpp"
 
 int main(int argc, char *argv[])
@@ -22,10 +23,12 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<Gauge>("com.voknal.gauge", 1, 0, "Gauge");
 
+    DataProvider dataProvider;
     DeviceModel deviceModel;
     BluetoothManager btManager(&deviceModel);
 
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("dataProvider", &dataProvider);
     engine.rootContext()->setContextProperty("bluetoothManager", &btManager);
     engine.rootContext()->setContextProperty("deviceModel", &deviceModel);
 
