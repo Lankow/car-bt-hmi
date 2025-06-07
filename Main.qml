@@ -27,26 +27,21 @@ ApplicationWindow {
     LoadingScreen{}
     ScreenOverlay{}
 
-    // TODO: Style Button
-    // Button{
-    //     text: "Menu"
-    //     onClicked: sideMenu.showMenu()
-    //     anchors.top: parent.top
-    //     anchors.right: parent.right
-    // }
-
-
-
     MenuIcon{
-        size:40
-        MouseArea {
-          anchors.fill: parent
-          onClicked: menuBackIcon.state = menuBackIcon.state === "menu" ? "back" : "menu"
-        }
-
         id: menuBackIcon
+        size: 35
+        state: "menu"
+        barColor: "#cfcccc"
+
         anchors.top: parent.top
         anchors.right: parent.right
+        anchors.topMargin: 10
+        anchors.rightMargin: 10
+
+        MouseArea {
+          anchors.fill: parent
+          onClicked: sideMenu.showMenu()
+        }
     }
 
     Gauge{
