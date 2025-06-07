@@ -28,9 +28,23 @@ ApplicationWindow {
     ScreenOverlay{}
 
     // TODO: Style Button
-    Button{
-        text: "Menu"
-        onClicked: sideMenu.showMenu()
+    // Button{
+    //     text: "Menu"
+    //     onClicked: sideMenu.showMenu()
+    //     anchors.top: parent.top
+    //     anchors.right: parent.right
+    // }
+
+
+
+    MenuIcon{
+        size:40
+        MouseArea {
+          anchors.fill: parent
+          onClicked: menuBackIcon.state = menuBackIcon.state === "menu" ? "back" : "menu"
+        }
+
+        id: menuBackIcon
         anchors.top: parent.top
         anchors.right: parent.right
     }
