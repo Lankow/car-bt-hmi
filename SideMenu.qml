@@ -15,7 +15,6 @@ Rectangle {
         spacing: 10
         padding: 10
 
-        // Default Menu Page
         Loader {
             id: menuLoader
             sourceComponent: mainMenuComponent

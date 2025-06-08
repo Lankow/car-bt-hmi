@@ -34,8 +34,10 @@ ApplicationWindow {
         barColor: "#cfcccc"
         z: 100
 
-        x: sideMenu.opened ? sideMenu.x - width - 10 : parent.width - width - 10
-        y: 10
+        anchors.top: parent.top
+        anchors.right: sideMenu.left
+        anchors.topMargin: 10
+        anchors.rightMargin: 10
 
         MouseArea {
             anchors.fill: parent
