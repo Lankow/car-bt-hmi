@@ -3,14 +3,14 @@ import QtQuick 2.15
 Rectangle {
     id: overlay
     anchors.fill: parent
-    visible: sideMenu.visible
-    color: "#80000000"
+    opacity: sideMenu.opened ? 0.4 : 0.0
+    color: "#000"
     z: 99
 
     MouseArea {
         anchors.fill: parent
-        onClicked: {
-            sideMenu.hideMenu()
-        }
+        onClicked: sideMenu.opened ? sideMenu.hideMenu() : ""
     }
+
+    Behavior on opacity { NumberAnimation { duration: 300 } }
 }

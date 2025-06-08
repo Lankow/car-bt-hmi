@@ -4,12 +4,11 @@ import QtQuick.Controls 2.15
 Rectangle {
     id: menu
     width: 200
+    height: parent.height
     color: "#ffffff"
-    visible: false
 
-    // TODO: Add Header for Menu
-    // TODO: Add Back Button for Menu
-    
+    property bool opened: falses
+
     Column {
         id: menuContent
         anchors.fill: parent
@@ -84,14 +83,16 @@ Rectangle {
         }
     }
 
+    Behavior on x { NumberAnimation { duration: 300; easing.type: Easing.InOutQuad } }
+
     function showMenu() {
-        visible = true
+        opened = true
         x = parent.width - width
     }
 
     function hideMenu() {
-        x = parent.width
+        x = parent.width;
+        opened = false
         menuLoader.sourceComponent = mainMenuComponent
-        visible = false
     }
 }

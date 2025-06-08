@@ -27,20 +27,19 @@ ApplicationWindow {
     LoadingScreen{}
     ScreenOverlay{}
 
-    MenuIcon{
+    MenuIcon {
         id: menuBackIcon
         size: 35
-        state: "menu"
+        state: sideMenu.opened ? "back-right" : "menu"
         barColor: "#cfcccc"
+        z: 100
 
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.topMargin: 10
-        anchors.rightMargin: 10
+        x: sideMenu.opened ? sideMenu.x - width - 10 : parent.width - width - 10
+        y: 10
 
         MouseArea {
-          anchors.fill: parent
-          onClicked: sideMenu.showMenu()
+            anchors.fill: parent
+            onClicked: sideMenu.opened ? sideMenu.hideMenu() : sideMenu.showMenu()
         }
     }
 
@@ -74,7 +73,9 @@ ApplicationWindow {
         id: sideMenu
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.right: parent.right
+        height: parent.height
+        width: 200
+        x: parent.width
         z: 100
     }
 }

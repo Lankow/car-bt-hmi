@@ -5,59 +5,42 @@ Item {
     property int size: 10
     property int animationDuration: 350
     property color barColor: "#FFFFFF"
+    property string iconState: "menu"
 
-    width: size
+    width: size * 1.5
     height: size
+    state: iconState
 
-    Rectangle {
-        id: bar1
-        width: size
-        height: size / 5
-        color: barColor
+    readonly property int barHeight: size / 5
+    readonly property real barSpacing: size * 2 / 5
+
+    Repeater {
+        model: 3
+        Rectangle {
+            id: bar
+            width: root.width
+            height: root.barHeight
+            color: root.barColor
+            y: index * root.barSpacing
+            transformOrigin: Item.Center
+        }
     }
-
-    Rectangle {
-        id: bar2
-        y: size * 2 / 5
-        width: size
-        height: size / 5
-        color: barColor
-    }
-
-    Rectangle {
-        id: bar3
-        y: size * 4 / 5
-        width: size
-        height: size / 5
-        color: barColor
-    }
-
-    state: "menu"
 
     states: [
         State {
             name: "menu"
         },
         State {
-            name: "back"
-            PropertyChanges {
-                target: bar1
-                rotation: -45
-                width: size * 2 / 3
-                y: size / 3
-            }
-            PropertyChanges {
-                target: bar2
-                width: size / 2
-                x: size * 0.2
-                y: size / 2
-            }
-            PropertyChanges {
-                target: bar3
-                rotation: 45
-                width: size * 2 / 3
-                y: size * 2 / 3
-            }
+            name: "back-left"
+            PropertyChanges { target: root.children[0]; rotation: -45; width: size * 2 / 3; x: size / 2; y: size / 3 }
+            PropertyChanges { target: root.children[1]; opacity: 0 }
+            PropertyChanges { target: root.children[2]; rotation: 45; width: size * 2 / 3; x: size / 2; y: size * 2 / 3 }
+        },
+        State {
+            name: "back-right"
+            PropertyChanges { target: root.children[0]; rotation: 45; width: size * 2 / 3; x: size / 2; y: size / 3 }
+            PropertyChanges { target: root.children[1]; opacity: 0 }
+            PropertyChanges { target: root.children[2]; rotation: -45; width: size * 2 / 3; x: size / 2; y: size * 2 / 3 }
         }
     ]
 
@@ -65,8 +48,7 @@ Item {
         Transition {
             to: "*"
             PropertyAnimation {
-                targets: [bar1, bar2, bar3]
-                properties: "rotation, width, x, y, height"
+                properties: "opacity, rotation, width, x, y"
                 duration: animationDuration
                 easing.type: Easing.InOutQuad
             }
