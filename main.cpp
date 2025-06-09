@@ -11,16 +11,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    int id = QFontDatabase::addApplicationFont(":/Orbitron.ttf");
-    if (id == -1) {
-        qWarning() << "Failed to load Orbitron font.";
-    } else {
-        QStringList loadedFamilies = QFontDatabase::applicationFontFamilies(id);
-        if (!loadedFamilies.isEmpty()) {
-            qDebug() << "Font loaded successfully:" << loadedFamilies.first();
-        }
-    }
-
+    QFontDatabase::addApplicationFont(":/Orbitron.ttf");
     qmlRegisterType<Gauge>("com.voknal.gauge", 1, 0, "Gauge");
 
     DataProvider dataProvider;

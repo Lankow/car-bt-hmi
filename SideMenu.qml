@@ -3,22 +3,52 @@ import QtQuick.Controls 2.15
 
 Rectangle {
     id: menu
-    width: 200
+    width: 250
     height: parent.height
-    color: "#ffffff"
+    color: "#292828"
 
-    property bool opened: falses
+    property bool opened: false
 
     Column {
         id: menuContent
         anchors.fill: parent
-        spacing: 10
-        padding: 10
+        spacing: 15
 
-        Loader {
-            id: menuLoader
-            sourceComponent: mainMenuComponent
+        Text{
+            text:"CAR-BT-HMI"
+            font.family: "Orbitron"
+            font.pointSize: 18
+            y: 12
+            x: 10
+            color: "#cfcccc"
         }
+
+        Rectangle{
+            width:parent.width
+            height: 4
+            color: "#cfcccc"
+        }
+
+        Text{
+            text:"Device"
+            font.family: "Orbitron"
+            font.pointSize: 14
+            x: 10
+            color: "#cfcccc"
+        }
+
+        Text{
+            text:"Settings"
+            font.family: "Orbitron"
+            font.pointSize: 14
+            x: 10
+            color: "#cfcccc"
+        }
+
+        // Loader {
+        //     id: menuLoader
+        //     sourceComponent: mainMenuComponent
+        // }
     }
 
     Component {

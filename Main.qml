@@ -29,13 +29,13 @@ ApplicationWindow {
 
     MenuIcon {
         id: menuBackIcon
-        size: 35
-        state: sideMenu.opened ? "back-right" : "menu"
+        size: 30
+        state: sideMenu.opened ? "close" : "menu"
         barColor: "#cfcccc"
-        z: 100
+        z: 101
 
         anchors.top: parent.top
-        anchors.right: sideMenu.left
+        anchors.right: parent.right
         anchors.topMargin: 10
         anchors.rightMargin: 10
 
@@ -76,7 +76,7 @@ ApplicationWindow {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         height: parent.height
-        width: 200
+        width: 250
         x: parent.width
         z: 100
     }

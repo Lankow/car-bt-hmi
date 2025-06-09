@@ -22,13 +22,18 @@ Item {
             height: root.barHeight
             color: root.barColor
             y: index * root.barSpacing
-            transformOrigin: Item.Center
         }
     }
 
     states: [
         State {
             name: "menu"
+        },
+        State {
+            name: "close"
+            PropertyChanges { target: root.children[0]; rotation: -45; height: root.barHeight * 0.8; width: size * 0.8; x: width / 2; y: size / 2}
+            PropertyChanges { target: root.children[1]; opacity: 0 }
+            PropertyChanges { target: root.children[2]; rotation: 45; height: root.barHeight * 0.8; width: size * 0.8; x: width / 2; y: size / 2}
         },
         State {
             name: "back-left"
@@ -48,7 +53,7 @@ Item {
         Transition {
             to: "*"
             PropertyAnimation {
-                properties: "opacity, rotation, width, x, y"
+                properties: "opacity, rotation, height, width, x, y"
                 duration: animationDuration
                 easing.type: Easing.InOutQuad
             }
