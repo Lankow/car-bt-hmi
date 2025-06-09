@@ -14,18 +14,25 @@ Rectangle {
         anchors.fill: parent
         spacing: 15
 
-        Text{
-            text:"CAR-BT-HMI"
-            font.family: "Orbitron"
-            font.pointSize: 18
-            y: 12
-            x: 10
-            color: "#cfcccc"
+        Rectangle{
+            height: 40
+            color: "transparent"
+            width: parent.width
+
+            Text{
+                text:"CAR-BT-HMI"
+                font.family: "Orbitron"
+                font.pointSize: 18
+
+                x: 10
+                y: 12
+                color: "#cfcccc"
+            }
         }
 
         Rectangle{
             width:parent.width
-            height: 4
+            height: 2
             color: "#cfcccc"
         }
 
@@ -39,6 +46,14 @@ Rectangle {
 
         Text{
             text:"Settings"
+            font.family: "Orbitron"
+            font.pointSize: 14
+            x: 10
+            color: "#cfcccc"
+        }
+
+        Text{
+            text:"About"
             font.family: "Orbitron"
             font.pointSize: 14
             x: 10

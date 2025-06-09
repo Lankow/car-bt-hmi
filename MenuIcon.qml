@@ -31,9 +31,9 @@ Item {
         },
         State {
             name: "close"
-            PropertyChanges { target: root.children[0]; rotation: -45; height: root.barHeight * 0.8; width: size * 0.8; x: width / 2; y: size / 2}
+            PropertyChanges { target: root.children[0]; rotation: -45; height: root.barHeight * 0.6; width: size * 0.8; x: width / 2; y: size / 2}
             PropertyChanges { target: root.children[1]; opacity: 0 }
-            PropertyChanges { target: root.children[2]; rotation: 45; height: root.barHeight * 0.8; width: size * 0.8; x: width / 2; y: size / 2}
+            PropertyChanges { target: root.children[2]; rotation: 45; height: root.barHeight * 0.6; width: size * 0.8; x: width / 2; y: size / 2}
         },
         State {
             name: "back-left"
