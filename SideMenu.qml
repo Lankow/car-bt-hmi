@@ -9,77 +9,35 @@ Rectangle {
 
     property bool opened: false
 
-    Column {
-        id: menuContent
-        anchors.fill: parent
-        spacing: 15
+    MenuHeader{
+        id: menuHeader
+        anchors.top: parent.top
+        anchors.left: parent.left
+    }
 
-        Rectangle{
-            height: 40
-            color: "transparent"
-            width: parent.width
-
-            Text{
-                text:"CAR-BT-HMI"
-                font.family: "Orbitron"
-                font.pointSize: 18
-
-                x: 10
-                y: 12
-                color: "#cfcccc"
-            }
-        }
-
-        Rectangle{
-            width:parent.width
-            height: 2
-            color: "#cfcccc"
-        }
-
-        Text{
-            text:"Device"
-            font.family: "Orbitron"
-            font.pointSize: 14
-            x: 10
-            color: "#cfcccc"
-        }
-
-        Text{
-            text:"Settings"
-            font.family: "Orbitron"
-            font.pointSize: 14
-            x: 10
-            color: "#cfcccc"
-        }
-
-        Text{
-            text:"About"
-            font.family: "Orbitron"
-            font.pointSize: 14
-            x: 10
-            color: "#cfcccc"
-        }
-
-        // Loader {
-        //     id: menuLoader
-        //     sourceComponent: mainMenuComponent
-        // }
+    Loader {
+        id: menuLoader
+        width:parent.width
+        anchors.top: menuHeader.bottom
+        sourceComponent: mainMenuComponent
     }
 
     Component {
         id: mainMenuComponent
-
         Column {
-            spacing: 10
+            anchors.fill: parent
+            MenuButton{
+                id: deviceButton
+                buttontext: "Device"
 
-            Button {
-                text: "Device"
-                onClicked: menuLoader.sourceComponent = deviceMenuComponent
-            }
-
-            Button {
-                text: "Settings"
-                onClicked: menuLoader.sourceComponent = settingsMenuComponent
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: {
+                        menuHeader.headerTitle = deviceButton.buttontext
+                        menuLoader.sourceComponent = deviceMenuComponent
+                        menuIcon.state = "back-left"
+                    }
+                }
             }
         }
     }
@@ -88,27 +46,29 @@ Rectangle {
         id: deviceMenuComponent
 
         Column {
-            spacing: 10
+            anchors.fill: parent
+            MenuButton{
+                id: scanButton
+                buttontext: "Scan Button"
 
-            Button {
-                text: "< Back"
-                onClicked: menuLoader.sourceComponent = mainMenuComponent
-            }
-
-            Button {
-                text: "Start Scan"
-                onClicked: bluetoothManager.startDiscovery()
-            }
-
-            Button {
-                text: "Cancel"
-                onClicked: {
-                    bluetoothManager.stopDiscovery()
-                    hideMenu()
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: bluetoothManager.startDiscovery()
                 }
             }
+            MenuButton{
+                id: cancelButton
+                buttontext: "Cancel Scan"
 
-            DeviceList{}
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: bluetoothManager.stopDiscovery()
+                }
+            }
+            DeviceList{
+                id:deviceList
+                width: parent.width
+            }
         }
     }
 
@@ -116,13 +76,6 @@ Rectangle {
         id: settingsMenuComponent
 
         Column {
-            spacing: 10
-
-            Button {
-                text: "< Back"
-                onClicked: menuLoader.sourceComponent = mainMenuComponent
-            }
-
             Label { text: "Settings here..." }
         }
     }
@@ -130,13 +83,16 @@ Rectangle {
     Behavior on x { NumberAnimation { duration: 300; easing.type: Easing.InOutQuad } }
 
     function showMenu() {
+        menuIcon.state = "close"
         opened = true
         x = parent.width - width
     }
 
     function hideMenu() {
+        menuIcon.state = "menu"
         x = parent.width;
         opened = false
+        menuHeader.headerTitle = "CAR-BT-HMI"
         menuLoader.sourceComponent = mainMenuComponent
     }
 }

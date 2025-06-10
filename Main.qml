@@ -25,12 +25,12 @@ ApplicationWindow {
 
     Vignette {}
     LoadingScreen{}
-    ScreenOverlay{}
+    //ScreenOverlay{}
 
     MenuIcon {
-        id: menuBackIcon
+        id: menuIcon
         size: 30
-        state: sideMenu.opened ? "close" : "menu"
+        state: "menu"
         barColor: "#cfcccc"
         z: 101
 
