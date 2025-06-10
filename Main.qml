@@ -25,7 +25,7 @@ ApplicationWindow {
 
     Vignette {}
     LoadingScreen{}
-    //ScreenOverlay{}
+    ScreenOverlay{}
 
     MenuIcon {
         id: menuIcon
@@ -41,7 +41,7 @@ ApplicationWindow {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: sideMenu.opened ? sideMenu.hideMenu() : sideMenu.showMenu()
+            onClicked: menuIcon.state === "close" ? sideMenu.hideMenu() : sideMenu.showMenu()
         }
     }
 

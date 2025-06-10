@@ -32,12 +32,23 @@ Rectangle {
 
                 MouseArea{
                     anchors.fill: parent
-                    onClicked: {
-                        menuHeader.headerTitle = deviceButton.buttontext
-                        menuLoader.sourceComponent = deviceMenuComponent
-                        menuIcon.state = "back-left"
-                    }
+                    onClicked: switchMenu(deviceButton.buttontext, deviceMenuComponent, "back-left")
                 }
+            }
+
+            MenuButton{
+                id: settingsButton
+                buttontext: "Settings"
+
+                MouseArea{
+                    anchors.fill: parent
+                    onClicked: switchMenu(settingsButton.buttontext, settingsMenuComponent, "back-left")
+                }
+            }
+
+            MenuButton{
+                id: helpButton
+                buttontext: "Help"
             }
         }
     }
@@ -83,16 +94,22 @@ Rectangle {
     Behavior on x { NumberAnimation { duration: 300; easing.type: Easing.InOutQuad } }
 
     function showMenu() {
+        menuLoader.sourceComponent = mainMenuComponent
+        menuHeader.headerTitle = "CAR-BT-HMI"
         menuIcon.state = "close"
         opened = true
         x = parent.width - width
     }
 
     function hideMenu() {
-        menuIcon.state = "menu"
         x = parent.width;
         opened = false
-        menuHeader.headerTitle = "CAR-BT-HMI"
-        menuLoader.sourceComponent = mainMenuComponent
+        menuIcon.state = "menu"
+    }
+
+    function switchMenu(newTitle, newComponent, newIcon) {
+        menuHeader.headerTitle = newTitle
+        menuLoader.sourceComponent = newComponent
+        menuIcon.state = newIcon
     }
 }
