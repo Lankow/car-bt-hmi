@@ -58,6 +58,12 @@ void BluetoothManager::sendMessage(const QString &message)
     }
 }
 
+
+void BluetoothManager::clearResults()
+{
+    m_model->clear();
+}
+
 void BluetoothManager::connectToOBD(const QBluetoothDeviceInfo &device)
 {
     m_obdDevice = device;

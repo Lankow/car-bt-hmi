@@ -8,7 +8,10 @@ Rectangle {
     z: 99
 
     MouseArea {
-        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        width: parent.width - sideMenu.width
         onClicked: sideMenu.opened ? sideMenu.hideMenu() : ""
     }
 

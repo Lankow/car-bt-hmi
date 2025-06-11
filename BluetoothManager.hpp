@@ -16,6 +16,7 @@ public:
     explicit BluetoothManager(DeviceModel *model, QObject *parent = nullptr);
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
+    Q_INVOKABLE void clearResults();
     Q_INVOKABLE void sendMessage(const QString &message);
     Q_INVOKABLE void connectToOBD(const QBluetoothDeviceInfo &device);
 

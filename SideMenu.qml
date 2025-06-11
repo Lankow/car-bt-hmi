@@ -20,6 +20,12 @@ Rectangle {
         width:parent.width
         anchors.top: menuHeader.bottom
         sourceComponent: mainMenuComponent
+
+        onLoaded: {
+            if (sourceComponent === deviceMenuComponent) {
+                bluetoothManager.startDiscovery()
+            }
+        }
     }
 
     Component {
@@ -56,29 +62,18 @@ Rectangle {
     Component {
         id: deviceMenuComponent
 
+
         Column {
             anchors.fill: parent
-            MenuButton{
-                id: scanButton
-                buttontext: "Scan Button"
 
-                MouseArea{
-                    anchors.fill: parent
-                    onClicked: bluetoothManager.startDiscovery()
-                }
-            }
-            MenuButton{
-                id: cancelButton
-                buttontext: "Cancel Scan"
-
-                MouseArea{
-                    anchors.fill: parent
-                    onClicked: bluetoothManager.stopDiscovery()
-                }
-            }
             DeviceList{
                 id:deviceList
                 width: parent.width
+            }
+
+            Component.onDestruction: {
+                bluetoothManager.stopDiscovery()
+                bluetoothManager.clearResults()
             }
         }
     }
