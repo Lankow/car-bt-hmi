@@ -35,21 +35,13 @@ Rectangle {
             MenuButton{
                 id: deviceButton
                 buttontext: "Device"
-
-                MouseArea{
-                    anchors.fill: parent
-                    onClicked: switchMenu(deviceButton.buttontext, deviceMenuComponent, "back-left")
-                }
+                onClicked: switchMenu(buttontext, deviceMenuComponent, "back-left")
             }
 
             MenuButton{
                 id: settingsButton
                 buttontext: "Settings"
-
-                MouseArea{
-                    anchors.fill: parent
-                    onClicked: switchMenu(settingsButton.buttontext, settingsMenuComponent, "back-left")
-                }
+                onClicked: switchMenu(buttontext, settingsMenuComponent, "back-left")
             }
 
             MenuButton{

@@ -31,7 +31,6 @@ ApplicationWindow {
         id: menuIcon
         size: 30
         state: "menu"
-        barColor: "#cfcccc"
         z: 101
 
         anchors.top: parent.top
@@ -39,10 +38,7 @@ ApplicationWindow {
         anchors.topMargin: 10
         anchors.rightMargin: 10
 
-        MouseArea {
-            anchors.fill: parent
-            onClicked: menuIcon.state === "close" ? sideMenu.hideMenu() : sideMenu.showMenu()
-        }
+        onClicked: menuIcon.state === "close" ? sideMenu.hideMenu() : sideMenu.showMenu()
     }
 
     Gauge{

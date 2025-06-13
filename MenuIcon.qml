@@ -1,11 +1,13 @@
 import QtQuick 2.15
 
 Item {
-    id: root
+    id: menuIconRoot
     property int size: 10
     property int animationDuration: 350
-    property color barColor: "#FFFFFF"
+    property color barColor: menuIconMouseArea.pressed ? "#606162" : "#cfcccc"
     property string iconState: "menu"
+
+    signal clicked()
 
     width: size * 1.5
     height: size
@@ -18,10 +20,11 @@ Item {
         model: 3
         Rectangle {
             id: bar
-            width: root.width
-            height: root.barHeight
-            color: root.barColor
-            y: index * root.barSpacing
+            width: menuIconRoot.width
+            height: menuIconRoot.barHeight
+            color: menuIconRoot.barColor
+            y: index * menuIconRoot.barSpacing
+            radius: size
         }
     }
 
@@ -31,21 +34,21 @@ Item {
         },
         State {
             name: "close"
-            PropertyChanges { target: root.children[0]; rotation: -45; height: root.barHeight * 0.6; width: size * 0.8; x: width / 2; y: size / 2}
-            PropertyChanges { target: root.children[1]; opacity: 0 }
-            PropertyChanges { target: root.children[2]; rotation: 45; height: root.barHeight * 0.6; width: size * 0.8; x: width / 2; y: size / 2}
+            PropertyChanges { target: menuIconRoot.children[0]; rotation: -45; height: menuIconRoot.barHeight * 0.6; width: size * 0.8; x: width / 2; y: size / 2}
+            PropertyChanges { target: menuIconRoot.children[1]; opacity: 0 }
+            PropertyChanges { target: menuIconRoot.children[2]; rotation: 45; height: menuIconRoot.barHeight * 0.6; width: size * 0.8; x: width / 2; y: size / 2}
         },
         State {
             name: "back-left"
-            PropertyChanges { target: root.children[0]; rotation: -45; width: size * 2 / 3; x: size / 2; y: size / 3 }
-            PropertyChanges { target: root.children[1]; opacity: 0 }
-            PropertyChanges { target: root.children[2]; rotation: 45; width: size * 2 / 3; x: size / 2; y: size * 2 / 3 }
+            PropertyChanges { target: menuIconRoot.children[0]; rotation: -45; width: size * 2 / 3; x: size / 2; y: size / 3 }
+            PropertyChanges { target: menuIconRoot.children[1]; opacity: 0 }
+            PropertyChanges { target: menuIconRoot.children[2]; rotation: 45; width: size * 2 / 3; x: size / 2; y: size * 2 / 3 }
         },
         State {
             name: "back-right"
-            PropertyChanges { target: root.children[0]; rotation: 45; width: size * 2 / 3; x: size / 2; y: size / 3 }
-            PropertyChanges { target: root.children[1]; opacity: 0 }
-            PropertyChanges { target: root.children[2]; rotation: -45; width: size * 2 / 3; x: size / 2; y: size * 2 / 3 }
+            PropertyChanges { target: menuIconRoot.children[0]; rotation: 45; width: size * 2 / 3; x: size / 2; y: size / 3 }
+            PropertyChanges { target: menuIconRoot.children[1]; opacity: 0 }
+            PropertyChanges { target: menuIconRoot.children[2]; rotation: -45; width: size * 2 / 3; x: size / 2; y: size * 2 / 3 }
         }
     ]
 
@@ -59,4 +62,10 @@ Item {
             }
         }
     ]
+
+    MouseArea {
+        id: menuIconMouseArea
+        anchors.fill: parent
+        onClicked: menuIconRoot.clicked()
+    }
 }
