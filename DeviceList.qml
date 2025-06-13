@@ -43,7 +43,10 @@ Frame {
             MouseArea {
                 id: mouseArea
                 anchors.fill: parent
-                onClicked: bluetoothManager.connectToOBD(model.device)
+                onClicked: {
+                    // TODO: Open "Connecting to BT Device" Screen
+                    bluetoothManager.connectToOBD(model.device)
+                }
             }
         }
     }

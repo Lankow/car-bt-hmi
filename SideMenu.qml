@@ -15,6 +15,8 @@ Rectangle {
         anchors.left: parent.left
     }
 
+    //TODO: Extract Menu Components
+
     Loader {
         id: menuLoader
         width:parent.width
@@ -39,6 +41,9 @@ Rectangle {
             }
 
             MenuButton{
+                // TODO: Add Menu CheckBox Component
+                // TODO: Add "Save Settings" button
+                // TODO: Reset Device
                 id: settingsButton
                 buttontext: "Settings"
                 onClicked: switchMenu(buttontext, settingsMenuComponent, "back-left")

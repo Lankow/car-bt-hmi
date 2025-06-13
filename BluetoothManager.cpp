@@ -5,6 +5,8 @@ BluetoothManager::BluetoothManager(DeviceModel *model, QObject *parent)
     : m_model(model), QObject(parent), m_discoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
     m_socket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this))
 {
+    //TODO: Load last device from Config file
+
     connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceDiscovered, this, &BluetoothManager::deviceDiscovered);
     connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::finished, this, &BluetoothManager::discoveryFinished);
 
@@ -40,6 +42,8 @@ void BluetoothManager::onConnected()
     m_connected = true;
 
     stopDiscovery();
+
+    // TODO: Save Device to Config File
 
     emit connectedChanged();
 }
