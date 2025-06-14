@@ -1,5 +1,6 @@
 #include "BluetoothManager.hpp"
 #include <QDebug>
+#include <QSettings>
 
 BluetoothManager::BluetoothManager(DeviceModel *model, QObject *parent)
     : m_model(model), QObject(parent), m_discoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
@@ -13,6 +14,19 @@ BluetoothManager::BluetoothManager(DeviceModel *model, QObject *parent)
     connect(m_socket, &QBluetoothSocket::connected, this, &BluetoothManager::onConnected);
     connect(m_socket, &QBluetoothSocket::readyRead, this, &BluetoothManager::onReadyRead);
     connect(m_socket, &QBluetoothSocket::errorOccurred, this, &BluetoothManager::onErrorOccurred);
+
+    init();
+}
+
+void BluetoothManager::init()
+{
+    QSettings settings;
+    QString address = settings.value("lastDeviceAddress").toString();
+    QString name = settings.value("lastDeviceName").toString();
+
+    if (!address.isEmpty()) {
+        qDebug() << "Restoring device:" << name << address;
+    }
 }
 
 void BluetoothManager::startDiscovery()
@@ -40,10 +54,11 @@ void BluetoothManager::onConnected()
 {
     qDebug() << "Connected to OBD Device!";
     m_connected = true;
-
     stopDiscovery();
 
-    // TODO: Save Device to Config File
+    QSettings settings;
+    settings.setValue("lastDeviceAddress", m_obdDevice.address().toString());
+    settings.setValue("lastDeviceName", m_obdDevice.name());
 
     emit connectedChanged();
 }

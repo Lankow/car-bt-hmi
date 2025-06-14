@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtCore
 import com.voknal.gauge 1.0
 
 ApplicationWindow {
@@ -24,8 +25,12 @@ ApplicationWindow {
     color:"#141414"
 
     Vignette {}
-    LoadingScreen{}
+    LoadingScreen{} // TODO: Develop Loading Screens
     ScreenOverlay{}
+
+    Settings {
+        id: appSettings
+    }
 
     MenuIcon {
         id: menuIcon

@@ -9,6 +9,9 @@
 
 int main(int argc, char *argv[])
 {
+    QCoreApplication::setOrganizationName("Voknal");
+    QCoreApplication::setApplicationName("CarBtHmi");
+
     QGuiApplication app(argc, argv);
 
     QFontDatabase::addApplicationFont(":/Orbitron.ttf");

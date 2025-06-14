@@ -21,6 +21,7 @@ public:
     Q_INVOKABLE void connectToOBD(const QBluetoothDeviceInfo &device);
 
     bool isConnected() const { return m_connected; }
+    void init();
 
 signals:
     void deviceFound(const QString &deviceName);

@@ -79,7 +79,9 @@ Rectangle {
         id: settingsMenuComponent
 
         Column {
-            Label { text: "Settings here..." }
+            Label {
+                text: "Last connected device: " + appSettings.value("lastDeviceName", "None")
+            }
         }
     }
 
