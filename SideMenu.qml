@@ -79,8 +79,17 @@ Rectangle {
         id: settingsMenuComponent
 
         Column {
-            Label {
-                text: "Last connected device: " + appSettings.value("lastDeviceName", "None")
+            anchors.fill: parent
+
+            MenuButton{
+                id: clearSettingsButton
+                buttontext: "Clear Settings"
+                onClicked: settingsManager.clearSettings();
+            }
+
+            MenuButton{
+                id: settingsDevice
+                buttontext: "Device: " + appSettings.value("lastDeviceName", "None")
             }
         }
     }

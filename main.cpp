@@ -3,6 +3,7 @@
 #include <QFontDatabase>
 #include <QQmlContext>
 #include "BluetoothManager.hpp"
+#include "SettingsManager.hpp"
 #include "DeviceModel.hpp"
 #include "DataProvider.hpp"
 #include "Gauge.hpp"
@@ -19,9 +20,11 @@ int main(int argc, char *argv[])
 
     DataProvider dataProvider;
     DeviceModel deviceModel;
+    SettingsManager settingsManager;
     BluetoothManager btManager(&deviceModel);
 
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("settingsManager", &settingsManager);
     engine.rootContext()->setContextProperty("dataProvider", &dataProvider);
     engine.rootContext()->setContextProperty("bluetoothManager", &btManager);
     engine.rootContext()->setContextProperty("deviceModel", &deviceModel);
