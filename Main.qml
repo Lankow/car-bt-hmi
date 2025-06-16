@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtCore
-import com.voknal.gauge 1.0
+import CustomControls 1.0
 
 ApplicationWindow {
 
@@ -27,6 +27,17 @@ ApplicationWindow {
     Vignette {}
     LoadingScreen{} // TODO: Develop Loading Screens
     ScreenOverlay{}
+
+    StateIndicator{
+        size: 50
+
+        anchors{
+            top: parent.top
+            left: parent.left
+            topMargin: 10
+            leftMargin: 10
+        }
+    }
 
     Settings {
         id: appSettings

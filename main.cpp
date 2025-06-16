@@ -7,6 +7,7 @@
 #include "DeviceModel.hpp"
 #include "DataProvider.hpp"
 #include "Gauge.hpp"
+#include "StateIndicator.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -16,7 +17,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QFontDatabase::addApplicationFont(":/Orbitron.ttf");
-    qmlRegisterType<Gauge>("com.voknal.gauge", 1, 0, "Gauge");
+    qmlRegisterType<Gauge>("CustomControls", 1, 0, "Gauge");
+    qmlRegisterType<StateIndicator>("CustomControls", 1, 0, "StateIndicator");
 
     DataProvider dataProvider;
     DeviceModel deviceModel;
