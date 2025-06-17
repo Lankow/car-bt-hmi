@@ -29,8 +29,8 @@ ApplicationWindow {
     ScreenOverlay{}
 
     StateIndicator{
-        size: 50
-
+        size: 30
+        state: bluetoothManager.connected ? 1 : 0;
         anchors{
             top: parent.top
             left: parent.left

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QQuickPaintedItem>
+#include <QTimer>
 
 class StateIndicator : public QQuickPaintedItem
 {
@@ -27,4 +28,8 @@ signals:
 private:
     int m_state = 0;
     int m_size = 50;
+
+    QColor m_currentColor;
+    QTimer m_timer;
+    qreal m_blinkPhase = 0.0;
 };
