@@ -6,11 +6,14 @@
 #include <QBluetoothSocket>
 #include <QBluetoothDeviceInfo>
 #include "DeviceModel.hpp"
+#include "ConnectionState.hpp"
+
+using ConnectionState = ConnectionStateHelper::ConnectionState;
 
 class BluetoothManager : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool connected READ isConnected NOTIFY connectedChanged)
+    Q_PROPERTY(ConnectionState connectionState READ getConnectionState NOTIFY connectionStateChanged)
 
 public:
     explicit BluetoothManager(DeviceModel *model, QObject *parent = nullptr);
@@ -20,12 +23,12 @@ public:
     Q_INVOKABLE void sendMessage(const QString &message);
     Q_INVOKABLE void connectToOBD(const QBluetoothDeviceInfo &device);
 
-    bool isConnected() const { return m_connected; }
+    ConnectionState getConnectionState() const;
     void init();
 
 signals:
     void deviceFound(const QString &deviceName);
-    void connectedChanged();
+    void connectionStateChanged();
     void messageReceived(const QString &message);
 
 private slots:
@@ -38,10 +41,11 @@ private slots:
 private:
     QBluetoothDeviceDiscoveryAgent *m_discoveryAgent;
     QBluetoothSocket *m_socket;
-    bool m_connected = false;
     QBluetoothDeviceInfo m_obdDevice;
-
+    ConnectionState m_connectionState;
     DeviceModel *m_model;
+
+    void setConnectionState(ConnectionState state);
 };
 
 

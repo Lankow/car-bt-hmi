@@ -4,7 +4,7 @@
 
 BluetoothManager::BluetoothManager(DeviceModel *model, QObject *parent)
     : m_model(model), QObject(parent), m_discoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
-    m_socket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this))
+    m_socket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this)), m_connectionState(ConnectionState::Disconnected)
 {
     //TODO: Load last device from Config file
 
@@ -16,6 +16,15 @@ BluetoothManager::BluetoothManager(DeviceModel *model, QObject *parent)
     connect(m_socket, &QBluetoothSocket::errorOccurred, this, &BluetoothManager::onErrorOccurred);
 
     init();
+}
+
+void BluetoothManager::setConnectionState(ConnectionState state)
+{
+    if(m_connectionState != state)
+    {
+        m_connectionState = state;
+        emit connectionStateChanged();
+    }
 }
 
 void BluetoothManager::init()
@@ -33,11 +42,17 @@ void BluetoothManager::startDiscovery()
 {
     qDebug() << "Starting Bluetooth discovery...";
     m_discoveryAgent->start();
+    setConnectionState(ConnectionState::Discovering);
 }
 
 void BluetoothManager::stopDiscovery()
 {
+    qDebug() << "Stoping Bluetooth discovery.";
     m_discoveryAgent->stop();
+    if (m_socket->state() != QBluetoothSocket::SocketState::ConnectedState)
+    {
+        setConnectionState(ConnectionState::Initial);
+    }
 }
 
 void BluetoothManager::deviceDiscovered(const QBluetoothDeviceInfo &device) {
@@ -48,19 +63,21 @@ void BluetoothManager::deviceDiscovered(const QBluetoothDeviceInfo &device) {
 void BluetoothManager::discoveryFinished()
 {
     qDebug() << "Discovery Finished.";
+    if (m_socket->state() != QBluetoothSocket::SocketState::ConnectedState)
+    {
+        setConnectionState(ConnectionState::Initial);
+    }
 }
 
 void BluetoothManager::onConnected()
 {
     qDebug() << "Connected to OBD Device!";
-    m_connected = true;
+    setConnectionState(ConnectionState::Connected);
     stopDiscovery();
 
     QSettings settings;
     settings.setValue("lastDeviceAddress", m_obdDevice.address().toString());
     settings.setValue("lastDeviceName", m_obdDevice.name());
-
-    emit connectedChanged();
 }
 
 void BluetoothManager::sendMessage(const QString &message)
@@ -77,6 +94,9 @@ void BluetoothManager::sendMessage(const QString &message)
     }
 }
 
+ConnectionState BluetoothManager::getConnectionState() const {
+    return m_connectionState;
+}
 
 void BluetoothManager::clearResults()
 {
@@ -85,6 +105,7 @@ void BluetoothManager::clearResults()
 
 void BluetoothManager::connectToOBD(const QBluetoothDeviceInfo &device)
 {
+    setConnectionState(ConnectionState::Connecting);
     m_obdDevice = device;
 
     if (!m_obdDevice.isValid()) {
@@ -112,4 +133,5 @@ void BluetoothManager::onReadyRead()
 void BluetoothManager::onErrorOccurred(QBluetoothSocket::SocketError error)
 {
     qDebug() << "Bluetooth Error:" << error;
+    setConnectionState(ConnectionState::Error);
 }

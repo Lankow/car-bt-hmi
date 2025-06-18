@@ -30,7 +30,7 @@ ApplicationWindow {
 
     StateIndicator{
         size: 30
-        state: bluetoothManager.connected ? 1 : 0;
+        state: bluetoothManager.connectionState
         anchors{
             top: parent.top
             left: parent.left
