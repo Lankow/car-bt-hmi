@@ -45,6 +45,9 @@ private:
     ConnectionState m_connectionState;
     DeviceModel *m_model;
 
+    QBluetoothAddress m_restoredAddress;
+    bool m_attemptReconnect = false;
+
     void setConnectionState(ConnectionState state);
 };
 

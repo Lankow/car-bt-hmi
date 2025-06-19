@@ -31,6 +31,7 @@ ApplicationWindow {
     StateIndicator{
         size: 30
         state: bluetoothManager.connectionState
+        z: 101
         anchors{
             top: parent.top
             left: parent.left

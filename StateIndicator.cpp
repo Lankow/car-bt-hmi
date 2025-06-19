@@ -1,7 +1,7 @@
 #include "StateIndicator.hpp"
 #include <QPainter>
 
-const QColor initialColor(128, 128, 128);
+const QColor initialColor(100, 100, 100);
 const QColor connectedColor(40, 195, 70);
 const QColor connectingColor(70, 130, 180);
 const QColor discoveringColor(255, 200, 0);
@@ -71,6 +71,7 @@ void StateIndicator::stateToColor()
     switch (m_state) {
     case ConnectionState::Initial:
         m_currentColor = initialColor;
+        break;
     case ConnectionState::Discovering:
         m_currentColor = discoveringColor;
         break;

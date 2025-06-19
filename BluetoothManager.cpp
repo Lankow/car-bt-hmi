@@ -4,10 +4,8 @@
 
 BluetoothManager::BluetoothManager(DeviceModel *model, QObject *parent)
     : m_model(model), QObject(parent), m_discoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
-    m_socket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this)), m_connectionState(ConnectionState::Disconnected)
+    m_socket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this)), m_connectionState(ConnectionState::Initial)
 {
-    //TODO: Load last device from Config file
-
     connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceDiscovered, this, &BluetoothManager::deviceDiscovered);
     connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::finished, this, &BluetoothManager::discoveryFinished);
 
@@ -35,6 +33,11 @@ void BluetoothManager::init()
 
     if (!address.isEmpty()) {
         qDebug() << "Restoring device:" << name << address;
+
+        m_restoredAddress = QBluetoothAddress(address);
+        m_attemptReconnect = true;
+
+        startDiscovery();
     }
 }
 
@@ -58,6 +61,12 @@ void BluetoothManager::stopDiscovery()
 void BluetoothManager::deviceDiscovered(const QBluetoothDeviceInfo &device) {
     qDebug() << "Found device:" << device.name() << device.address().toString();
     m_model->addDevice(device);
+
+    if (m_attemptReconnect && device.address() == m_restoredAddress) {
+        qDebug() << "Auto-connecting to stored device:" << device.name();
+        m_attemptReconnect = false;
+        connectToOBD(device);
+    }
 }
 
 void BluetoothManager::discoveryFinished()
