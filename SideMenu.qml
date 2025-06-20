@@ -32,6 +32,12 @@ Rectangle {
         }
     }
 
+    MenuFooter{
+        id: menuFooter
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+    }
+
     Component {
         id: mainMenuComponent
         Column {
@@ -65,7 +71,7 @@ Rectangle {
             anchors.fill: parent
 
             DeviceList{
-                id:deviceList
+                id: deviceList
                 width: parent.width
             }
 

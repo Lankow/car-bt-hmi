@@ -11,7 +11,7 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setOrganizationName("Voknal");
+    QCoreApplication::setOrganizationName("LNKV");
     QCoreApplication::setApplicationName("CarBtHmi");
 
     QGuiApplication app(argc, argv);

@@ -42,6 +42,7 @@ qt_add_qml_module(appcar-bt-hmi
         SOURCES ConnectionState.hpp
         QML_FILES
         RESOURCES logo.svg
+        QML_FILES MenuFooter.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

@@ -5,7 +5,7 @@ Frame {
     id: deviceListFrame
     padding: 0
     width: 200
-    height: 420
+    height: 380
 
     background: Rectangle {
         color: "#1e1e1e"

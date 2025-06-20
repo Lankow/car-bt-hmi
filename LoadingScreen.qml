@@ -6,9 +6,11 @@ Rectangle {
     id: loadingScreenRoot
     anchors.fill: parent
     z: 999
-    color: "#000000"
+    color: "#141414"
     visible: true
     opacity: 1.0
+
+    Vignette {}
 
     Image {
         source: "logo.svg"

@@ -25,20 +25,8 @@ ApplicationWindow {
     color:"#141414"
 
     Vignette {}
-    LoadingScreen{} // TODO: Develop Loading Screens
+    LoadingScreen{}
     ScreenOverlay{}
-
-    StateIndicator{
-        size: 30
-        connectionState: bluetoothManager.connectionState
-        z: 101
-        anchors{
-            top: parent.top
-            left: parent.left
-            topMargin: 10
-            leftMargin: 10
-        }
-    }
 
     Settings {
         id: appSettings
