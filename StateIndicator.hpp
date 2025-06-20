@@ -10,27 +10,27 @@ class StateIndicator : public QQuickPaintedItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(ConnectionState state READ getState WRITE setState NOTIFY stateChanged)
+    Q_PROPERTY(ConnectionState connectionState READ getConnectionState WRITE setConnectionState NOTIFY connectionStateChanged)
     Q_PROPERTY(int size READ getSize WRITE setSize NOTIFY sizeChanged)
 
 public:
     explicit StateIndicator(QQuickItem* parent = nullptr);
 
-    ConnectionState getState() const { return m_state; }
+    ConnectionState getConnectionState() const;
     int getSize() const { return m_size; }
 
-    void setState(ConnectionState state);
+    void setConnectionState(ConnectionState connectionState);
     void setSize(int size);
 
     void paint(QPainter* painter) override;
 
 signals:
-    void stateChanged();
+    void connectionStateChanged();
     void sizeChanged();
 
 private:
-    void stateToColor();
-    ConnectionState m_state;
+    void connectionStateToColor();
+    ConnectionState m_connectionState;
     int m_size = 50;
 
     QColor m_currentColor;

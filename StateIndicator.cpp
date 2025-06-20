@@ -1,19 +1,23 @@
 #include "StateIndicator.hpp"
 #include <QPainter>
 
-const QColor initialColor(100, 100, 100);
-const QColor connectedColor(40, 195, 70);
-const QColor connectingColor(70, 130, 180);
-const QColor discoveringColor(255, 200, 0);
-const QColor disconnectedColor(255, 140, 0);
-const QColor errorColor(160, 10, 20);
+namespace
+{
+const QColor InitialColor(100, 100, 100);
+const QColor ConnectedColor(40, 195, 70);
+const QColor ConnectingColor(70, 130, 180);
+const QColor DiscoveringColor(255, 200, 0);
+const QColor DisconnectedColor(255, 140, 0);
+const QColor ErrorColor(160, 10, 20);
+}
 
 StateIndicator::StateIndicator(QQuickItem* parent)
-    : QQuickPaintedItem(parent)
+    : QQuickPaintedItem(parent),
+    m_currentColor(InitialColor)
 {
     setWidth(m_size);
     setHeight(m_size);
-    m_currentColor = initialColor;
+    m_currentColor = InitialColor;
 
     m_timer.setInterval(24);
     connect(&m_timer, &QTimer::timeout, this, [this]() {
@@ -25,13 +29,19 @@ StateIndicator::StateIndicator(QQuickItem* parent)
     m_timer.start();
 }
 
-void StateIndicator::setState(ConnectionState state)
+ConnectionState StateIndicator::getConnectionState() const
 {
-    if (state != m_state) {
-        m_state = state;
-        stateToColor();
+    return m_connectionState;
+}
+
+
+void StateIndicator::setConnectionState(ConnectionState state)
+{
+    if (state != m_connectionState) {
+        m_connectionState = state;
+        connectionStateToColor();
         update();
-        emit stateChanged();
+        emit connectionStateChanged();
     }
 }
 
@@ -66,27 +76,27 @@ void StateIndicator::paint(QPainter* painter)
     painter->restore();
 }
 
-void StateIndicator::stateToColor()
+void StateIndicator::connectionStateToColor()
 {
-    switch (m_state) {
+    switch (m_connectionState) {
     case ConnectionState::Initial:
-        m_currentColor = initialColor;
+        m_currentColor = InitialColor;
         break;
     case ConnectionState::Discovering:
-        m_currentColor = discoveringColor;
+        m_currentColor = DiscoveringColor;
         break;
     case ConnectionState::Connected:
-        m_currentColor = connectedColor;
+        m_currentColor = ConnectedColor;
         break;
     case ConnectionState::Connecting:
-        m_currentColor = connectingColor;
+        m_currentColor = ConnectingColor;
         break;
     case ConnectionState::Error:
-        m_currentColor = errorColor;
+        m_currentColor = ErrorColor;
         break;
     case ConnectionState::Disconnected:
     default:
-        m_currentColor = disconnectedColor;
+        m_currentColor = DisconnectedColor;
         break;
     }
 }

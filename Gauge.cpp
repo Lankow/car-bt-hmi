@@ -9,8 +9,8 @@ constexpr qreal kDefaultSize = 500;
 constexpr qreal kDefaultMinValue = 0;
 constexpr qreal kDefaultMaxValue = 200;
 
-constexpr qreal kStartAngle = 50;              // in degrees
-constexpr qreal kSweepAngle = 260;             // arc coverage (360 - 2 * kStartAngle)
+constexpr qreal kStartAngle = 50;
+constexpr qreal kSweepAngle = 260;
 
 constexpr int kArcWidth = 20;
 constexpr int kValueFontSize = 55;

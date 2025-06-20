@@ -20,7 +20,9 @@ Rectangle {
     Loader {
         id: menuLoader
         width:parent.width
-        anchors.top: menuHeader.bottom
+        anchors{
+            top: menuHeader.bottom
+        }
         sourceComponent: mainMenuComponent
 
         onLoaded: {
@@ -58,7 +60,6 @@ Rectangle {
 
     Component {
         id: deviceMenuComponent
-
 
         Column {
             anchors.fill: parent

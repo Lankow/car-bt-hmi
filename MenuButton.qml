@@ -21,8 +21,11 @@ Rectangle {
         font.pointSize: 14
         anchors.leftMargin: 10
         color: "#cfcccc"
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
+        anchors {
+            left: parent.left
+            verticalCenter: parent.verticalCenter
+            leftMargin: 10
+        }
     }
 
     MouseArea {
