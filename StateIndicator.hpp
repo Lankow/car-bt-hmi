@@ -11,6 +11,7 @@ class StateIndicator : public QQuickPaintedItem
     Q_OBJECT
 
     Q_PROPERTY(ConnectionState connectionState READ getConnectionState WRITE setConnectionState NOTIFY connectionStateChanged)
+    Q_PROPERTY(QString stateText READ getStateText NOTIFY connectionStateChanged)
     Q_PROPERTY(int size READ getSize WRITE setSize NOTIFY sizeChanged)
 
 public:
@@ -18,6 +19,7 @@ public:
 
     ConnectionState getConnectionState() const;
     int getSize() const { return m_size; }
+    QString getStateText() const;
 
     void setConnectionState(ConnectionState connectionState);
     void setSize(int size);

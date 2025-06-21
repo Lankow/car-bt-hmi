@@ -6,7 +6,7 @@ Rectangle {
     width: 250
     height: parent.height
     color: "#292828"
-
+    z: 999
     property bool opened: false
 
     MenuHeader{

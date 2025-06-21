@@ -100,3 +100,15 @@ void StateIndicator::connectionStateToColor()
         break;
     }
 }
+
+QString StateIndicator::getStateText() const {
+    switch (m_connectionState) {
+    case ConnectionState::Initial: return "Initial";
+    case ConnectionState::Discovering: return "Discovering";
+    case ConnectionState::Connected: return "Connected";
+    case ConnectionState::Connecting: return "Connecting";
+    case ConnectionState::Error: return "Error";
+    case ConnectionState::Disconnected: return "Disconnected";
+    default: return "Unknown";
+    }
+}
