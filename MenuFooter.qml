@@ -17,7 +17,6 @@ Rectangle {
         anchors.leftMargin: 10
     }
 
-
     StateIndicator {
         id: stateIndicator
         size: 30

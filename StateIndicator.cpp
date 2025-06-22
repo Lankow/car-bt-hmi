@@ -62,8 +62,11 @@ void StateIndicator::paint(QPainter* painter)
     painter->setRenderHint(QPainter::Antialiasing);
     painter->save();
 
-    qreal blinkFactor = 0.4 + 0.3 * std::sin(m_blinkPhase);
-    QColor dynamicColor = m_currentColor.darker(150 + int((1.0 - blinkFactor) * 100));
+    QColor dynamicColor = m_currentColor;
+    if (m_timer.isActive()) {
+        qreal blinkFactor = 0.4 + 0.3 * std::sin(m_blinkPhase);
+        dynamicColor = m_currentColor.darker(150 + int((1.0 - blinkFactor) * 100));
+    }
 
     QRadialGradient gradient(rect.center(), rect.width() / 2);
     gradient.setColorAt(0.6, dynamicColor);
@@ -78,18 +81,18 @@ void StateIndicator::paint(QPainter* painter)
 
 void StateIndicator::connectionStateToColor()
 {
+    bool shouldBlink = false;
+
     switch (m_connectionState) {
     case ConnectionState::Initial:
-        m_currentColor = InitialColor;
-        break;
     case ConnectionState::Discovering:
-        m_currentColor = DiscoveringColor;
+        m_currentColor = InitialColor;
+        shouldBlink = (m_connectionState == ConnectionState::Discovering);
         break;
     case ConnectionState::Connected:
-        m_currentColor = ConnectedColor;
-        break;
     case ConnectionState::Connecting:
-        m_currentColor = ConnectingColor;
+        m_currentColor = ConnectedColor;
+        shouldBlink = (m_connectionState == ConnectionState::Connecting);
         break;
     case ConnectionState::Error:
         m_currentColor = ErrorColor;
@@ -98,6 +101,13 @@ void StateIndicator::connectionStateToColor()
     default:
         m_currentColor = DisconnectedColor;
         break;
+    }
+
+    if (shouldBlink && !m_timer.isActive()) {
+        m_timer.start();
+    } else if (!shouldBlink && m_timer.isActive()) {
+        m_timer.stop();
+        m_blinkPhase = 0.0;
     }
 }
 

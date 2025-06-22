@@ -56,6 +56,10 @@ void BluetoothManager::stopDiscovery()
     {
         setConnectionState(ConnectionState::Initial);
     }
+    else
+    {
+        setConnectionState(ConnectionState::Connected);
+    }
 }
 
 void BluetoothManager::deviceDiscovered(const QBluetoothDeviceInfo &device) {
@@ -75,6 +79,10 @@ void BluetoothManager::discoveryFinished()
     if (m_socket->state() != QBluetoothSocket::SocketState::ConnectedState)
     {
         setConnectionState(ConnectionState::Initial);
+    }
+    else
+    {
+        setConnectionState(ConnectionState::Connected);
     }
 }
 
@@ -114,6 +122,11 @@ void BluetoothManager::clearResults()
 
 void BluetoothManager::connectToOBD(const QBluetoothDeviceInfo &device)
 {
+    // if (m_socket->state() == QBluetoothSocket::SocketState::ConnectedState)
+    // {
+    //     m_socket->disconnectFromService();
+    // }
+
     setConnectionState(ConnectionState::Connecting);
     m_obdDevice = device;
 
