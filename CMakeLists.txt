@@ -16,40 +16,33 @@ qt_add_qml_module(appcar-bt-hmi
     URI car-bt-hmi
     VERSION 1.0
     QML_FILES
-        Main.qml
-        SOURCES BluetoothManager.hpp BluetoothManager.cpp
-        SOURCES
-        SOURCES
-        QML_FILES DeviceList.qml
-        SOURCES DeviceModel.hpp DeviceModel.cpp
-        SOURCES
-        SOURCES DataProvider.hpp DataProvider.cpp
-        SOURCES Gauge.hpp Gauge.cpp
-        RESOURCES
-        QML_FILES Vignette.qml
-        QML_FILES SideMenu.qml
-        QML_FILES
-        QML_FILES
-        QML_FILES LoadingScreen.qml
-        QML_FILES ScreenOverlay.qml
-        QML_FILES MenuIcon.qml
-        RESOURCES Orbitron.ttf
-        QML_FILES MenuHeader.qml
-        QML_FILES MenuButton.qml
-        SOURCES SettingsManager.hpp SettingsManager.cpp
-        QML_FILES
-        SOURCES StateIndicator.hpp StateIndicator.cpp
-        SOURCES ConnectionState.hpp
-        QML_FILES
-        RESOURCES logo.svg
-        QML_FILES MenuFooter.qml
+        qml/Main.qml
+        qml/DeviceList.qml
+        qml/LoadingScreen.qml
+        qml/MenuButton.qml
+        qml/MenuFooter.qml
+        qml/MenuHeader.qml
+        qml/MenuIcon.qml
+        qml/ScreenOverlay.qml
+        qml/SideMenu.qml
+        qml/Vignette.qml
+        qml/menus/MainMenu.qml
+        qml/menus/DeviceMenu.qml
+        qml/menus/SettingsMenu.qml
+    SOURCES
+        BluetoothManager.hpp BluetoothManager.cpp
+        DeviceModel.hpp DeviceModel.cpp
+        DataProvider.hpp DataProvider.cpp
+        Gauge.hpp Gauge.cpp
+        SettingsManager.hpp SettingsManager.cpp
+        StateIndicator.hpp StateIndicator.cpp
+        ConnectionState.hpp
+    RESOURCES
+        resources/Orbitron.ttf
+        resources/logo.svg
 )
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
 set_target_properties(appcar-bt-hmi PROPERTIES
-#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appcar-bt-hmi
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE

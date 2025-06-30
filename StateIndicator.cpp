@@ -113,7 +113,7 @@ void StateIndicator::connectionStateToColor()
 
 QString StateIndicator::getStateText() const {
     switch (m_connectionState) {
-    case ConnectionState::Initial: return "Initial";
+    case ConnectionState::Initial: return "Not connected";
     case ConnectionState::Discovering: return "Discovering";
     case ConnectionState::Connected: return "Connected";
     case ConnectionState::Connecting: return "Connecting";

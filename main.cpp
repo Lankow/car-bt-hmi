@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    QFontDatabase::addApplicationFont(":/Orbitron.ttf");
+    QFontDatabase::addApplicationFont(":/resources/Orbitron.ttf");
     qmlRegisterType<Gauge>("CustomControls", 1, 0, "Gauge");
     qmlRegisterType<StateIndicator>("CustomControls", 1, 0, "StateIndicator");
 
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("bluetoothManager", &btManager);
     engine.rootContext()->setContextProperty("deviceModel", &deviceModel);
 
-    const QUrl url(QStringLiteral("qrc:/car-bt-hmi/Main.qml"));
+    const QUrl url(QStringLiteral("qrc:/car-bt-hmi/qml/Main.qml"));
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,
