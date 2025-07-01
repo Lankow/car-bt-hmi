@@ -2,20 +2,38 @@ cmake_minimum_required(VERSION 3.16)
 
 project(car-bt-hmi VERSION 0.1 LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Bluetooth Svg)
 
 qt_standard_project_setup()
 
-qt_add_executable(appcar-bt-hmi
-    main.cpp
+add_executable(appcar-bt-hmi
+    src/main.cpp
 )
 
-qt_add_qml_module(appcar-bt-hmi
-    URI car-bt-hmi
-    VERSION 1.0
-    QML_FILES
+target_sources(appcar-bt-hmi
+    PRIVATE
+        src/BluetoothManager.cpp
+        src/DeviceModel.cpp
+        src/DataProvider.cpp
+        src/Gauge.cpp
+        src/SettingsManager.cpp
+        src/StateIndicator.cpp
+
+        include/BluetoothManager.hpp
+        include/DeviceModel.hpp
+        include/DataProvider.hpp
+        include/Gauge.hpp
+        include/SettingsManager.hpp
+        include/StateIndicator.hpp
+        include/ConnectionState.hpp
+)
+
+qt_add_resources(appcar-bt-hmi "qml_resources"
+    PREFIX "/car-bt-hmi"
+    FILES
         qml/Main.qml
         qml/DeviceList.qml
         qml/LoadingScreen.qml
@@ -29,28 +47,23 @@ qt_add_qml_module(appcar-bt-hmi
         qml/menus/MainMenu.qml
         qml/menus/DeviceMenu.qml
         qml/menus/SettingsMenu.qml
-    SOURCES
-        BluetoothManager.hpp BluetoothManager.cpp
-        DeviceModel.hpp DeviceModel.cpp
-        DataProvider.hpp DataProvider.cpp
-        Gauge.hpp Gauge.cpp
-        SettingsManager.hpp SettingsManager.cpp
-        StateIndicator.hpp StateIndicator.cpp
-        ConnectionState.hpp
-    RESOURCES
         resources/Orbitron.ttf
         resources/logo.svg
 )
 
-set_target_properties(appcar-bt-hmi PROPERTIES
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
+target_include_directories(appcar-bt-hmi
+    PRIVATE ${CMAKE_SOURCE_DIR}/include
 )
 
 target_link_libraries(appcar-bt-hmi
     PRIVATE Qt6::Quick Qt6::Bluetooth Qt6::Svg
+)
+
+set_target_properties(appcar-bt-hmi PROPERTIES
+    MACOSX_BUNDLE TRUE
+    WIN32_EXECUTABLE TRUE
+    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
 )
 
 include(GNUInstallDirs)
