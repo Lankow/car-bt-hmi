@@ -9,117 +9,86 @@ Rectangle {
     z: 999
     property bool opened: false
 
-    MenuHeader{
+    // === Menu Registry ===
+    property var menuRegistry: ({
+        main: {
+            id: "main",
+            header: "CAR-BT-HMI",
+            icon: "menu",
+            component: mainMenuComponent
+        },
+        device: {
+            id: "device",
+            header: "Device",
+            icon: "back-left",
+            component: deviceMenuComponent
+        },
+        settings: {
+            id: "settings",
+            header: "Settings",
+            icon: "back-left",
+            component: settingsMenuComponent
+        }
+    })
+
+    MenuHeader {
         id: menuHeader
         anchors.top: parent.top
         anchors.left: parent.left
     }
 
-    //TODO: Extract Menu Components
-
     Loader {
         id: menuLoader
-        width:parent.width
-        anchors{
-            top: menuHeader.bottom
-        }
-        sourceComponent: mainMenuComponent
+        width: parent.width
+        anchors.top: menuHeader.bottom
+        sourceComponent: menuRegistry.main.component
 
         onLoaded: {
             if (sourceComponent === deviceMenuComponent) {
                 bluetoothManager.startDiscovery()
             }
+
+            if (item && item.menuSwitchRequested) {
+                item.menuSwitchRequested.connect(switchTo)
+            }
         }
     }
 
-    MenuFooter{
+    MenuFooter {
         id: menuFooter
         anchors.bottom: parent.bottom
         anchors.left: parent.left
     }
 
-    Component {
-        id: mainMenuComponent
-        Column {
-            anchors.fill: parent
-            MenuButton{
-                id: deviceButton
-                buttontext: "Device"
-                onClicked: switchMenu(buttontext, deviceMenuComponent, "back-left")
-            }
+    Component { id: mainMenuComponent; MainMenu {} }
+    Component { id: deviceMenuComponent; DeviceMenu {} }
+    Component { id: settingsMenuComponent; SettingsMenu {} }
 
-            MenuButton{
-                // TODO: Add Menu CheckBox Component
-                // TODO: Add "Save Settings" button
-                // TODO: Reset Device
-                id: settingsButton
-                buttontext: "Settings"
-                onClicked: switchMenu(buttontext, settingsMenuComponent, "back-left")
-            }
-
-            MenuButton{
-                id: helpButton
-                buttontext: "Help"
-            }
-        }
+    Behavior on x {
+        NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
     }
-
-    Component {
-        id: deviceMenuComponent
-
-        Column {
-            anchors.fill: parent
-
-            DeviceList{
-                id: deviceList
-                width: parent.width
-            }
-
-            Component.onDestruction: {
-                bluetoothManager.stopDiscovery()
-                bluetoothManager.clearResults()
-            }
-        }
-    }
-
-    Component {
-        id: settingsMenuComponent
-
-        Column {
-            anchors.fill: parent
-
-            MenuButton{
-                id: clearSettingsButton
-                buttontext: "Clear Settings"
-                onClicked: settingsManager.clearSettings();
-            }
-
-            MenuButton{
-                id: settingsDevice
-                buttontext: "Device: " + appSettings.value("lastDeviceName", "None")
-            }
-        }
-    }
-
-    Behavior on x { NumberAnimation { duration: 300; easing.type: Easing.InOutQuad } }
 
     function showMenu() {
-        menuLoader.sourceComponent = mainMenuComponent
-        menuHeader.headerTitle = "CAR-BT-HMI"
-        menuIcon.state = "close"
+        switchTo("main")
         opened = true
         x = parent.width - width
     }
 
     function hideMenu() {
-        x = parent.width;
+        x = parent.width
         opened = false
         menuIcon.state = "menu"
     }
 
-    function switchMenu(newTitle, newComponent, newIcon) {
-        menuHeader.headerTitle = newTitle
-        menuLoader.sourceComponent = newComponent
-        menuIcon.state = newIcon
+    function switchTo(menuId) {
+        if (!menuRegistry[menuId]) {
+            console.warn("Unknown menu ID:", menuId)
+            return
+        }
+
+        let entry = menuRegistry[menuId]
+        menuHeader.headerTitle = entry.header
+        menuLoader.sourceComponent = entry.component
+        menuIcon.state = entry.icon
     }
 }

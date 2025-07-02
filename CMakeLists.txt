@@ -13,27 +13,19 @@ add_executable(appcar-bt-hmi
     src/main.cpp
 )
 
-target_sources(appcar-bt-hmi
-    PRIVATE
-        src/BluetoothManager.cpp
-        src/DeviceModel.cpp
-        src/DataProvider.cpp
-        src/Gauge.cpp
-        src/SettingsManager.cpp
-        src/StateIndicator.cpp
-
-        include/BluetoothManager.hpp
-        include/DeviceModel.hpp
-        include/DataProvider.hpp
-        include/Gauge.hpp
-        include/SettingsManager.hpp
-        include/StateIndicator.hpp
+qt_add_qml_module(appcar-bt-hmi
+    URI car-bt-hmi
+    VERSION 1.0
+    SOURCES
+        include/BluetoothManager.hpp src/BluetoothManager.cpp
+        include/DeviceModel.hpp src/DeviceModel.cpp
+        include/DataProvider.hpp src/DataProvider.cpp
+        include/Gauge.hpp src/Gauge.cpp
+        include/SettingsManager.hpp src/SettingsManager.cpp
+        include/StateIndicator.hpp src/StateIndicator.cpp
         include/ConnectionState.hpp
-)
 
-qt_add_resources(appcar-bt-hmi "qml_resources"
-    PREFIX "/car-bt-hmi"
-    FILES
+    QML_FILES
         qml/Main.qml
         qml/DeviceList.qml
         qml/LoadingScreen.qml
@@ -44,9 +36,11 @@ qt_add_resources(appcar-bt-hmi "qml_resources"
         qml/ScreenOverlay.qml
         qml/SideMenu.qml
         qml/Vignette.qml
-        qml/menus/MainMenu.qml
-        qml/menus/DeviceMenu.qml
-        qml/menus/SettingsMenu.qml
+        qml/MainMenu.qml
+        qml/DeviceMenu.qml
+        qml/SettingsMenu.qml
+
+    RESOURCES
         resources/Orbitron.ttf
         resources/logo.svg
 )
