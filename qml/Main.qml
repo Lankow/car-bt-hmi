@@ -42,8 +42,6 @@ ApplicationWindow {
         anchors.right: parent.right
         anchors.topMargin: 10
         anchors.rightMargin: 10
-
-        onClicked: menuIcon.state === "close" ? sideMenu.hideMenu() : sideMenu.showMenu()
     }
 
     Gauge{

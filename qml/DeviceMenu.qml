@@ -8,6 +8,10 @@ Column {
         width: parent.width
     }
 
+    Component.onCompleted: {
+        bluetoothManager.startDiscovery()
+    }
+
     Component.onDestruction: {
         bluetoothManager.stopDiscovery()
         bluetoothManager.clearResults()

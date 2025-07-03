@@ -7,14 +7,21 @@ Rectangle {
     height: parent.height
     color: "#292828"
     z: 999
-    property bool opened: false
 
-    // === Menu Registry ===
+    property string currentMenuId: "closed"
+    property var menuHistory: []
+
     property var menuRegistry: ({
+        closed: {
+            id: "closed",
+            header: "",
+            icon: "menu",
+            component: null
+        },
         main: {
             id: "main",
             header: "CAR-BT-HMI",
-            icon: "menu",
+            icon: "close",
             component: mainMenuComponent
         },
         device: {
@@ -44,10 +51,6 @@ Rectangle {
         sourceComponent: menuRegistry.main.component
 
         onLoaded: {
-            if (sourceComponent === deviceMenuComponent) {
-                bluetoothManager.startDiscovery()
-            }
-
             if (item && item.menuSwitchRequested) {
                 item.menuSwitchRequested.connect(switchTo)
             }
@@ -68,16 +71,13 @@ Rectangle {
         NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
     }
 
-    function showMenu() {
-        switchTo("main")
-        opened = true
-        x = parent.width - width
-    }
-
-    function hideMenu() {
-        x = parent.width
-        opened = false
-        menuIcon.state = "menu"
+    function goBack() {
+        if (menuHistory.length > 0) {
+            let previousId = menuHistory.pop()
+            switchTo(previousId)
+        } else {
+            switchTo("main")
+        }
     }
 
     function switchTo(menuId) {
@@ -86,7 +86,15 @@ Rectangle {
             return
         }
 
+        if (menuId === "closed") {
+            menuHistory = []
+        } else if (currentMenuId !== "closed" && currentMenuId !== menuId) {
+            menuHistory.push(currentMenuId)
+        }
+        currentMenuId = menuId
         let entry = menuRegistry[menuId]
+
+        x = (menuId === "closed") ? parent.width : parent.width - width
         menuHeader.headerTitle = entry.header
         menuLoader.sourceComponent = entry.component
         menuIcon.state = entry.icon

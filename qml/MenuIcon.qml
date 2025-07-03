@@ -7,8 +7,6 @@ Item {
     property color barColor: menuIconMouseArea.pressed ? "#606162" : "#cfcccc"
     property string iconState: "menu"
 
-    signal clicked()
-
     width: size * 1.5
     height: size
     state: iconState
@@ -66,6 +64,14 @@ Item {
     MouseArea {
         id: menuIconMouseArea
         anchors.fill: parent
-        onClicked: menuIconRoot.clicked()
+        onClicked: {
+            if (sideMenu.currentMenuId === "closed") {
+                sideMenu.switchTo("main")
+            } else if (sideMenu.currentMenuId === "main") {
+                sideMenu.switchTo("closed")
+            } else {
+                sideMenu.goBack()
+            }
+        }
     }
 }
