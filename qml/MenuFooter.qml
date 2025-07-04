@@ -8,13 +8,31 @@ Rectangle {
 
     Text {
         id: stateText
-        text: stateIndicator.stateText
         font.family: "Orbitron"
-        font.pixelSize: 18
+        font.pixelSize: 15
         color: "#cfcccc"
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 10
+
+        text: {
+            switch (bluetoothManager.connectionState) {
+                case 0: return "Not connected";
+                case 1: return "Discovering";
+                case 2: return bluetoothManager.connectedDeviceName !== ""
+                            ? "Connecting to \n" + bluetoothManager.connectedDeviceName
+                            : "Connecting";
+                case 3: return bluetoothManager.connectedDeviceName !== ""
+                            ? "Connected to \n" + bluetoothManager.connectedDeviceName
+                            : "Connected";
+                case 4: return "Disconnected";
+                case 5: return "Error";
+                default: return "Unknown";
+            }
+        }
+
+        elide: Text.ElideRight
+        wrapMode: Text.NoWrap
     }
 
     StateIndicator {

@@ -115,6 +115,10 @@ ConnectionState BluetoothManager::getConnectionState() const {
     return m_connectionState;
 }
 
+QString BluetoothManager::getConnectedDeviceName() const {
+    return m_obdDevice.isValid() ? m_obdDevice.name() : "";
+}
+
 void BluetoothManager::clearResults()
 {
     m_model->clear();
@@ -129,6 +133,8 @@ void BluetoothManager::connectToOBD(const QBluetoothDeviceInfo &device)
 
     setConnectionState(ConnectionState::Connecting);
     m_obdDevice = device;
+
+    emit connectedDeviceNameChanged();
 
     if (!m_obdDevice.isValid()) {
         qWarning() << "No OBD Device found!";
