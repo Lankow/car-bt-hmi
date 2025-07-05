@@ -14,23 +14,12 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 10
-
-        text: {
-            switch (bluetoothManager.connectionState) {
-                case 0: return "Not connected";
-                case 1: return "Discovering";
-                case 2: return bluetoothManager.connectedDeviceName !== ""
-                            ? "Connecting to \n" + bluetoothManager.connectedDeviceName
-                            : "Connecting";
-                case 3: return bluetoothManager.connectedDeviceName !== ""
-                            ? "Connected to \n" + bluetoothManager.connectedDeviceName
-                            : "Connected";
-                case 4: return "Disconnected";
-                case 5: return "Error";
-                default: return "Unknown";
-            }
-        }
-
+        text: stateIndicator.stateText + (
+            (bluetoothManager.connectionState === 2 || bluetoothManager.connectionState === 3)
+            && bluetoothManager.activeDeviceName !== ""
+                ? "\n" + bluetoothManager.activeDeviceName
+                : ""
+        )
         elide: Text.ElideRight
         wrapMode: Text.NoWrap
     }

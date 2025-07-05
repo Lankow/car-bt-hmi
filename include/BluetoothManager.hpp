@@ -14,7 +14,7 @@ class BluetoothManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(ConnectionState connectionState READ getConnectionState NOTIFY connectionStateChanged)
-    Q_PROPERTY(QString connectedDeviceName READ getConnectedDeviceName NOTIFY connectedDeviceNameChanged)
+    Q_PROPERTY(QString activeDeviceName READ getActiveDeviceName NOTIFY activeDeviceNameChanged)
 
 public:
     explicit BluetoothManager(DeviceModel *model, QObject *parent = nullptr);
@@ -25,14 +25,14 @@ public:
     Q_INVOKABLE void connectToOBD(const QBluetoothDeviceInfo &device);
 
     ConnectionState getConnectionState() const;
-    QString getConnectedDeviceName() const;
+    QString getActiveDeviceName() const;
 
     void init();
 
 signals:
     void deviceFound(const QString &deviceName);
     void connectionStateChanged();
-    void connectedDeviceNameChanged();
+    void activeDeviceNameChanged();
     void messageReceived(const QString &message);
 
 private slots:
@@ -45,14 +45,16 @@ private slots:
 private:
     QBluetoothDeviceDiscoveryAgent *m_discoveryAgent;
     QBluetoothSocket *m_socket;
+    QBluetoothDeviceInfo m_pendingObdDevice;
     QBluetoothDeviceInfo m_obdDevice;
     ConnectionState m_connectionState;
     DeviceModel *m_model;
 
     QBluetoothAddress m_restoredAddress;
     bool m_attemptReconnect = false;
-
     void setConnectionState(ConnectionState state);
+    void createSocket();
+    void resetSocket();
 };
 
 

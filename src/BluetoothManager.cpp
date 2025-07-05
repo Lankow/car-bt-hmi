@@ -3,15 +3,15 @@
 #include <QSettings>
 
 BluetoothManager::BluetoothManager(DeviceModel *model, QObject *parent)
-    : m_model(model), QObject(parent), m_discoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
-    m_socket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this)), m_connectionState(ConnectionState::Initial)
+    : m_model(model), QObject(parent),
+    m_discoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
+    m_socket(nullptr),
+    m_connectionState(ConnectionState::Initial)
 {
     connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceDiscovered, this, &BluetoothManager::deviceDiscovered);
     connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::finished, this, &BluetoothManager::discoveryFinished);
 
-    connect(m_socket, &QBluetoothSocket::connected, this, &BluetoothManager::onConnected);
-    connect(m_socket, &QBluetoothSocket::readyRead, this, &BluetoothManager::onReadyRead);
-    connect(m_socket, &QBluetoothSocket::errorOccurred, this, &BluetoothManager::onErrorOccurred);
+    createSocket();
 
     init();
 }
@@ -88,6 +88,9 @@ void BluetoothManager::discoveryFinished()
 
 void BluetoothManager::onConnected()
 {
+    m_obdDevice = m_pendingObdDevice;
+    emit activeDeviceNameChanged();
+
     qDebug() << "Connected to OBD Device!";
     setConnectionState(ConnectionState::Connected);
     stopDiscovery();
@@ -115,8 +118,14 @@ ConnectionState BluetoothManager::getConnectionState() const {
     return m_connectionState;
 }
 
-QString BluetoothManager::getConnectedDeviceName() const {
-    return m_obdDevice.isValid() ? m_obdDevice.name() : "";
+QString BluetoothManager::getActiveDeviceName() const {
+    if (m_connectionState == ConnectionState::Connecting && m_pendingObdDevice.isValid()) {
+        return m_pendingObdDevice.name();
+    }
+    if (m_connectionState == ConnectionState::Connected && m_obdDevice.isValid()) {
+        return m_obdDevice.name();
+    }
+    return "";
 }
 
 void BluetoothManager::clearResults()
@@ -126,29 +135,20 @@ void BluetoothManager::clearResults()
 
 void BluetoothManager::connectToOBD(const QBluetoothDeviceInfo &device)
 {
-    // if (m_socket->state() == QBluetoothSocket::SocketState::ConnectedState)
-    // {
-    //     m_socket->disconnectFromService();
-    // }
+    if (!device.isValid()) {
+        qWarning() << "Invalid OBD Device!";
+        return;
+    }
+
+    resetSocket();
 
     setConnectionState(ConnectionState::Connecting);
-    m_obdDevice = device;
+    m_pendingObdDevice = device;
 
-    emit connectedDeviceNameChanged();
+    emit activeDeviceNameChanged();
 
-    if (!m_obdDevice.isValid()) {
-        qWarning() << "No OBD Device found!";
-        return;
-    }
-
-    qDebug() << "Connecting to OBD Device at" << m_obdDevice.address().toString();
-
-    if (m_socket->state() == QBluetoothSocket::SocketState::ConnectedState) {
-        qDebug() << "Already connected to OBD Device.";
-        return;
-    }
-
-    m_socket->connectToService(m_obdDevice.address(), QBluetoothUuid(QStringLiteral("00001101-0000-1000-8000-00805F9B34FB")));
+    qDebug() << "Connecting to OBD Device at" << device.address().toString();
+    m_socket->connectToService(device.address(), QBluetoothUuid(QStringLiteral("00001101-0000-1000-8000-00805F9B34FB")));
 }
 
 void BluetoothManager::onReadyRead()
@@ -161,5 +161,27 @@ void BluetoothManager::onReadyRead()
 void BluetoothManager::onErrorOccurred(QBluetoothSocket::SocketError error)
 {
     qDebug() << "Bluetooth Error:" << error;
+    m_pendingObdDevice = QBluetoothDeviceInfo();
     setConnectionState(ConnectionState::Error);
+}
+
+void BluetoothManager::createSocket()
+{
+    m_socket = new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this);
+
+    connect(m_socket, &QBluetoothSocket::connected, this, &BluetoothManager::onConnected);
+    connect(m_socket, &QBluetoothSocket::readyRead, this, &BluetoothManager::onReadyRead);
+    connect(m_socket, &QBluetoothSocket::errorOccurred, this, &BluetoothManager::onErrorOccurred);
+}
+
+void BluetoothManager::resetSocket()
+{
+    if (m_socket) {
+        m_socket->disconnectFromService();
+        m_socket->close();
+        m_socket->deleteLater();
+        m_socket = nullptr;
+    }
+
+    createSocket();
 }
