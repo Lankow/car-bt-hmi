@@ -1,12 +1,14 @@
 import QtQuick 2.15
 
 Rectangle {
-    id: menuButtonRoot
+    id: menuItemRoot
     height: 50
     width: parent.width
     color: menuButtonMouseArea.pressed ? "#606162" : "#404142"
 
     property string buttontext: ""
+    property bool hasCheckbox: false
+    property bool checked: false
     signal clicked()
 
     Rectangle {
@@ -19,7 +21,6 @@ Rectangle {
         text: buttontext
         font.family: "Orbitron"
         font.pointSize: 14
-        anchors.leftMargin: 10
         color: "#cfcccc"
         anchors {
             left: parent.left
@@ -28,9 +29,28 @@ Rectangle {
         }
     }
 
+    Rectangle {
+        visible: hasCheckbox
+        width: 25
+        height: 25
+        radius: 3
+        color: checked ? "#00cc66" : "#666666"
+        anchors {
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+            rightMargin: 10
+        }
+    }
+
     MouseArea {
         id: menuButtonMouseArea
         anchors.fill: parent
-        onClicked: menuButtonRoot.clicked()
+        onClicked: {
+            if (hasCheckbox){
+                checked = !checked
+            }else{
+                menuItemRoot.clicked()
+            }
+        }
     }
 }

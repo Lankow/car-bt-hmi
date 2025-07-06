@@ -3,13 +3,19 @@ import QtQuick 2.15
 Column {
     anchors.fill: parent
 
-    MenuButton{
+    MenuItem{
         id: clearSettingsButton
         buttontext: "Clear Settings"
         onClicked: settingsManager.clearSettings();
     }
 
-    MenuButton{
+    MenuItem{
+        buttontext: "Logging Enabled"
+        hasCheckbox: true
+        checked: true
+    }
+
+    MenuItem{
         id: settingsDevice
         buttontext: "Device: " + appSettings.value("lastDeviceName", "None")
     }

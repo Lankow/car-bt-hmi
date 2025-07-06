@@ -29,7 +29,7 @@ qt_add_qml_module(appcar-bt-hmi
         qml/Main.qml
         qml/DeviceList.qml
         qml/LoadingScreen.qml
-        qml/MenuButton.qml
+        qml/MenuItem.qml
         qml/MenuFooter.qml
         qml/MenuHeader.qml
         qml/MenuIcon.qml

@@ -4,12 +4,12 @@ Column {
     anchors.fill: parent
     signal menuSwitchRequested(string menuId)
 
-    MenuButton{
+    MenuItem{
         buttontext: "Device"
         onClicked: menuSwitchRequested("device")
     }
 
-    MenuButton{
+    MenuItem{
         // TODO: Add Menu CheckBox Component
         // TODO: Add "Save Settings" button
         // TODO: Reset Device
@@ -17,7 +17,7 @@ Column {
         onClicked: menuSwitchRequested("settings")
     }
 
-    MenuButton{
+    MenuItem{
         id: helpButton
         buttontext: "Help"
     }
