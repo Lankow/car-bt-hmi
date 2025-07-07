@@ -9,10 +9,11 @@ Column {
         onClicked: settingsManager.clearSettings();
     }
 
-    MenuItem{
+    MenuItem {
         buttontext: "Logging Enabled"
         hasCheckbox: true
-        checked: true
+        checked: settingsManager.loggingEnabled
+        onClicked: settingsManager.toggleSetting(settingsManager.LoggingEnabled)
     }
 
     MenuItem{

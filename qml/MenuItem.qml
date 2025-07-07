@@ -9,12 +9,14 @@ Rectangle {
     property string buttontext: ""
     property bool hasCheckbox: false
     property bool checked: false
+
     signal clicked()
 
     Rectangle {
         width: parent.width
         height: 2
         color: "#323334"
+        anchors.top: parent.top
     }
 
     Text {
@@ -45,12 +47,6 @@ Rectangle {
     MouseArea {
         id: menuButtonMouseArea
         anchors.fill: parent
-        onClicked: {
-            if (hasCheckbox){
-                checked = !checked
-            }else{
-                menuItemRoot.clicked()
-            }
-        }
+        onClicked: menuItemRoot.clicked()
     }
 }
