@@ -4,79 +4,84 @@ import QtCore
 import CustomControls 1.0
 
 ApplicationWindow {
-
-    // Uncomment below to keep frame borderless.
-    // flags: Qt.FramelessWindowHint
-
-    property int displayWidth: 800
-    property int displayHeight: 480
-
-    width: displayWidth
-    height: displayHeight
-
-    minimumWidth: displayWidth
-    minimumHeight: displayHeight
-
-    maximumWidth: displayWidth
-    maximumHeight: displayHeight
-
+    id: root
+    width: 800
+    height: 480
     visible: true
+    color: "#141414"
     title: qsTr("CAR-BT-HMI")
-    color:"#141414"
 
     Vignette {}
-    LoadingScreen{}
-    ScreenOverlay{}
 
-    Settings {
-        id: appSettings
+    LoadingScreen {
+        id: loadingScreen
+        anchors.fill: parent
+        z: 999
+        opacity: 1.0
     }
 
-    MenuIcon {
-        id: menuIcon
-        size: 30
-        state: "menu"
-        z: 101
+    Item {
+        id: mainContent
+        anchors.fill: parent
+        opacity: 0.0
+        scale: 0.96
+        z: 1
 
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.topMargin: 10
-        anchors.rightMargin: 10
+        Settings { id: appSettings }
+        ScreenOverlay {}
+
+        MenuIcon {
+            id: menuIcon
+            size: 30
+            state: "menu"
+            z: 101
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.margins: 10
+        }
+
+        Gauge {
+            value: dataProvider.vehicleSpeed
+            unit: "Km/h"
+            size: 350
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: 30
+            width: size
+            height: size
+            minValue: 0
+            maxValue: 200
+        }
+
+        Gauge {
+            value: dataProvider.engineSpeed
+            unit: "RPM"
+            size: 350
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.rightMargin: 30
+            width: size
+            height: size
+            minValue: 0
+            maxValue: 5000
+        }
+
+        SideMenu {
+            id: sideMenu
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            height: parent.height
+            width: 250
+            x: parent.width
+            z: 100
+        }
     }
 
-    Gauge{
-        value: dataProvider.vehicleSpeed
-        unit: "Km/h"
-        size: 350
-        anchors.left: parent.left
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.leftMargin: 30
-        width: size
-        height: size
-        minValue: 0
-        maxValue: 200
-    }
-
-    Gauge{
-        value: dataProvider.engineSpeed
-        unit: "RPM"
-        size: 350
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.rightMargin: 30
-        width: size
-        height: size
-        minValue: 0
-        maxValue: 5000
-    }
-
-    SideMenu {
-        id: sideMenu
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        height: parent.height
-        width: 250
-        x: parent.width
-        z: 100
+    ScreenTransition {
+        id: screenTransition
+        loadingScreen: loadingScreen
+        mainContent: mainContent
+        onOnFinished: loadingScreen.visible = false
+        running: true
     }
 }

@@ -6,11 +6,9 @@ Rectangle {
     id: loadingScreenRoot
     anchors.fill: parent
     z: 999
-    color: "#141414"
+    color: "transparent"
     visible: true
     opacity: 1.0
-
-    Vignette {}
 
     Image {
         source: "../resources/logo.svg"
@@ -19,28 +17,6 @@ Rectangle {
         anchors{
             verticalCenter: parent.verticalCenter
             horizontalCenter: parent.horizontalCenter
-        }
-    }
-
-    Timer {
-        id: hideTimer
-        interval: 1500
-        running: true
-        repeat: false
-        onTriggered: fadeOut.start()
-    }
-
-    SequentialAnimation {
-        id: fadeOut
-        PropertyAnimation {
-            target: loadingScreenRoot
-            property: "opacity"
-            to: 0
-            duration: 500
-            easing.type: Easing.InOutQuad
-        }
-        ScriptAction {
-            script: loadingScreenRoot.visible = false
         }
     }
 }

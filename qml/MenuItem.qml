@@ -36,7 +36,7 @@ Rectangle {
         width: 25
         height: 25
         radius: 3
-        color: checked ? "#00cc66" : "#666666"
+        color: checked ? "#cfcccc" : "#606162"
         anchors {
             right: parent.right
             verticalCenter: parent.verticalCenter
