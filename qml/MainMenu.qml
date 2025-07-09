@@ -10,9 +10,6 @@ Column {
     }
 
     MenuItem{
-        // TODO: Add Menu CheckBox Component
-        // TODO: Add "Save Settings" button
-        // TODO: Reset Device
         buttontext: "Settings"
         onClicked: menuSwitchRequested("settings")
     }
@@ -20,6 +17,7 @@ Column {
     MenuItem{
         id: helpButton
         buttontext: "Help"
+        onClicked: menuSwitchRequested("help")
     }
 }
 

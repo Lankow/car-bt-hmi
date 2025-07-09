@@ -35,6 +35,12 @@ Rectangle {
             header: "Settings",
             icon: "back-left",
             component: settingsMenuComponent
+        },
+        help: {
+            id: "help",
+            header: "Help",
+            icon: "back-left",
+            component: helpMenuComponent
         }
     })
 
@@ -66,6 +72,7 @@ Rectangle {
     Component { id: mainMenuComponent; MainMenu {} }
     Component { id: deviceMenuComponent; DeviceMenu {} }
     Component { id: settingsMenuComponent; SettingsMenu {} }
+    Component { id: helpMenuComponent; HelpMenu {} }
 
     Behavior on x {
         NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }

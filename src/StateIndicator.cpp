@@ -6,9 +6,9 @@ namespace
 const QColor InitialColor(100, 100, 100);
 const QColor ConnectedColor(40, 195, 70);
 const QColor ConnectingColor(70, 130, 180);
-const QColor DiscoveringColor(255, 200, 0);
-const QColor DisconnectedColor(255, 140, 0);
-const QColor ErrorColor(160, 10, 20);
+const QColor DiscoveringColor(160, 130, 60);
+const QColor DisconnectedColor(85, 85, 90);
+const QColor ErrorColor(41, 40, 40);
 }
 
 StateIndicator::StateIndicator(QQuickItem* parent)

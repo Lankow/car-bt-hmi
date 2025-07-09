@@ -26,10 +26,14 @@ int main(int argc, char *argv[])
     BluetoothManager btManager(&deviceModel);
 
     QQmlApplicationEngine engine;
+
     engine.rootContext()->setContextProperty("settingsManager", &settingsManager);
     engine.rootContext()->setContextProperty("dataProvider", &dataProvider);
     engine.rootContext()->setContextProperty("bluetoothManager", &btManager);
     engine.rootContext()->setContextProperty("deviceModel", &deviceModel);
+
+    QString appVersion = QStringLiteral(APP_VERSION);
+    engine.rootContext()->setContextProperty("appVersion", appVersion);
 
     const QUrl url(QStringLiteral("qrc:/car-bt-hmi/qml/Main.qml"));
     QObject::connect(
