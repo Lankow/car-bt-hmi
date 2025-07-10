@@ -4,11 +4,12 @@ Rectangle {
     id: menuItemRoot
     height: 50
     width: parent.width
-    color: menuButtonMouseArea.pressed ? "#606162" : "#404142"
+    color: clickable && menuButtonMouseArea.pressed ? "#606162" : "#404142"
 
     property string buttontext: ""
     property bool hasCheckbox: false
     property bool checked: false
+    property bool clickable: true
 
     signal clicked()
 
@@ -36,7 +37,7 @@ Rectangle {
         width: 25
         height: 25
         radius: 3
-        color: checked ? "#cfcccc" : "#606162"
+        color: checked ? "#cfcccc" : "#292828"
         anchors {
             right: parent.right
             verticalCenter: parent.verticalCenter

@@ -3,17 +3,35 @@
 #include <QSettings>
 #include <QDebug>
 
+namespace {
+const QString KEY_LAST_DEVICE_ADDRESS = QStringLiteral("lastDeviceAddress");
+const QString KEY_LAST_DEVICE_NAME = QStringLiteral("lastDeviceName");
+const QString KEY_LOGGING_ENABLED = QStringLiteral("loggingEnabled");
+}
+
 SettingsManager::SettingsManager(QObject *parent)
     : QObject(parent){}
 
-void SettingsManager::clearSettings() {
-    QSettings settings;
-    settings.clear();
+void SettingsManager::resetSettings() {
+    setLastDeviceName("");
+    setLastDeviceAddress("");
 }
 
 bool SettingsManager::getLoggingEnabled() const
 {
     return m_loggingEnabled;
+}
+
+QString SettingsManager::getLastDeviceName() const
+{
+    QSettings settings;
+    return settings.value(KEY_LAST_DEVICE_NAME, "").toString();
+}
+
+QString SettingsManager::getLastDeviceAddress() const
+{
+    QSettings settings;
+    return settings.value(KEY_LAST_DEVICE_ADDRESS, "").toString();
 }
 
 void SettingsManager::setLoggingEnabled(bool enabled)
@@ -23,8 +41,20 @@ void SettingsManager::setLoggingEnabled(bool enabled)
 
     m_loggingEnabled = enabled;
     emit loggingEnabledChanged();
+}
 
-    qDebug() << m_loggingEnabled;
+void SettingsManager::setLastDeviceName(const QString &name)
+{
+    QSettings settings;
+    settings.setValue(KEY_LAST_DEVICE_NAME, name);
+    emit lastDeviceNameChanged();
+}
+
+void SettingsManager::setLastDeviceAddress(const QString &address)
+{
+    QSettings settings;
+    settings.setValue(KEY_LAST_DEVICE_ADDRESS, address);
+    emit lastDeviceAddressChanged();
 }
 
 void SettingsManager::toggleSetting(SettingsManager::SettingKey key)

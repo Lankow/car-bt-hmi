@@ -1,9 +1,8 @@
 #include "BluetoothManager.hpp"
 #include <QDebug>
-#include <QSettings>
 
-BluetoothManager::BluetoothManager(DeviceModel *model, QObject *parent)
-    : m_model(model), QObject(parent),
+BluetoothManager::BluetoothManager(DeviceModel *model, SettingsManager *settingsManager, QObject *parent)
+    : m_model(model), m_settingsManager(settingsManager), QObject(parent),
     m_discoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
     m_socket(nullptr),
     m_connectionState(ConnectionState::Initial)
@@ -27,9 +26,8 @@ void BluetoothManager::setConnectionState(ConnectionState state)
 
 void BluetoothManager::init()
 {
-    QSettings settings;
-    QString address = settings.value("lastDeviceAddress").toString();
-    QString name = settings.value("lastDeviceName").toString();
+    QString address = m_settingsManager->getLastDeviceAddress();
+    QString name = m_settingsManager->getLastDeviceName();
 
     if (!address.isEmpty()) {
         qDebug() << "Restoring device:" << name << address;
@@ -95,9 +93,8 @@ void BluetoothManager::onConnected()
     setConnectionState(ConnectionState::Connected);
     stopDiscovery();
 
-    QSettings settings;
-    settings.setValue("lastDeviceAddress", m_obdDevice.address().toString());
-    settings.setValue("lastDeviceName", m_obdDevice.name());
+    m_settingsManager->setLastDeviceAddress(m_obdDevice.address().toString());
+    m_settingsManager->setLastDeviceName(m_obdDevice.name());
 }
 
 void BluetoothManager::sendMessage(const QString &message)
@@ -165,6 +162,12 @@ void BluetoothManager::onErrorOccurred(QBluetoothSocket::SocketError error)
     setConnectionState(ConnectionState::Error);
 }
 
+void BluetoothManager::onDisconnected()
+{
+    qDebug() << "OBD Device disconnected!";
+    setConnectionState(ConnectionState::Disconnected);
+}
+
 void BluetoothManager::createSocket()
 {
     m_socket = new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this);
@@ -172,6 +175,7 @@ void BluetoothManager::createSocket()
     connect(m_socket, &QBluetoothSocket::connected, this, &BluetoothManager::onConnected);
     connect(m_socket, &QBluetoothSocket::readyRead, this, &BluetoothManager::onReadyRead);
     connect(m_socket, &QBluetoothSocket::errorOccurred, this, &BluetoothManager::onErrorOccurred);
+    connect(m_socket, &QBluetoothSocket::disconnected, this, &BluetoothManager::onDisconnected);
 }
 
 void BluetoothManager::resetSocket()

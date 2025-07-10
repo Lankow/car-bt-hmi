@@ -30,17 +30,23 @@ Rectangle {
             icon: "back-left",
             component: deviceMenuComponent
         },
+        obd: {
+            id: "obd",
+            header: "OBD PIDs",
+            icon: "back-left",
+            component: obdMenuComponent
+        },
         settings: {
             id: "settings",
             header: "Settings",
             icon: "back-left",
             component: settingsMenuComponent
         },
-        help: {
-            id: "help",
-            header: "Help",
+        info: {
+            id: "info",
+            header: "Device Info",
             icon: "back-left",
-            component: helpMenuComponent
+            component: infoMenuComponent
         }
     })
 
@@ -71,8 +77,9 @@ Rectangle {
 
     Component { id: mainMenuComponent; MainMenu {} }
     Component { id: deviceMenuComponent; DeviceMenu {} }
+    Component { id: obdMenuComponent; ObdMenu {} }
     Component { id: settingsMenuComponent; SettingsMenu {} }
-    Component { id: helpMenuComponent; HelpMenu {} }
+    Component { id: infoMenuComponent; InfoMenu {} }
 
     Behavior on x {
         NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }

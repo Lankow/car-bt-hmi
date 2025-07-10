@@ -27,7 +27,6 @@ ApplicationWindow {
         scale: 0.96
         z: 1
 
-        Settings { id: appSettings }
         ScreenOverlay {}
 
         MenuIcon {

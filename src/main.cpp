@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     DataProvider dataProvider;
     DeviceModel deviceModel;
     SettingsManager settingsManager;
-    BluetoothManager btManager(&deviceModel);
+    BluetoothManager btManager(&deviceModel, &settingsManager);
 
     QQmlApplicationEngine engine;
 

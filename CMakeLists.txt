@@ -39,12 +39,13 @@ qt_add_qml_module(appcar-bt-hmi
         qml/MainMenu.qml
         qml/DeviceMenu.qml
         qml/SettingsMenu.qml
+        qml/ScreenTransition.qml
+        qml/InfoMenu.qml
+        qml/ObdMenu.qml
 
     RESOURCES
         resources/Orbitron.ttf
         resources/logo.svg
-        QML_FILES qml/ScreenTransition.qml
-        QML_FILES qml/HelpMenu.qml
 )
 
 target_compile_definitions(appcar-bt-hmi

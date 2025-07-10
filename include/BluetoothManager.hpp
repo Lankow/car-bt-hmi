@@ -7,6 +7,7 @@
 #include <QBluetoothDeviceInfo>
 #include "DeviceModel.hpp"
 #include "ConnectionState.hpp"
+#include "SettingsManager.hpp"
 
 using ConnectionState = ConnectionStateHelper::ConnectionState;
 
@@ -17,7 +18,7 @@ class BluetoothManager : public QObject
     Q_PROPERTY(QString activeDeviceName READ getActiveDeviceName NOTIFY activeDeviceNameChanged)
 
 public:
-    explicit BluetoothManager(DeviceModel *model, QObject *parent = nullptr);
+    explicit BluetoothManager(DeviceModel *model, SettingsManager *settingsManager, QObject *parent = nullptr);
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
     Q_INVOKABLE void clearResults();
@@ -40,6 +41,7 @@ private slots:
     void discoveryFinished();
     void onConnected();
     void onReadyRead();
+    void onDisconnected();
     void onErrorOccurred(QBluetoothSocket::SocketError error);
 
 private:
@@ -49,6 +51,7 @@ private:
     QBluetoothDeviceInfo m_obdDevice;
     ConnectionState m_connectionState;
     DeviceModel *m_model;
+    SettingsManager *m_settingsManager;
 
     QBluetoothAddress m_restoredAddress;
     bool m_attemptReconnect = false;

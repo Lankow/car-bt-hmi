@@ -10,14 +10,18 @@ Column {
     }
 
     MenuItem{
+        buttontext: "OBD PIDs"
+        onClicked: menuSwitchRequested("obd")
+    }
+
+    MenuItem{
         buttontext: "Settings"
         onClicked: menuSwitchRequested("settings")
     }
 
     MenuItem{
-        id: helpButton
-        buttontext: "Help"
-        onClicked: menuSwitchRequested("help")
+        buttontext: "Device Info"
+        onClicked: menuSwitchRequested("info")
     }
 }
 
