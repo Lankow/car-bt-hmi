@@ -29,7 +29,7 @@ qt_add_qml_module(appcar-bt-hmi
         qml/Main.qml
         qml/DeviceList.qml
         qml/LoadingScreen.qml
-        qml/MenuItem.qml
+        qml/MenuEntry.qml
         qml/MenuFooter.qml
         qml/MenuHeader.qml
         qml/MenuIcon.qml
@@ -46,6 +46,7 @@ qt_add_qml_module(appcar-bt-hmi
     RESOURCES
         resources/Orbitron.ttf
         resources/logo.svg
+        QML_FILES qml/ConfirmMenu.qml
 )
 
 target_compile_definitions(appcar-bt-hmi

@@ -3,12 +3,12 @@ import QtQuick 2.15
 Column {
     anchors.fill: parent
 
-    MenuItem {
+    MenuEntry {
         buttontext: "Vehicle Speed"
         hasCheckbox: true
     }
 
-    MenuItem {
+    MenuEntry {
         buttontext: "Engine Speed"
         hasCheckbox: true
     }

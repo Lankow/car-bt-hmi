@@ -4,22 +4,22 @@ Column {
     anchors.fill: parent
     signal menuSwitchRequested(string menuId)
 
-    MenuItem{
-        buttontext: "Device"
+    MenuEntry{
+        buttontext: "Pair Device"
         onClicked: menuSwitchRequested("device")
     }
 
-    MenuItem{
+    MenuEntry{
         buttontext: "OBD PIDs"
         onClicked: menuSwitchRequested("obd")
     }
 
-    MenuItem{
+    MenuEntry{
         buttontext: "Settings"
         onClicked: menuSwitchRequested("settings")
     }
 
-    MenuItem{
+    MenuEntry{
         buttontext: "Device Info"
         onClicked: menuSwitchRequested("info")
     }

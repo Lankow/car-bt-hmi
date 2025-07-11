@@ -3,9 +3,11 @@ import QtQuick.Controls 2.15
 
 Frame {
     id: deviceListFrame
+    property var bluetoothManager
     padding: 0
     width: 200
     height: 380
+
 
     background: Rectangle {
         color: "#1e1e1e"
@@ -44,8 +46,22 @@ Frame {
                 id: mouseArea
                 anchors.fill: parent
                 onClicked: {
-                    // TODO: Open "Connecting to BT Device" Screen
-                    bluetoothManager.connectToOBD(model.device)
+                    let bt = bluetoothManager  // capture scope-safe reference
+                    let dev = model.device     // capture device
+                    let deviceName = (!model.name || model.name.toLowerCase().includes(model.address.toLowerCase()))
+                                    ? "Unknown device" : model.name
+
+                    let confirmText = "Connect to device " + deviceName + "?"
+
+                    let confirmAction = function() {
+                        bt.connectToOBD(dev)
+                    }
+
+                    let cancelAction = function() {
+                        menu.goBack()
+                    }
+
+                    menu.showConfirm(confirmText, confirmAction, cancelAction)
                 }
             }
         }

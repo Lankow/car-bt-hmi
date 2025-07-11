@@ -26,7 +26,7 @@ Rectangle {
         },
         device: {
             id: "device",
-            header: "Device",
+            header: "Pair Device",
             icon: "back-left",
             component: deviceMenuComponent
         },
@@ -47,6 +47,12 @@ Rectangle {
             header: "Device Info",
             icon: "back-left",
             component: infoMenuComponent
+        },
+        confirm: {
+            id: "confirm",
+            header: "Confirm",
+            icon: "back-left",
+            component: confirmMenuComponent
         }
     })
 
@@ -80,6 +86,7 @@ Rectangle {
     Component { id: obdMenuComponent; ObdMenu {} }
     Component { id: settingsMenuComponent; SettingsMenu {} }
     Component { id: infoMenuComponent; InfoMenu {} }
+    Component { id: confirmMenuComponent; ConfirmMenu {} }
 
     Behavior on x {
         NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
@@ -112,5 +119,18 @@ Rectangle {
         menuHeader.headerTitle = entry.header
         menuLoader.sourceComponent = entry.component
         menuIcon.state = entry.icon
+    }
+
+    function showConfirm(text, confirmAction, cancelAction) {
+        switchTo("confirm")
+        Qt.callLater(function() {
+            if (menuLoader.item) {
+                menuLoader.item.confirmText = text
+                menuLoader.item.confirmAction = confirmAction
+                menuLoader.item.cancelAction = cancelAction
+            } else {
+                console.warn("ConfirmMenu not loaded yet")
+            }
+        })
     }
 }
