@@ -19,6 +19,7 @@ int main(int argc, char *argv[])
     QFontDatabase::addApplicationFont(":/resources/Orbitron.ttf");
     qmlRegisterType<Gauge>("CustomControls", 1, 0, "Gauge");
     qmlRegisterType<StateIndicator>("CustomControls", 1, 0, "StateIndicator");
+    qmlRegisterSingletonType(QUrl("qrc:/car-bt-hmi/qml/MenuState.qml"), "MenuState", 1, 0, "MenuState");
 
     DataProvider dataProvider;
     DeviceModel deviceModel;

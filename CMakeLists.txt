@@ -47,6 +47,7 @@ qt_add_qml_module(appcar-bt-hmi
         resources/Orbitron.ttf
         resources/logo.svg
         QML_FILES qml/ConfirmMenu.qml
+        QML_FILES qml/MenuState.qml
 )
 
 target_compile_definitions(appcar-bt-hmi

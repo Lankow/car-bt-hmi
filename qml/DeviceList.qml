@@ -1,13 +1,12 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import MenuState 1.0
 
 Frame {
     id: deviceListFrame
-    property var bluetoothManager
     padding: 0
     width: 200
     height: 380
-
 
     background: Rectangle {
         color: "#1e1e1e"
@@ -43,25 +42,21 @@ Frame {
             }
 
             MouseArea {
-                id: mouseArea
                 anchors.fill: parent
                 onClicked: {
-                    let bt = bluetoothManager  // capture scope-safe reference
-                    let dev = model.device     // capture device
-                    let deviceName = (!model.name || model.name.toLowerCase().includes(model.address.toLowerCase()))
-                                    ? "Unknown device" : model.name
+                    let capturedDevice = model.device
+                    let capturedBtManager = bluetoothManager
 
-                    let confirmText = "Connect to device " + deviceName + "?"
-
-                    let confirmAction = function() {
-                        bt.connectToOBD(dev)
-                    }
-
-                    let cancelAction = function() {
-                        menu.goBack()
-                    }
-
-                    menu.showConfirm(confirmText, confirmAction, cancelAction)
+                    MenuState.showConfirm(
+                        "Connect to " + model.name + "?",
+                        function () {
+                            capturedBtManager.connectToOBD(capturedDevice)
+                            MenuState.switchTo("main")
+                        },
+                        function () {
+                            MenuState.goBack()
+                        }
+                    )
                 }
             }
         }

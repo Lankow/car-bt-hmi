@@ -1,21 +1,25 @@
 import QtQuick 2.15
+import MenuState 1.0
 
 Rectangle {
     id: overlay
     anchors.fill: parent
-    opacity: sideMenu.currentMenuId === "closed" ? 0.0 : 0.4
+    opacity: MenuState.currentMenuId === "closed" ? 0.0 : 0.4
     color: "#000"
     z: 99
+    visible: MenuState.currentMenuId !== "closed"
 
     MouseArea {
-        anchors{
+        anchors {
             top: parent.top
             left: parent.left
             bottom: parent.bottom
         }
-        width: parent.width - sideMenu.width
-        onClicked: sideMenu.switchTo("closed")
+        width: parent.width - 250
+        onClicked: MenuState.switchTo("closed")
     }
 
-    Behavior on opacity { NumberAnimation { duration: 300 } }
+    Behavior on opacity {
+        NumberAnimation { duration: 300 }
+    }
 }

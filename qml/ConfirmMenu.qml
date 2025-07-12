@@ -1,18 +1,14 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import MenuState 1.0
 
 Column {
     id: confirmMenu
     width: parent.width
     spacing: 10
-    padding: 10
-
-    property string confirmText: ""
-    property var confirmAction: null
-    property var cancelAction: null
 
     Text {
-        text: confirmText
+        text: MenuState.confirmText
         font.pixelSize: 16
         font.family: "Orbitron"
         color: "#cfcccc"
@@ -23,18 +19,20 @@ Column {
     MenuEntry {
         buttontext: "Confirm"
         onClicked: {
-            if (confirmAction) {
-                confirmAction()
+            if (MenuState.confirmAction) {
+                MenuState.confirmAction()
             }
+            MenuState.clearConfirm()
         }
     }
 
     MenuEntry {
         buttontext: "Cancel"
         onClicked: {
-            if (cancelAction) {
-                cancelAction()
+            if (MenuState.cancelAction) {
+                MenuState.cancelAction()
             }
+            MenuState.clearConfirm()
         }
     }
 }

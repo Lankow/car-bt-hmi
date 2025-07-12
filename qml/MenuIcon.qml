@@ -1,4 +1,5 @@
 import QtQuick 2.15
+import MenuState 1.0
 
 Item {
     id: menuIconRoot
@@ -65,12 +66,12 @@ Item {
         id: menuIconMouseArea
         anchors.fill: parent
         onClicked: {
-            if (sideMenu.currentMenuId === "closed") {
-                sideMenu.switchTo("main")
-            } else if (sideMenu.currentMenuId === "main") {
-                sideMenu.switchTo("closed")
+            if (MenuState.currentMenuId === "closed") {
+                MenuState.switchTo("main")
+            } else if (MenuState.currentMenuId === "main") {
+                MenuState.switchTo("closed")
             } else {
-                sideMenu.goBack()
+                MenuState.goBack()
             }
         }
     }

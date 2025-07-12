@@ -3,9 +3,8 @@ import QtQuick 2.15
 Column {
     anchors.fill: parent
 
-    DeviceList{
+    DeviceList {
         id: deviceList
-        width: parent.width
     }
 
     Component.onCompleted: {
