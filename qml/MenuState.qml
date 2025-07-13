@@ -74,7 +74,7 @@ QtObject {
             menuHistory = []
         }
 
-        else if (menuId !== "confirm" && currentMenuId !== "closed" && currentMenuId !== menuId) {
+        else if (currentMenuId !== "confirm" && currentMenuId !== "closed" && currentMenuId !== menuId) {
             menuHistory.push(currentMenuId)
         }
 

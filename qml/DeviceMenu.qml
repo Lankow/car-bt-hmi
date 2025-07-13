@@ -5,6 +5,7 @@ Column {
 
     DeviceList {
         id: deviceList
+        width: parent.width
     }
 
     Component.onCompleted: {

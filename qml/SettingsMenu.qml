@@ -13,6 +13,19 @@ Column {
     MenuEntry{
         id: resetSettingsButton
         buttontext: "Factory Reset"
-        onClicked: settingsManager.resetSettings();
+        onClicked: {
+            let capturedSettingsManager = settingsManager
+
+            MenuState.showConfirm(
+                        "Shall Factory reset be performed? All settings will be restored to Default.",
+                        function () {
+                            capturedSettingsManager.resetSettings();
+                            MenuState.switchTo("main")
+                        },
+                        function () {
+                            MenuState.goBack()
+                        }
+                        )
+        }
     }
 }

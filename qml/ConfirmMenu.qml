@@ -5,15 +5,9 @@ import MenuState 1.0
 Column {
     id: confirmMenu
     width: parent.width
-    spacing: 10
 
-    Text {
+    MenuTextBlock {
         text: MenuState.confirmText
-        font.pixelSize: 16
-        font.family: "Orbitron"
-        color: "#cfcccc"
-        wrapMode: Text.WordWrap
-        width: parent.width - 20
     }
 
     MenuEntry {
