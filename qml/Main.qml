@@ -74,6 +74,14 @@ ApplicationWindow {
             x: parent.width
             z: 100
         }
+
+        Clock {
+            id: clock
+            anchors{
+                bottom: parent.bottom
+                horizontalCenter: parent.horizontalCenter
+            }
+        }
     }
 
     ScreenTransition {
