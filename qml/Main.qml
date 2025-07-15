@@ -77,7 +77,8 @@ ApplicationWindow {
 
         Clock {
             id: clock
-            anchors{
+            visible: settingsManager.clockEnabled
+            anchors {
                 bottom: parent.bottom
                 horizontalCenter: parent.horizontalCenter
             }

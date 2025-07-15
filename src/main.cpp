@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<Gauge>("CustomControls", 1, 0, "Gauge");
     qmlRegisterType<StateIndicator>("CustomControls", 1, 0, "StateIndicator");
     qmlRegisterSingletonType(QUrl("qrc:/car-bt-hmi/qml/MenuState.qml"), "MenuState", 1, 0, "MenuState");
+    qmlRegisterUncreatableType<SettingsManager>("Settings", 1, 0, "SettingsManager", "Enum access only");
 
     DataProvider dataProvider;
     DeviceModel deviceModel;
