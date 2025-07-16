@@ -44,12 +44,13 @@ qt_add_qml_module(appcar-bt-hmi
         qml/ObdMenu.qml
         qml/ConfirmMenu.qml
         qml/MenuState.qml
+        qml/MenuTextBlock.qml
+        qml/Clock.qml
+        qml/MenuNumberInput.qml
 
-    RESOURCES
+        RESOURCES
         resources/Orbitron.ttf
         resources/logo.svg
-        QML_FILES qml/MenuTextBlock.qml
-        QML_FILES qml/Clock.qml
 )
 
 target_compile_definitions(appcar-bt-hmi
