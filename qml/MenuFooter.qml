@@ -11,15 +11,17 @@ Rectangle {
         font.family: "Orbitron"
         font.pixelSize: 15
         color: "#cfcccc"
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors{
+            verticalCenter: parent.verticalCenter
+            left: parent.left
+            leftMargin: 10
+        }
         text: stateIndicator.stateText + (
-            (bluetoothManager.connectionState === 2 || bluetoothManager.connectionState === 3)
-            && bluetoothManager.activeDeviceName !== ""
-                ? "\n" + bluetoothManager.activeDeviceName
-                : ""
-        )
+                  (bluetoothManager.connectionState === 2 || bluetoothManager.connectionState === 3)
+                  && bluetoothManager.activeDeviceName !== ""
+                  ? "\n" + bluetoothManager.activeDeviceName
+                  : ""
+                  )
         elide: Text.ElideRight
         wrapMode: Text.NoWrap
     }
