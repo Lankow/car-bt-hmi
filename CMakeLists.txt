@@ -24,6 +24,7 @@ qt_add_qml_module(appcar-bt-hmi
         include/SettingsManager.hpp src/SettingsManager.cpp
         include/StateIndicator.hpp src/StateIndicator.cpp
         include/ConnectionState.hpp
+        include/ObdService.hpp src/ObdService.cpp
 
     QML_FILES
         qml/Main.qml
