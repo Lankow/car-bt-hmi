@@ -97,17 +97,19 @@ void BluetoothManager::onConnected()
     m_settingsManager->setLastDeviceName(m_obdDevice.name());
 }
 
-void BluetoothManager::sendMessage(const QString &message)
+bool BluetoothManager::sendMessage(const QString &message)
 {
     if (m_socket->state() == QBluetoothSocket::SocketState::ConnectedState)
     {
         QString formattedMessage = message + "\r";
         m_socket->write(formattedMessage.toUtf8());
         qDebug() << "Sent:" << formattedMessage;
+        return true;
     }
     else
     {
         qDebug() << "Not connected!";
+        return false;
     }
 }
 

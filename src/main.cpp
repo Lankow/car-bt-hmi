@@ -6,6 +6,7 @@
 #include "SettingsManager.hpp"
 #include "DeviceModel.hpp"
 #include "DataProvider.hpp"
+#include "ObdService.hpp"
 #include "Gauge.hpp"
 #include "StateIndicator.hpp"
 
@@ -26,6 +27,7 @@ int main(int argc, char *argv[])
     DeviceModel deviceModel;
     SettingsManager settingsManager;
     BluetoothManager btManager(&deviceModel, &settingsManager);
+    ObdService obdService(&btManager, &dataProvider);
 
     QQmlApplicationEngine engine;
 

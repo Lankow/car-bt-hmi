@@ -12,12 +12,13 @@ class ObdService : public QObject
 public:
     ObdService(BluetoothManager* btManager, DataProvider* provider, QObject* parent = nullptr);
 
-    void start();
+    void start(int intervalMs);
     void stop();
 
 private slots:
+    void handleBtStateChanged();
     void onMessageReceived(const QString& message);
-    void writeNextRequest();
+    void sendNextRequest();
 
 private:
     BluetoothManager* m_btManager;

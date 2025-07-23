@@ -22,8 +22,8 @@ public:
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
     Q_INVOKABLE void clearResults();
-    Q_INVOKABLE void sendMessage(const QString &message);
     Q_INVOKABLE void connectToOBD(const QBluetoothDeviceInfo &device);
+    bool sendMessage(const QString &message);
 
     ConnectionState getConnectionState() const;
     QString getActiveDeviceName() const;
