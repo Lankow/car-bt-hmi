@@ -32,16 +32,30 @@ void ObdService::sendNextRequest()
     }
 }
 
-void ObdService::onMessageReceived(const QString& message)
+void ObdService::onMessageReceived(const QByteArray &message)
 {
-    qDebug() << "Received Message:" << message;
+    QByteArray normalized = message.trimmed().toUpper();
+    qDebug() << "Received Message:" << normalized;
+
+    if (normalized.startsWith("41 0D")) {
+        qint64 speed = parseResponse(normalized, 6, 2);
+        qDebug() << "Speed: " << speed;
+        m_dataProvider->setVehicleSpeed(speed);
+    }
+
+    if (normalized.startsWith("41 0C")) {
+        qint64 rawRPM = parseResponse(normalized, 6, 5);
+        qint64 rpm = rawRPM / 4;
+        qDebug() << "RPM: " << rpm;
+        m_dataProvider->setEngineSpeed(rpm);
+    }
 }
 
 void ObdService::handleBtStateChanged()
 {
     if (m_btManager->getConnectionState() == ConnectionState::Connected)
     {
-        start(100);
+        start(50);
         qDebug() << "Started requests transmission.";
     }
     else
@@ -49,4 +63,17 @@ void ObdService::handleBtStateChanged()
         stop();
         qDebug() << "Stopped requests transmission.";
     }
+}
+
+qint64 ObdService::parseResponse(const QByteArray &data, int startByte, int byteCount) {
+    if (data.size() < startByte + byteCount) {
+        qWarning() << "Invalid data length for parsing!";
+        return -1;
+    }
+
+    QByteArray hexValue = data.mid(startByte, byteCount);
+    hexValue.replace(" ", "");
+
+    bool ok;
+    return hexValue.toUInt(&ok, 16);
 }

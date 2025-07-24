@@ -17,10 +17,12 @@ public:
 
 private slots:
     void handleBtStateChanged();
-    void onMessageReceived(const QString& message);
+    void onMessageReceived(const QByteArray &message);
     void sendNextRequest();
 
 private:
+    qint64 parseResponse(const QByteArray &data, int startByte, int byteCount);
+
     BluetoothManager* m_btManager;
     DataProvider* m_dataProvider;
 

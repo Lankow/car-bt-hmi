@@ -153,8 +153,7 @@ void BluetoothManager::connectToOBD(const QBluetoothDeviceInfo &device)
 void BluetoothManager::onReadyRead()
 {
     QByteArray data = m_socket->readAll();
-    qDebug() << "Received from OBD Device:" << QString::fromUtf8(data);
-    emit messageReceived(QString::fromUtf8(data));
+    emit messageReceived(data);
 }
 
 void BluetoothManager::onErrorOccurred(QBluetoothSocket::SocketError error)

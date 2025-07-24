@@ -34,7 +34,7 @@ signals:
     void deviceFound(const QString &deviceName);
     void connectionStateChanged();
     void activeDeviceNameChanged();
-    void messageReceived(const QString &message);
+    void messageReceived(const QByteArray &data);
 
 private slots:
     void deviceDiscovered(const QBluetoothDeviceInfo &device);
