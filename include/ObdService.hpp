@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QTimer>
 #include "BluetoothManager.hpp"
+#include "SettingsManager.hpp"
 #include "DataProvider.hpp"
 
 class ObdService : public QObject
@@ -10,7 +11,7 @@ class ObdService : public QObject
     Q_OBJECT
 
 public:
-    ObdService(BluetoothManager* btManager, DataProvider* provider, QObject* parent = nullptr);
+    ObdService(BluetoothManager* btManager, SettingsManager* settingsManagers, DataProvider* provider, QObject* parent = nullptr);
 
     void start(int intervalMs);
     void stop();
@@ -24,6 +25,7 @@ private:
     qint64 parseResponse(const QByteArray &data, int startByte, int byteCount);
 
     BluetoothManager* m_btManager;
+    SettingsManager* m_settingsManager;
     DataProvider* m_dataProvider;
 
     QTimer m_requestTimer;

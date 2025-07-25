@@ -10,11 +10,13 @@ class SettingsManager : public QObject
     Q_PROPERTY(bool clockEnabled READ getClockEnabled WRITE setClockEnabled NOTIFY clockEnabledChanged)
     Q_PROPERTY(QString lastDeviceAddress READ getLastDeviceAddress WRITE setLastDeviceAddress NOTIFY lastDeviceAddressChanged)
     Q_PROPERTY(QString lastDeviceName READ getLastDeviceName WRITE setLastDeviceName NOTIFY lastDeviceNameChanged)
+    Q_PROPERTY(int cycleIntervalMs READ getCycleIntervalMs WRITE setCycleIntervalMs NOTIFY cycleIntervalMsChanged)
 
 public:
     enum SettingKey {
         LoggingEnabled,
         ClockEnabled,
+        CycleIntervalMs
     };
     Q_ENUM(SettingKey)
 
@@ -32,6 +34,9 @@ public:
     QString getLastDeviceName() const;
     QString getLastDeviceAddress() const;
 
+    int getCycleIntervalMs() const;
+    void setCycleIntervalMs(int intervalMs);
+
     void setLastDeviceName(const QString &deviceName);
     void setLastDeviceAddress(const QString &deviceAddress);
 
@@ -40,6 +45,7 @@ signals:
     void clockEnabledChanged();
     void lastDeviceNameChanged();
     void lastDeviceAddressChanged();
+    void cycleIntervalMsChanged();
 };
 
 #endif // SETTINGSMANAGER_HPP

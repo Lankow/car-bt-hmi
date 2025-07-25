@@ -7,6 +7,7 @@ const QString KEY_LAST_DEVICE_ADDRESS = QStringLiteral("lastDeviceAddress");
 const QString KEY_LAST_DEVICE_NAME = QStringLiteral("lastDeviceName");
 const QString KEY_LOGGING_ENABLED = QStringLiteral("loggingEnabled");
 const QString KEY_CLOCK_ENABLED = QStringLiteral("clockEnabled");
+const QString KEY_CYCLE_INTERVAL_MS = QStringLiteral("cycleIntervalMs");
 }
 
 SettingsManager::SettingsManager(QObject *parent)
@@ -67,6 +68,20 @@ void SettingsManager::setLastDeviceAddress(const QString &address) {
     QSettings settings;
     settings.setValue(KEY_LAST_DEVICE_ADDRESS, address);
     emit lastDeviceAddressChanged();
+}
+
+int SettingsManager::getCycleIntervalMs() const {
+    QSettings settings;
+    return settings.value(KEY_CYCLE_INTERVAL_MS, 100).toInt();
+}
+
+void SettingsManager::setCycleIntervalMs(int intervalMs) {
+    QSettings settings;
+    if (settings.value(KEY_CYCLE_INTERVAL_MS, 100).toInt() == intervalMs)
+        return;
+
+    settings.setValue(KEY_CYCLE_INTERVAL_MS, intervalMs);
+    emit cycleIntervalMsChanged();
 }
 
 void SettingsManager::toggleSetting(SettingsManager::SettingKey key) {

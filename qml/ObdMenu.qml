@@ -6,7 +6,7 @@ Column {
     MenuNumberInput {
         id: inputControl
         buttontext: "Polling Interval [Ms]"
-        value: 5
+        value: settingsManager.cycleIntervalMs
 
         onMinusClicked: console.log("Minus clicked.")
         onPlusClicked: console.log("Plus clicked.")

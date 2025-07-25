@@ -1,7 +1,7 @@
 #include "ObdService.hpp"
 
-ObdService::ObdService(BluetoothManager* btManager, DataProvider* provider, QObject* parent)
-    : QObject(parent), m_btManager(btManager), m_dataProvider(provider), m_currentRequestIndex(0)
+ObdService::ObdService(BluetoothManager* btManager, SettingsManager* settingsManager, DataProvider* provider, QObject* parent)
+    : QObject(parent), m_btManager(btManager), m_settingsManager(settingsManager), m_dataProvider(provider), m_currentRequestIndex(0)
 {
     connect(btManager, &BluetoothManager::messageReceived, this, &ObdService::onMessageReceived);
     connect(btManager, &BluetoothManager::connectionStateChanged, this, &ObdService::handleBtStateChanged);
@@ -14,7 +14,9 @@ ObdService::ObdService(BluetoothManager* btManager, DataProvider* provider, QObj
 
 void ObdService::start(int intervalMs)
 {
-    m_requestTimer.setInterval(intervalMs);
+    if(m_requests.count() <= 1) return;
+    int requestIntervalMs = intervalMs / m_requests.count();
+    m_requestTimer.setInterval(requestIntervalMs);
     m_requestTimer.start();
 }
 
@@ -55,7 +57,7 @@ void ObdService::handleBtStateChanged()
 {
     if (m_btManager->getConnectionState() == ConnectionState::Connected)
     {
-        start(50);
+        start(m_settingsManager->getCycleIntervalMs());
         qDebug() << "Started requests transmission.";
     }
     else
