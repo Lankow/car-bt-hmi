@@ -8,7 +8,10 @@ Rectangle {
     color: "#404142"
 
     property string buttontext: ""
+
     property int value: 0
+    property int minValue: 0
+    property int maxValue: 100000
 
     signal minusClicked()
     signal plusClicked()
@@ -42,7 +45,7 @@ Rectangle {
         Rectangle {
             width: 40
             height: 40
-            color: "#2e2f30"
+            color: value > minValue ? "#2e2f30" : "#5a5b5c"
             radius: 5
             border.color: "#606162"
 
@@ -56,14 +59,14 @@ Rectangle {
                 anchors.centerIn: parent
                 text: "-"
                 font.pointSize: 20
-                color: "#ffffff"
+                color: value > minValue ? "#ffffff" : "#a0a0a0"
+                font.family: "Orbitron"
             }
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: {
-                    minusClicked()
-                }
+                enabled: value>minValue
+                onClicked: minusClicked()
             }
         }
 
@@ -84,7 +87,7 @@ Rectangle {
         Rectangle {
             width: 40
             height: 40
-            color: "#2e2f30"
+            color: value < maxValue ? "#2e2f30" : "#5a5b5c"
             radius: 5
             border.color: "#606162"
 
@@ -98,14 +101,14 @@ Rectangle {
                 anchors.centerIn: parent
                 text: "+"
                 font.pointSize: 20
-                color: "#ffffff"
+                color: value < maxValue ? "#ffffff" : "#a0a0a0"
+                font.family: "Orbitron"
             }
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: {
-                    plusClicked()
-                }
+                enabled: value<maxValue
+                onClicked: plusClicked()
             }
         }
     }

@@ -5,6 +5,7 @@ ObdService::ObdService(BluetoothManager* btManager, SettingsManager* settingsMan
 {
     connect(btManager, &BluetoothManager::messageReceived, this, &ObdService::onMessageReceived);
     connect(btManager, &BluetoothManager::connectionStateChanged, this, &ObdService::handleBtStateChanged);
+    connect(settingsManager, &SettingsManager::cycleIntervalMsChanged, this, &ObdService::handleBtStateChanged);
 
     m_requests << "010D"  // Vehicle Speed
                << "010C"; // Engine RPM
@@ -64,6 +65,16 @@ void ObdService::handleBtStateChanged()
     {
         stop();
         qDebug() << "Stopped requests transmission.";
+    }
+}
+
+void ObdService::handleIntervalChanged()
+{
+    if (m_btManager->getConnectionState() == ConnectionState::Connected)
+    {
+        stop();
+        start(m_settingsManager->getCycleIntervalMs());
+        qDebug() << "Started requests transmission with updated Interval.";
     }
 }
 

@@ -7,9 +7,16 @@ Column {
         id: inputControl
         buttontext: "Polling Interval [Ms]"
         value: settingsManager.cycleIntervalMs
+        minValue: 50
+        maxValue: 1000
 
-        onMinusClicked: console.log("Minus clicked.")
-        onPlusClicked: console.log("Plus clicked.")
+        onMinusClicked: {
+            settingsManager.cycleIntervalMs -= 10
+        }
+
+        onPlusClicked: {
+            settingsManager.cycleIntervalMs += 10
+        }
     }
 
     MenuEntry {

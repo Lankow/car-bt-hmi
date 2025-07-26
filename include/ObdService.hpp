@@ -18,6 +18,7 @@ public:
 
 private slots:
     void handleBtStateChanged();
+    void handleIntervalChanged();
     void onMessageReceived(const QByteArray &message);
     void sendNextRequest();
 

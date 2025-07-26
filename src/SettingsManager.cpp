@@ -8,7 +8,13 @@ const QString KEY_LAST_DEVICE_NAME = QStringLiteral("lastDeviceName");
 const QString KEY_LOGGING_ENABLED = QStringLiteral("loggingEnabled");
 const QString KEY_CLOCK_ENABLED = QStringLiteral("clockEnabled");
 const QString KEY_CYCLE_INTERVAL_MS = QStringLiteral("cycleIntervalMs");
+
+const int DEFAULT_CYCLE_INTERVAL_MS = 100;
+const int MIN_CYCLE_INTERVAL_MS = 50;
+const int MAX_CYCLE_INTERVAL_MS = 1000;
 }
+
+
 
 SettingsManager::SettingsManager(QObject *parent)
     : QObject(parent) {}
@@ -18,6 +24,7 @@ void SettingsManager::resetSettings() {
     setLastDeviceAddress("");
     setLoggingEnabled(false);
     setClockEnabled(true);
+    setCycleIntervalMs(DEFAULT_CYCLE_INTERVAL_MS);
 }
 
 bool SettingsManager::getLoggingEnabled() const {
@@ -72,12 +79,14 @@ void SettingsManager::setLastDeviceAddress(const QString &address) {
 
 int SettingsManager::getCycleIntervalMs() const {
     QSettings settings;
-    return settings.value(KEY_CYCLE_INTERVAL_MS, 100).toInt();
+    return settings.value(KEY_CYCLE_INTERVAL_MS, DEFAULT_CYCLE_INTERVAL_MS).toInt();
 }
 
 void SettingsManager::setCycleIntervalMs(int intervalMs) {
     QSettings settings;
-    if (settings.value(KEY_CYCLE_INTERVAL_MS, 100).toInt() == intervalMs)
+    if (intervalMs > MAX_CYCLE_INTERVAL_MS ||
+        intervalMs < MIN_CYCLE_INTERVAL_MS ||
+        settings.value(KEY_CYCLE_INTERVAL_MS, DEFAULT_CYCLE_INTERVAL_MS).toInt() == intervalMs)
         return;
 
     settings.setValue(KEY_CYCLE_INTERVAL_MS, intervalMs);
