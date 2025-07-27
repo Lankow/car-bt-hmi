@@ -8,6 +8,7 @@ const QString KEY_LAST_DEVICE_NAME = QStringLiteral("lastDeviceName");
 const QString KEY_LOGGING_ENABLED = QStringLiteral("loggingEnabled");
 const QString KEY_CLOCK_ENABLED = QStringLiteral("clockEnabled");
 const QString KEY_CYCLE_INTERVAL_MS = QStringLiteral("cycleIntervalMs");
+const QString KEY_OBD_PID_LIST = QStringLiteral("obdPidList");
 
 const int DEFAULT_CYCLE_INTERVAL_MS = 100;
 const int MIN_CYCLE_INTERVAL_MS = 50;
@@ -25,6 +26,9 @@ void SettingsManager::resetSettings() {
     setLoggingEnabled(false);
     setClockEnabled(true);
     setCycleIntervalMs(DEFAULT_CYCLE_INTERVAL_MS);
+
+    addObdPid("010D"); // Vehicle Speed
+    addObdPid("010C"); // Engine RPM
 }
 
 bool SettingsManager::getLoggingEnabled() const {
@@ -93,6 +97,11 @@ void SettingsManager::setCycleIntervalMs(int intervalMs) {
     emit cycleIntervalMsChanged();
 }
 
+QStringList SettingsManager::getObdPidList() const {
+    QSettings settings;
+    return settings.value(KEY_OBD_PID_LIST, QStringList()).toStringList();
+}
+
 void SettingsManager::toggleSetting(SettingsManager::SettingKey key) {
     QSettings settings;
     switch (key) {
@@ -105,4 +114,29 @@ void SettingsManager::toggleSetting(SettingsManager::SettingKey key) {
     default:
         qWarning("toggleSetting: Unsupported key");
     }
+}
+
+void SettingsManager::addObdPid(const QString &pid) {
+    QSettings settings;
+    QStringList list = settings.value(KEY_OBD_PID_LIST, QStringList()).toStringList();
+
+    if (!list.contains(pid)) {
+        list.append(pid);
+        settings.setValue(KEY_OBD_PID_LIST, list);
+        emit obdPidListChanged();
+    }
+}
+
+void SettingsManager::removeObdPid(const QString &pid) {
+    QSettings settings;
+    QStringList list = settings.value(KEY_OBD_PID_LIST, QStringList()).toStringList();
+
+    if (list.removeAll(pid) > 0) {
+        settings.setValue(KEY_OBD_PID_LIST, list);
+        emit obdPidListChanged();
+    }
+}
+
+bool SettingsManager::hasObdPid(const QString &pid) const {
+    return getObdPidList().contains(pid);
 }

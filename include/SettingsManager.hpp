@@ -11,6 +11,7 @@ class SettingsManager : public QObject
     Q_PROPERTY(QString lastDeviceAddress READ getLastDeviceAddress WRITE setLastDeviceAddress NOTIFY lastDeviceAddressChanged)
     Q_PROPERTY(QString lastDeviceName READ getLastDeviceName WRITE setLastDeviceName NOTIFY lastDeviceNameChanged)
     Q_PROPERTY(int cycleIntervalMs READ getCycleIntervalMs WRITE setCycleIntervalMs NOTIFY cycleIntervalMsChanged)
+    Q_PROPERTY(QStringList obdPidList READ getObdPidList NOTIFY obdPidListChanged)
 
 public:
     enum SettingKey {
@@ -24,6 +25,9 @@ public:
 
     Q_INVOKABLE void resetSettings();
     Q_INVOKABLE void toggleSetting(SettingsManager::SettingKey key);
+    Q_INVOKABLE void addObdPid(const QString &pid);
+    Q_INVOKABLE void removeObdPid(const QString &pid);
+    Q_INVOKABLE bool hasObdPid(const QString &pid) const;
 
     bool getLoggingEnabled() const;
     void setLoggingEnabled(bool enabled);
@@ -40,12 +44,15 @@ public:
     void setLastDeviceName(const QString &deviceName);
     void setLastDeviceAddress(const QString &deviceAddress);
 
+    QStringList getObdPidList() const;
+
 signals:
     void loggingEnabledChanged();
     void clockEnabledChanged();
     void lastDeviceNameChanged();
     void lastDeviceAddressChanged();
     void cycleIntervalMsChanged();
+    void obdPidListChanged();
 };
 
 #endif // SETTINGSMANAGER_HPP

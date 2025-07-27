@@ -7,9 +7,7 @@ ObdService::ObdService(BluetoothManager* btManager, SettingsManager* settingsMan
     connect(btManager, &BluetoothManager::connectionStateChanged, this, &ObdService::handleBtStateChanged);
     connect(settingsManager, &SettingsManager::cycleIntervalMsChanged, this, &ObdService::handleBtStateChanged);
 
-    m_requests << "010D"  // Vehicle Speed
-               << "010C"; // Engine RPM
-
+    m_requests = settingsManager->getObdPidList();
     connect(&m_requestTimer, &QTimer::timeout, this, &ObdService::sendNextRequest);
 }
 
