@@ -103,7 +103,6 @@ QStringList SettingsManager::getObdPidList() const {
 }
 
 void SettingsManager::toggleSetting(SettingsManager::SettingKey key) {
-    QSettings settings;
     switch (key) {
     case LoggingEnabled:
         setLoggingEnabled(!getLoggingEnabled());
@@ -111,6 +110,24 @@ void SettingsManager::toggleSetting(SettingsManager::SettingKey key) {
     case ClockEnabled:
         setClockEnabled(!getClockEnabled());
         break;
+    case VehicleSpeedEnabled: {
+        QString pid = "010D";
+        if (hasObdPid(pid))
+            removeObdPid(pid);
+        else
+            addObdPid(pid);
+        emit vehicleSpeedEnabledChanged();
+        break;
+    }
+    case EngineSpeedEnabled: {
+        QString pid = "010C";
+        if (hasObdPid(pid))
+            removeObdPid(pid);
+        else
+            addObdPid(pid);
+        emit engineSpeedEnabledChanged();
+        break;
+    }
     default:
         qWarning("toggleSetting: Unsupported key");
     }
@@ -139,4 +156,32 @@ void SettingsManager::removeObdPid(const QString &pid) {
 
 bool SettingsManager::hasObdPid(const QString &pid) const {
     return getObdPidList().contains(pid);
+}
+
+bool SettingsManager::getVehicleSpeedEnabled() const {
+    return hasObdPid("010D");
+}
+
+void SettingsManager::setVehicleSpeedEnabled(bool enabled) {
+    if (enabled && !hasObdPid("010D")) {
+        addObdPid("010D");
+        emit vehicleSpeedEnabledChanged();
+    } else if (!enabled && hasObdPid("010D")) {
+        removeObdPid("010D");
+        emit vehicleSpeedEnabledChanged();
+    }
+}
+
+bool SettingsManager::getEngineSpeedEnabled() const {
+    return hasObdPid("010C");
+}
+
+void SettingsManager::setEngineSpeedEnabled(bool enabled) {
+    if (enabled && !hasObdPid("010C")) {
+        addObdPid("010C");
+        emit engineSpeedEnabledChanged();
+    } else if (!enabled && hasObdPid("010C")) {
+        removeObdPid("010C");
+        emit engineSpeedEnabledChanged();
+    }
 }

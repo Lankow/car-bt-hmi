@@ -11,12 +11,16 @@ class SettingsManager : public QObject
     Q_PROPERTY(QString lastDeviceAddress READ getLastDeviceAddress WRITE setLastDeviceAddress NOTIFY lastDeviceAddressChanged)
     Q_PROPERTY(QString lastDeviceName READ getLastDeviceName WRITE setLastDeviceName NOTIFY lastDeviceNameChanged)
     Q_PROPERTY(int cycleIntervalMs READ getCycleIntervalMs WRITE setCycleIntervalMs NOTIFY cycleIntervalMsChanged)
+    Q_PROPERTY(bool vehicleSpeedEnabled READ getVehicleSpeedEnabled WRITE setVehicleSpeedEnabled NOTIFY vehicleSpeedEnabledChanged)
+    Q_PROPERTY(bool engineSpeedEnabled READ getEngineSpeedEnabled WRITE setEngineSpeedEnabled NOTIFY engineSpeedEnabledChanged)
     Q_PROPERTY(QStringList obdPidList READ getObdPidList NOTIFY obdPidListChanged)
 
 public:
     enum SettingKey {
         LoggingEnabled,
         ClockEnabled,
+        VehicleSpeedEnabled,
+        EngineSpeedEnabled,
         CycleIntervalMs
     };
     Q_ENUM(SettingKey)
@@ -44,6 +48,12 @@ public:
     void setLastDeviceName(const QString &deviceName);
     void setLastDeviceAddress(const QString &deviceAddress);
 
+    bool getVehicleSpeedEnabled() const;
+    void setVehicleSpeedEnabled(bool enabled);
+
+    bool getEngineSpeedEnabled() const;
+    void setEngineSpeedEnabled(bool enabled);
+
     QStringList getObdPidList() const;
 
 signals:
@@ -52,6 +62,8 @@ signals:
     void lastDeviceNameChanged();
     void lastDeviceAddressChanged();
     void cycleIntervalMsChanged();
+    void vehicleSpeedEnabledChanged();
+    void engineSpeedEnabledChanged();
     void obdPidListChanged();
 };
 

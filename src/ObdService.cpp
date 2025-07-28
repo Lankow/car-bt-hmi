@@ -5,7 +5,8 @@ ObdService::ObdService(BluetoothManager* btManager, SettingsManager* settingsMan
 {
     connect(btManager, &BluetoothManager::messageReceived, this, &ObdService::onMessageReceived);
     connect(btManager, &BluetoothManager::connectionStateChanged, this, &ObdService::handleBtStateChanged);
-    connect(settingsManager, &SettingsManager::cycleIntervalMsChanged, this, &ObdService::handleBtStateChanged);
+    connect(settingsManager, &SettingsManager::cycleIntervalMsChanged, this, &ObdService::handleIntervalChanged);
+    connect(settingsManager, &SettingsManager::obdPidListChanged, this, &ObdService::handleObdPidListChanged);
 
     m_requests = settingsManager->getObdPidList();
     connect(&m_requestTimer, &QTimer::timeout, this, &ObdService::sendNextRequest);
@@ -74,6 +75,15 @@ void ObdService::handleIntervalChanged()
         start(m_settingsManager->getCycleIntervalMs());
         qDebug() << "Started requests transmission with updated Interval.";
     }
+}
+
+void ObdService::handleObdPidListChanged()
+{
+    stop();
+    m_requests = m_settingsManager->getObdPidList();
+    m_currentRequestIndex = 0;
+    start(m_settingsManager->getCycleIntervalMs());
+    qDebug() << "Started requests transmission with updated OBD PIDs.";
 }
 
 qint64 ObdService::parseResponse(const QByteArray &data, int startByte, int byteCount) {
