@@ -14,7 +14,7 @@ ObdService::ObdService(BluetoothManager* btManager, SettingsManager* settingsMan
 
 void ObdService::start(int intervalMs)
 {
-    if(m_requests.count() <= 1) return;
+    if(m_requests.isEmpty()) return;
     int requestIntervalMs = intervalMs / m_requests.count();
     m_requestTimer.setInterval(requestIntervalMs);
     m_requestTimer.start();

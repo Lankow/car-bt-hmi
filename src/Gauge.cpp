@@ -74,11 +74,20 @@ void Gauge::setUnit(QString unit)
     }
 }
 
+void Gauge::setEnabled(bool enabled) {
+    if (m_enabled != enabled) {
+        m_enabled = enabled;
+        emit enabledChanged();
+        update();
+    }
+}
+
 qreal Gauge::getValue() const { return m_value; }
 qreal Gauge::getSize() const { return m_size; }
 qreal Gauge::getMinValue() const { return m_minValue; }
 qreal Gauge::getMaxValue() const { return m_maxValue; }
 QString Gauge::getUnit() const { return m_unit; }
+bool Gauge::getEnabled() const { return m_enabled; }
 
 void Gauge::paint(QPainter *painter)
 {
@@ -138,7 +147,8 @@ void Gauge::drawValueText(QPainter *painter, const QRectF &rect)
     painter->setPen(kTextColor);
 
     QRectF textRect = rect.adjusted(m_size / 30, m_size / 30, -m_size / 30, -m_size / 5);
-    painter->drawText(textRect, Qt::AlignCenter, QString::number(static_cast<int>(m_value)));
+    QString valueText = m_enabled ? QString::number(static_cast<int>(m_value)) : "--";
+    painter->drawText(textRect, Qt::AlignCenter, valueText);
     painter->restore();
 }
 

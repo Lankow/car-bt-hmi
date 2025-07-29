@@ -40,7 +40,8 @@ ApplicationWindow {
         }
 
         Gauge {
-            value: dataProvider.vehicleSpeed
+            enabled: settingsManager.vehicleSpeedEnabled
+            value: settingsManager.vehicleSpeedEnabled ? dataProvider.vehicleSpeed : 0
             unit: "Km/h"
             size: 350
             anchors.left: parent.left
@@ -53,7 +54,8 @@ ApplicationWindow {
         }
 
         Gauge {
-            value: dataProvider.engineSpeed
+            enabled: settingsManager.engineSpeedEnabled
+            value: settingsManager.engineSpeedEnabled ? dataProvider.engineSpeed : 0
             unit: "RPM"
             size: 350
             anchors.right: parent.right
@@ -67,8 +69,10 @@ ApplicationWindow {
 
         SideMenu {
             id: sideMenu
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            anchors{
+                top: parent.top
+                bottom: parent.bottom
+            }
             height: parent.height
             width: 250
             x: parent.width
