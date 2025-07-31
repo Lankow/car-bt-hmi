@@ -60,7 +60,7 @@ void ObdService::handleBtStateChanged()
         start(m_settingsManager->getCycleIntervalMs());
         qDebug() << "Started requests transmission.";
     }
-    else
+    else if (m_btManager->getConnectionState() != ConnectionState::Discovering)
     {
         stop();
         qDebug() << "Stopped requests transmission.";

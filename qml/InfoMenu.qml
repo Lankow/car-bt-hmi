@@ -3,20 +3,15 @@ import QtQuick 2.15
 Column {
     anchors.fill: parent
 
-    MenuEntry {
-        buttontext: "Version: " + appVersion
-        clickable: false
+    MenuTextBlock {
+        text: "Version: " + appVersion
     }
 
-    MenuEntry {
-        id: settingsDevice
-        buttontext: "Paired Device: " + (settingsManager.lastDeviceName !== "" ? "\n" + settingsManager.lastDeviceName : "None")
-        clickable: false
+    MenuTextBlock {
+        text: "Paired Device: " + (settingsManager.lastDeviceName !== "" ? "\n" + settingsManager.lastDeviceName : "None")
     }
 
-    MenuEntry {
-        id: settingsAddress
-        buttontext: "Address: " + (settingsManager.lastDeviceAddress !== "" ? "\n" + settingsManager.lastDeviceAddress : "None")
-        clickable: false
+    MenuTextBlock {
+        text: "Address: " + (settingsManager.lastDeviceAddress !== "" ? "\n" + settingsManager.lastDeviceAddress : "None")
     }
 }
