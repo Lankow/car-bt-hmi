@@ -1,6 +1,6 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 Rectangle {
     id: loadingScreenRoot
@@ -11,7 +11,7 @@ Rectangle {
     opacity: 1.0
 
     Image {
-        source: "../resources/logo.svg"
+        source: "resources/logo.svg"
         width: 300
         fillMode: Image.PreserveAspectFit
         anchors{
