@@ -2,11 +2,13 @@ cmake_minimum_required(VERSION 3.16)
 
 project(car-bt-hmi VERSION 0.1 LANGUAGES CXX)
 
+set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_SOURCE_DIR}/android")
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Bluetooth Svg)
 
 qt_standard_project_setup()
+
 
 qt_add_executable(appcar-bt-hmi
     main.cpp
