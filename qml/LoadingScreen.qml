@@ -11,7 +11,7 @@ Rectangle {
     opacity: 1.0
 
     Image {
-        source: "resources/logo.svg"
+        source: "../resources/logo.svg"
         width: 300
         fillMode: Image.PreserveAspectFit
         anchors{
