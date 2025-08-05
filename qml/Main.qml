@@ -9,6 +9,11 @@ Window {
     color: "#141414"
     title: qsTr("CAR-BT-HMI")
 
+    FontLoader {
+        id: orbitronFont
+        source: "qrc:/fonts/Orbitron.ttf"
+    }
+
     Vignette {}
 
     LoadingScreen {

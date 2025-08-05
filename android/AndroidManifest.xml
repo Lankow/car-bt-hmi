@@ -1,15 +1,30 @@
 <?xml version="1.0"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.voknal.carbt" android:installLocation="auto" android:versionCode="1" android:versionName="1.0.0">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.voknal.carbta"
+    android:installLocation="auto"
+    android:versionCode="1"
+    android:versionName="1.0.0">
 
-    <supports-screens android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" android:anyDensity="true"/>
+    <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:anyDensity="true" />
 
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <application android:name="org.qtproject.qt.android.bindings.QtApplication" android:label="CarBT HMI" android:hardwareAccelerated="true" android:requestLegacyExternalStorage="true" android:allowBackup="true" android:fullBackupOnly="false">
+    <application
+        android:name="org.qtproject.qt.android.bindings.QtApplication"
+        android:label="Car-BT-HMI"
+        android:icon="@mipmap/ic_launcher"
+        android:hardwareAccelerated="true"
+        android:requestLegacyExternalStorage="true"
+        android:allowBackup="true"
+        android:fullBackupOnly="false">
 
         <activity
             android:name="org.qtproject.qt.android.bindings.QtActivity"
@@ -20,16 +35,23 @@
             android:exported="true">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <meta-data android:name="android.app.lib_name" android:value="appcar-bt-hmi"/>
-            <meta-data android:name="android.app.arguments" android:value=""/>
+            <meta-data android:name="android.app.lib_name" android:value="appcar-bt-hmi" />
+            <meta-data android:name="android.app.arguments" android:value="" />
         </activity>
 
-        <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.qtprovider" android:exported="false" android:grantUriPermissions="true">
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/qtprovider_paths"/>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.qtprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/qtprovider_paths" />
         </provider>
+
     </application>
 </manifest>
