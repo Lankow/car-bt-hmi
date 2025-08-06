@@ -1,5 +1,8 @@
 #include "BluetoothManager.hpp"
+#include <QBluetoothPermission>
+#include <QCoreApplication>
 #include <QDebug>
+#include <QPermission>
 
 BluetoothManager::BluetoothManager(DeviceModel *model, SettingsManager *settingsManager, QObject *parent)
     : m_model(model), m_settingsManager(settingsManager), QObject(parent),
@@ -41,9 +44,22 @@ void BluetoothManager::init()
 
 void BluetoothManager::startDiscovery()
 {
-    qDebug() << "Starting Bluetooth discovery...";
-    m_discoveryAgent->start();
-    setConnectionState(ConnectionState::Discovering);
+    QBluetoothPermission permission;
+    permission.setCommunicationModes(QBluetoothPermission::Access);
+
+    auto permissionStatus = QCoreApplication::instance()->checkPermission(permission);
+
+    if (permissionStatus == Qt::PermissionStatus::Granted) {
+        qDebug() << "Starting Bluetooth discovery...";
+        m_discoveryAgent->start();
+        setConnectionState(ConnectionState::Discovering);
+    } else if (permissionStatus == Qt::PermissionStatus::Undetermined) {
+        qDebug() << "Requesting Bluetooth permission...";
+        requestBluetoothPermission();
+    } else {
+        qWarning() << "Bluetooth permission denied. Cannot start discovery.";
+        setConnectionState(ConnectionState::NotPermitted);
+    }
 }
 
 void BluetoothManager::stopDiscovery()
@@ -189,4 +205,23 @@ void BluetoothManager::resetSocket()
     }
 
     createSocket();
+}
+
+void BluetoothManager::requestBluetoothPermission()
+{
+    QBluetoothPermission permission;
+    permission.setCommunicationModes(QBluetoothPermission::Access);
+
+    qApp->requestPermission(permission, [this](const QPermission &perm){
+        if (perm.status() == Qt::PermissionStatus::Granted) {
+            qDebug() << "Bluetooth permission granted.";
+            startDiscovery();
+        } else if (perm.status() == Qt::PermissionStatus::Denied) {
+            qDebug() << "Bluetooth permission denied.";
+            setConnectionState(ConnectionState::NotPermitted);
+        } else {
+            qDebug() << "Bluetooth permission status is unknown.";
+            setConnectionState(ConnectionState::NotPermitted);
+        }
+    });
 }

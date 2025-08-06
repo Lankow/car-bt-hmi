@@ -35,13 +35,14 @@ qt_add_qml_module(appcar-bt-hmi
     URI car-bt-hmi
     VERSION 1.0
     QML_FILES ${QML_FILES}
+    RESOURCES
+        resources/logo.svg
 )
 
 qt_add_resources(appcar-bt-hmi "resources"
     PREFIX /
     FILES
         fonts/Orbitron.ttf
-        resources/logo.svg
 )
 
 set_target_properties(appcar-bt-hmi PROPERTIES

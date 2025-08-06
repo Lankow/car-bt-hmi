@@ -118,6 +118,7 @@ QString StateIndicator::getStateText() const {
     case ConnectionState::Connected: return "Connected";
     case ConnectionState::Connecting: return "Connecting";
     case ConnectionState::Error: return "Connection Error";
+    case ConnectionState::NotPermitted: return "Permission Error";
     case ConnectionState::Disconnected: return "Disconnected";
     default: return "Unknown";
     }

@@ -58,6 +58,7 @@ private:
     void setConnectionState(ConnectionState state);
     void createSocket();
     void resetSocket();
+    void requestBluetoothPermission();
 };
 
 

@@ -2,7 +2,7 @@ import QtQuick
 import CustomControls 1.0
 
 Rectangle {
-    color: "transparent"
+    color: "#292828"
     width: parent.width
     height: 50
 

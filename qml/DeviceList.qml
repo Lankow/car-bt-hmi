@@ -5,7 +5,7 @@ import MenuState 1.0
 Rectangle {
     id: deviceListBackground
     width: parent.width
-    height: 380
+    height: root.height * 0.8
     color: "transparent"
 
     ListView {

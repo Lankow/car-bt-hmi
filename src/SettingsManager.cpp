@@ -3,6 +3,7 @@
 #include <QDebug>
 
 namespace {
+const QString KEY_SETTINGS_INITIALIZED = QStringLiteral("settingsInitialized");
 const QString KEY_LAST_DEVICE_ADDRESS = QStringLiteral("lastDeviceAddress");
 const QString KEY_LAST_DEVICE_NAME = QStringLiteral("lastDeviceName");
 const QString KEY_LOGGING_ENABLED = QStringLiteral("loggingEnabled");
@@ -15,10 +16,14 @@ const int MIN_CYCLE_INTERVAL_MS = 50;
 const int MAX_CYCLE_INTERVAL_MS = 1000;
 }
 
-
-
 SettingsManager::SettingsManager(QObject *parent)
-    : QObject(parent) {}
+    : QObject(parent) {
+    QSettings settings;
+    if (!settings.value(KEY_SETTINGS_INITIALIZED, false).toBool()) {
+        resetSettings();
+        settings.setValue(KEY_SETTINGS_INITIALIZED, true);
+    }
+}
 
 void SettingsManager::resetSettings() {
     setLastDeviceName("");

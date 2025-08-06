@@ -12,6 +12,7 @@ public:
         Connecting,
         Connected,
         Disconnected,
+        NotPermitted,
         Error
     };
     Q_ENUM(ConnectionState)
