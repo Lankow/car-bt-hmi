@@ -33,6 +33,8 @@ void ObdService::stop()
 
 void ObdService::sendNextRequest()
 {
+    if(m_requests.isEmpty()) return;
+
     QString command = m_requests[m_currentRequestIndex];
     if (m_btManager->sendMessage(command))
     {
@@ -92,6 +94,11 @@ void ObdService::handleObdPidListChanged()
     stop();
     m_requests = m_settingsManager->getObdPidList();
     m_currentRequestIndex = 0;
+    if(m_requests.isEmpty())
+    {
+        stop();
+        return;
+    }
     start(m_settingsManager->getCycleIntervalMs());
     qDebug() << "Started requests transmission with updated OBD PIDs.";
 }

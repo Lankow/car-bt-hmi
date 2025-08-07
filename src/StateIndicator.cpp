@@ -10,6 +10,7 @@ const QColor ConnectingColor(70, 130, 180);
 const QColor DiscoveringColor(160, 130, 60);
 const QColor DisconnectedColor(85, 85, 90);
 const QColor ErrorColor(41, 40, 40);
+const QColor NotPermittedColor(200, 50, 50);
 }
 
 StateIndicator::StateIndicator(QQuickItem* parent)
@@ -85,16 +86,23 @@ void StateIndicator::connectionStateToColor()
 
     switch (m_connectionState) {
     case ConnectionState::Initial:
-    case ConnectionState::Discovering:
         m_currentColor = InitialColor;
-        shouldBlink = (m_connectionState == ConnectionState::Discovering);
+        break;
+    case ConnectionState::Discovering:
+        m_currentColor = DiscoveringColor;
+        shouldBlink = true;
         break;
     case ConnectionState::Connected:
         m_currentColor = ConnectedColor;
         break;
     case ConnectionState::Connecting:
         m_currentColor = ConnectingColor;
-        shouldBlink = true;    case ConnectionState::Error:
+        shouldBlink = true;
+        break;
+    case ConnectionState::NotPermitted:
+        m_currentColor = NotPermittedColor;
+        break;
+    case ConnectionState::Error:
         m_currentColor = ErrorColor;
         break;
     case ConnectionState::Disconnected:

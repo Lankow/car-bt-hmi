@@ -82,12 +82,18 @@ QString SettingsManager::getLastDeviceAddress() const {
 
 void SettingsManager::setLastDeviceName(const QString &name) {
     QSettings settings;
+    if (settings.value(KEY_LAST_DEVICE_NAME, "").toString() == name)
+        return;
+
     settings.setValue(KEY_LAST_DEVICE_NAME, name);
     emit lastDeviceNameChanged();
 }
 
 void SettingsManager::setLastDeviceAddress(const QString &address) {
     QSettings settings;
+    if (settings.value(KEY_LAST_DEVICE_ADDRESS, "").toString() == address)
+        return;
+
     settings.setValue(KEY_LAST_DEVICE_ADDRESS, address);
     emit lastDeviceAddressChanged();
 }
@@ -164,9 +170,10 @@ void SettingsManager::addObdPid(const QString &pid) {
 
 void SettingsManager::removeObdPid(const QString &pid) {
     QSettings settings;
+    QString normalized = pid.toUpper();
     QStringList list = settings.value(KEY_OBD_PID_LIST, QStringList()).toStringList();
 
-    if (list.removeAll(pid) > 0) {
+    if (list.removeAll(normalized) > 0) {
         settings.setValue(KEY_OBD_PID_LIST, list);
         emit obdPidListChanged();
     }
