@@ -1,5 +1,6 @@
 import QtQuick
 import CustomControls 1.0
+import ConnectionState 1.0
 
 Rectangle {
     color: "#292828"
@@ -17,7 +18,7 @@ Rectangle {
             leftMargin: 10
         }
         text: stateIndicator.stateText + (
-                  (bluetoothManager.connectionState === 2 || bluetoothManager.connectionState === 3)
+                  (bluetoothManager.connectionState === ConnectionState.Connecting || bluetoothManager.connectionState === ConnectionState.Connected)
                   && bluetoothManager.activeDeviceName !== ""
                   ? "\n" + bluetoothManager.activeDeviceName
                   : ""

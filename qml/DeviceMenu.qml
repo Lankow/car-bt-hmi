@@ -1,11 +1,12 @@
 import QtQuick
+import ConnectionState 1.0
 
 Column {
     anchors.fill: parent
 
     DeviceList {
         id: deviceList
-        visible: bluetoothManager.connectionState !== 5
+        visible: bluetoothManager.connectionState !== ConnectionState.NotPermitted
         width: parent.width
     }
 

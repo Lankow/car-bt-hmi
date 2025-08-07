@@ -9,6 +9,7 @@
 #include "ObdService.hpp"
 #include "Gauge.hpp"
 #include "StateIndicator.hpp"
+#include "ConnectionState.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -22,6 +23,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<StateIndicator>("CustomControls", 1, 0, "StateIndicator");
     qmlRegisterSingletonType(QUrl("qrc:/car-bt-hmi/qml/MenuState.qml"), "MenuState", 1, 0, "MenuState");
     qmlRegisterUncreatableType<SettingsManager>("Settings", 1, 0, "SettingsManager", "Enum access only");
+    qmlRegisterUncreatableType<ConnectionStateHelper>("ConnectionState", 1, 0, "ConnectionState", "Enum only");
 
     DataProvider dataProvider;
     DeviceModel deviceModel;
