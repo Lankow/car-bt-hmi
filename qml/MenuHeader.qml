@@ -9,7 +9,7 @@ Rectangle{
 
     Text{
         text: headerTitle
-        font.family: orbitronFont.name
+        font.family: "Orbitron"
         font.pointSize: 18
 
         x: 10

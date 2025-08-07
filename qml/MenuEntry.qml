@@ -22,7 +22,7 @@ Rectangle {
 
     Text {
         text: buttontext
-        font.family: orbitronFont.name
+        font.family: "Orbitron"
         font.pointSize: 14
         color: "#cfcccc"
         anchors {

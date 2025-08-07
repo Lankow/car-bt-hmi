@@ -25,7 +25,7 @@ Rectangle {
 
     Text {
         text: buttontext
-        font.family: orbitronFont.name
+        font.family: "Orbitron"
         font.pointSize: 16
         color: "#cfcccc"
         anchors {
@@ -60,7 +60,7 @@ Rectangle {
                 text: "-"
                 font.pointSize: 20
                 color: value > minValue ? "#ffffff" : "#a0a0a0"
-                font.family: orbitronFont.name
+                font.family: "Orbitron"
             }
 
             MouseArea {
@@ -75,7 +75,7 @@ Rectangle {
             text: value.toString()
             font.pointSize: 18
             color: "#ffffff"
-            font.family: orbitronFont.name
+            font.family: "Orbitron"
 
 
             anchors{
@@ -102,7 +102,7 @@ Rectangle {
                 text: "+"
                 font.pointSize: 20
                 color: value < maxValue ? "#ffffff" : "#a0a0a0"
-                font.family: orbitronFont.name
+                font.family: "Orbitron"
             }
 
             MouseArea {

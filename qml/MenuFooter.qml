@@ -9,7 +9,7 @@ Rectangle {
 
     Text {
         id: stateText
-        font.family: orbitronFont.name
+        font.family: "Orbitron"
         font.pixelSize: 15
         color: "#cfcccc"
         anchors{

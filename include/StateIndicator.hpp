@@ -32,7 +32,7 @@ signals:
 
 private:
     void connectionStateToColor();
-    ConnectionState m_connectionState;
+    ConnectionState m_connectionState {ConnectionState::Initial};
     int m_size = 50;
 
     QColor m_currentColor;

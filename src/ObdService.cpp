@@ -69,8 +69,11 @@ void ObdService::handleBtStateChanged()
 {
     if (m_btManager->getConnectionState() == ConnectionState::Connected)
     {
-        start(m_settingsManager->getCycleIntervalMs());
-        qDebug() << "Started requests transmission.";
+        if (!m_requests.isEmpty())
+        {
+            start(m_settingsManager->getCycleIntervalMs());
+            qDebug() << "Started requests transmission.";
+        }
     }
     else if (m_btManager->getConnectionState() != ConnectionState::Discovering)
     {
@@ -84,8 +87,11 @@ void ObdService::handleIntervalChanged()
     if (m_btManager->getConnectionState() == ConnectionState::Connected)
     {
         stop();
-        start(m_settingsManager->getCycleIntervalMs());
-        qDebug() << "Started requests transmission with updated Interval.";
+        if (!m_requests.isEmpty())
+        {
+            start(m_settingsManager->getCycleIntervalMs());
+            qDebug() << "Started requests transmission with updated Interval.";
+        }
     }
 }
 

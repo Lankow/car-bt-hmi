@@ -22,7 +22,7 @@ Rectangle {
         anchors.top: topBorder.bottom
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
-        font.family: orbitronFont.name
+        font.family: "Orbitron"
         font.pointSize: 14
         color: "#cfcccc"
     }

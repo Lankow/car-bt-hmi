@@ -148,6 +148,9 @@ void SettingsManager::toggleSetting(SettingsManager::SettingKey key) {
         emit engineSpeedEnabledChanged();
         break;
     }
+    case CycleIntervalMs:
+        setCycleIntervalMs(DEFAULT_CYCLE_INTERVAL_MS);
+        break;
     default:
         qWarning("toggleSetting: Unsupported key");
     }
@@ -180,7 +183,7 @@ void SettingsManager::removeObdPid(const QString &pid) {
 }
 
 bool SettingsManager::hasObdPid(const QString &pid) const {
-    return getObdPidList().contains(pid);
+    return getObdPidList().contains(pid.toUpper());
 }
 
 bool SettingsManager::getVehicleSpeedEnabled() const {

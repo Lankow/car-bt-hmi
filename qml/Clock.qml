@@ -28,7 +28,7 @@ Rectangle {
 
         Text {
             id: hoursText
-            font.family: orbitronFont.name
+            font.family: "Orbitron"
             font.pointSize: 28
             color: "#cfcccc"
             text: "00"
@@ -37,7 +37,7 @@ Rectangle {
         Text {
             id: colon
             text: ":"
-            font.family: orbitronFont.name
+            font.family: "Orbitron"
             font.pointSize: 28
             color: "#cfcccc"
             opacity: 1
@@ -45,7 +45,7 @@ Rectangle {
 
         Text {
             id: minutesText
-            font.family: orbitronFont.name
+            font.family: "Orbitron"
             font.pointSize: 28
             color: "#cfcccc"
             text: "00"
