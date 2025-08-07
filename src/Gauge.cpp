@@ -132,6 +132,11 @@ void Gauge::drawOuterArc(QPainter *painter, const QRectF &rect)
     QPen pen(getOuterColor(), kArcWidth, Qt::SolidLine, Qt::FlatCap);
     painter->setPen(pen);
 
+    if (qFuzzyCompare(m_maxValue, m_minValue)) {
+        painter->restore();
+        return;
+    }
+
     const qreal valueRatio = (m_value - m_minValue) / (m_maxValue - m_minValue);
     const qreal sweep = valueRatio * -kSweepAngle;
 
@@ -165,6 +170,10 @@ void Gauge::drawUnitText(QPainter *painter, const QRectF &rect)
 
 QColor Gauge::getOuterColor() const
 {
+    if (qFuzzyCompare(m_maxValue, m_minValue)) {
+        return kOuterMinColor;
+    }
+
     const qreal t = (m_value - m_minValue) / (m_maxValue - m_minValue);
     const int r = kOuterMinColor.red() + t * (kOuterMaxColor.red() - kOuterMinColor.red());
     const int g = kOuterMinColor.green() + t * (kOuterMaxColor.green() - kOuterMinColor.green());

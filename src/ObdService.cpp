@@ -47,17 +47,17 @@ void ObdService::onMessageReceived(const QByteArray &message)
 
     if (normalized.startsWith("41 0D")) {
         qint64 speed = parseResponse(normalized, 6, 2);
-        qDebug() << "Speed: " << speed;
         if (speed != -1) {
+            qDebug() << "Speed: " << speed;
             m_dataProvider->setVehicleSpeed(speed);
         }
     }
 
     if (normalized.startsWith("41 0C")) {
         qint64 rawRPM = parseResponse(normalized, 6, 5);
-        qint64 rpm = rawRPM / 4;
-        qDebug() << "RPM: " << rpm;
         if (rawRPM != -1) {
+            qint64 rpm = rawRPM / 4;
+            qDebug() << "RPM: " << rpm;
             m_dataProvider->setEngineSpeed(rpm);
         }
     }
@@ -105,6 +105,11 @@ qint64 ObdService::parseResponse(const QByteArray &data, int startByte, int byte
     QByteArray hexValue = data.mid(startByte, byteCount);
     hexValue.replace(" ", "");
 
-    bool ok;
-    return hexValue.toUInt(&ok, 16);
+    bool ok = false;
+    uint value = hexValue.toUInt(&ok, 16);
+    if (!ok) {
+        qWarning() << "Failed to convert" << hexValue;
+        return -1;
+    }
+    return value;
 }

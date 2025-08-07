@@ -12,6 +12,7 @@ BluetoothManager::BluetoothManager(DeviceModel *model, SettingsManager *settings
 {
     connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceDiscovered, this, &BluetoothManager::deviceDiscovered);
     connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::finished, this, &BluetoothManager::discoveryFinished);
+    connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::errorOccurred, this, &BluetoothManager::discoveryError);
 
     createSocket();
 
@@ -44,6 +45,9 @@ void BluetoothManager::init()
 
 void BluetoothManager::startDiscovery()
 {
+    if (m_discoveryAgent->isActive())
+        return;
+
     QBluetoothPermission permission;
     permission.setCommunicationModes(QBluetoothPermission::Access);
 
@@ -100,6 +104,11 @@ void BluetoothManager::discoveryFinished()
     }
 }
 
+void BluetoothManager::discoveryError(QBluetoothDeviceDiscoveryAgent::Error error)
+{
+    qWarning() << "Discovery error:" << error;
+}
+
 void BluetoothManager::onConnected()
 {
     m_obdDevice = m_pendingObdDevice;
@@ -118,7 +127,15 @@ bool BluetoothManager::sendMessage(const QString &message)
     if (m_socket->state() == QBluetoothSocket::SocketState::ConnectedState)
     {
         QString formattedMessage = message + "\r";
-        m_socket->write(formattedMessage.toUtf8());
+        QByteArray data = formattedMessage.toUtf8();
+        qint64 bytesWritten = m_socket->write(data);
+
+        if (bytesWritten != data.size())
+        {
+            qWarning() << "Failed to write message:" << formattedMessage;
+            return false;
+        }
+
         qDebug() << "Sent:" << formattedMessage;
         return true;
     }

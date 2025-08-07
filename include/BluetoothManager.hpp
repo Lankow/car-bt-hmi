@@ -39,6 +39,7 @@ signals:
 private slots:
     void deviceDiscovered(const QBluetoothDeviceInfo &device);
     void discoveryFinished();
+    void discoveryError(QBluetoothDeviceDiscoveryAgent::Error error);
     void onConnected();
     void onReadyRead();
     void onDisconnected();

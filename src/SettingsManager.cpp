@@ -96,12 +96,15 @@ int SettingsManager::getCycleIntervalMs() const {
 
 void SettingsManager::setCycleIntervalMs(int intervalMs) {
     QSettings settings;
-    if (intervalMs > MAX_CYCLE_INTERVAL_MS ||
-        intervalMs < MIN_CYCLE_INTERVAL_MS ||
-        settings.value(KEY_CYCLE_INTERVAL_MS, DEFAULT_CYCLE_INTERVAL_MS).toInt() == intervalMs)
+    int correctedInterval = qBound(MIN_CYCLE_INTERVAL_MS, intervalMs, MAX_CYCLE_INTERVAL_MS);
+
+    if (correctedInterval != intervalMs)
+        qWarning() << "setCycleIntervalMs: corrected" << intervalMs << "to" << correctedInterval;
+
+    if (settings.value(KEY_CYCLE_INTERVAL_MS, DEFAULT_CYCLE_INTERVAL_MS).toInt() == correctedInterval)
         return;
 
-    settings.setValue(KEY_CYCLE_INTERVAL_MS, intervalMs);
+    settings.setValue(KEY_CYCLE_INTERVAL_MS, correctedInterval);
     emit cycleIntervalMsChanged();
 }
 
