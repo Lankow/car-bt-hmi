@@ -26,6 +26,9 @@ SettingsManager::SettingsManager(QObject *parent)
 }
 
 void SettingsManager::resetSettings() {
+    QSettings settings;
+    settings.setValue(KEY_OBD_PID_LIST, QStringList());
+
     setLastDeviceName("");
     setLastDeviceAddress("");
     setLoggingEnabled(false);

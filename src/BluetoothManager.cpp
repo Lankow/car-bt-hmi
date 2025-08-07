@@ -64,7 +64,7 @@ void BluetoothManager::startDiscovery()
 
 void BluetoothManager::stopDiscovery()
 {
-    qDebug() << "Stoping Bluetooth discovery.";
+    qDebug() << "Stopping Bluetooth discovery.";
     m_discoveryAgent->stop();
     if (m_socket->state() != QBluetoothSocket::SocketState::ConnectedState)
     {

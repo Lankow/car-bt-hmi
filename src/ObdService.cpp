@@ -15,7 +15,13 @@ ObdService::ObdService(BluetoothManager* btManager, SettingsManager* settingsMan
 void ObdService::start(int intervalMs)
 {
     if(m_requests.isEmpty()) return;
-    int requestIntervalMs = intervalMs / m_requests.count();
+    int divisionResult = intervalMs / m_requests.count();
+    if(divisionResult < 1)
+    {
+        qWarning() << "Request interval less than 1ms, clamping to 1ms.";
+    }
+
+    int requestIntervalMs = qMax(1, divisionResult);
     m_requestTimer.setInterval(requestIntervalMs);
     m_requestTimer.start();
 }
@@ -42,14 +48,18 @@ void ObdService::onMessageReceived(const QByteArray &message)
     if (normalized.startsWith("41 0D")) {
         qint64 speed = parseResponse(normalized, 6, 2);
         qDebug() << "Speed: " << speed;
-        m_dataProvider->setVehicleSpeed(speed);
+        if (speed != -1) {
+            m_dataProvider->setVehicleSpeed(speed);
+        }
     }
 
     if (normalized.startsWith("41 0C")) {
         qint64 rawRPM = parseResponse(normalized, 6, 5);
         qint64 rpm = rawRPM / 4;
         qDebug() << "RPM: " << rpm;
-        m_dataProvider->setEngineSpeed(rpm);
+        if (rawRPM != -1) {
+            m_dataProvider->setEngineSpeed(rpm);
+        }
     }
 }
 
