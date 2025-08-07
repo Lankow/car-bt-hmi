@@ -1,5 +1,6 @@
 #include "StateIndicator.hpp"
 #include <QPainter>
+#include <QtMath>
 
 namespace
 {
@@ -26,7 +27,6 @@ StateIndicator::StateIndicator(QQuickItem* parent)
             m_blinkPhase -= 2 * M_PI;
         update();
     });
-    m_timer.start();
 }
 
 ConnectionState StateIndicator::getConnectionState() const
@@ -90,11 +90,11 @@ void StateIndicator::connectionStateToColor()
         shouldBlink = (m_connectionState == ConnectionState::Discovering);
         break;
     case ConnectionState::Connected:
-    case ConnectionState::Connecting:
         m_currentColor = ConnectedColor;
-        shouldBlink = (m_connectionState == ConnectionState::Connecting);
         break;
-    case ConnectionState::Error:
+    case ConnectionState::Connecting:
+        m_currentColor = ConnectingColor;
+        shouldBlink = true;    case ConnectionState::Error:
         m_currentColor = ErrorColor;
         break;
     case ConnectionState::Disconnected:

@@ -69,7 +69,9 @@ void BluetoothManager::startDiscovery()
 void BluetoothManager::stopDiscovery()
 {
     qDebug() << "Stopping Bluetooth discovery.";
-    m_discoveryAgent->stop();
+    if (m_discoveryAgent->isActive())
+        m_discoveryAgent->stop();
+
     if (m_socket->state() != QBluetoothSocket::SocketState::ConnectedState)
     {
         setConnectionState(ConnectionState::Initial);
@@ -133,6 +135,12 @@ bool BluetoothManager::sendMessage(const QString &message)
         if (bytesWritten != data.size())
         {
             qWarning() << "Failed to write message:" << formattedMessage;
+            return false;
+        }
+
+        if (!m_socket->waitForBytesWritten(1000))
+        {
+            qWarning() << "Timeout while sending" << formattedMessage;
             return false;
         }
 

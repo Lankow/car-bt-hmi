@@ -1,6 +1,7 @@
 #include "SettingsManager.hpp"
 #include <QSettings>
 #include <QDebug>
+#include <QRegularExpression>
 
 namespace {
 const QString KEY_SETTINGS_INITIALIZED = QStringLiteral("settingsInitialized");
@@ -14,6 +15,8 @@ const QString KEY_OBD_PID_LIST = QStringLiteral("obdPidList");
 const int DEFAULT_CYCLE_INTERVAL_MS = 100;
 const int MIN_CYCLE_INTERVAL_MS = 50;
 const int MAX_CYCLE_INTERVAL_MS = 1000;
+
+const QRegularExpression pidRegex("^[0-9A-Fa-f]{4}$");
 }
 
 SettingsManager::SettingsManager(QObject *parent)
@@ -145,11 +148,15 @@ void SettingsManager::toggleSetting(SettingsManager::SettingKey key) {
 }
 
 void SettingsManager::addObdPid(const QString &pid) {
+    if (!pidRegex.match(pid).hasMatch())
+        return;
+    QString normalized = pid.toUpper();
+
     QSettings settings;
     QStringList list = settings.value(KEY_OBD_PID_LIST, QStringList()).toStringList();
 
-    if (!list.contains(pid)) {
-        list.append(pid);
+    if (!list.contains(normalized)) {
+        list.append(normalized);
         settings.setValue(KEY_OBD_PID_LIST, list);
         emit obdPidListChanged();
     }
