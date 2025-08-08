@@ -1,54 +1,90 @@
 # CAR-BT-HMI
 
-## About  
-CAR-BT-HMI is a Qt-based application designed to serve as a vehicle dashboard interface by connecting to an ELM327 OBD2 Bluetooth device. It extracts and displays real-time speed and RPM data, providing a functional and visually appealing interface. The application runs on Windows desktops and is optimized for Raspberry Pi with a 7-inch display running Raspbian, though it can operate on any Linux distribution with Bluetooth support.
+A Qt-based head‑up display application that connects to an ELM327 OBD‑II Bluetooth adapter to show real‑time vehicle data (speed, RPM, etc.) on a custom dashboard. Designed for Raspberry Pi with a 7‑inch display and Android devices, but also runs on desktop Linux and Windows.
 
+## Table of Contents
+- [Demo](#demo)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Building](#building)
+- [Running](#running)
+- [Project Structure](#project-structure)
+- [License](#license)
+
+## Demo
 ![CAR-BT-HMI Demo](demo/car-bt-hmi-demo.gif)
 
----
+## Features
+- **Real-Time Dashboard**: Custom speedometer and tachometer gauges with digital readouts.
+- **Bluetooth Connectivity**: Automatically scans for and connects to ELM327 OBD‑II adapters.
+- **Cross-Platform**: Runs on Raspberry Pi, Android, desktop Linux, and Windows.
+- **Expandable**: Modular C++/QML architecture for adding new gauges or data sources.
+- **Configurable**: User-selectable devices and settings stored across sessions.
 
-### Key Features  
+## Requirements
 
-- **Real-Time Dashboard**  
-  - Displays speed and RPM using custom-designed gauges.
-  - Includes a digital clock and odometer for a complete dashboard experience.  
+### Hardware
+- Raspberry Pi, Android device, or any Linux-compatible system with Bluetooth
+- ELM327 OBD‑II Bluetooth adapter
+- (Optional) 7‑inch touchscreen display for Raspberry Pi or Android
 
-- **Custom Gauge Components**  
-  - Fully implemented custom gauges using Qt’s QML and C++.
-  - Designed for efficient rendering and responsiveness.
+### Software
+- Qt 6.4+ with Quick, Bluetooth, and Svg modules
+- CMake 3.16+
+- (For Android builds) Android SDK/NDK and Java development tools
 
-- **Bluetooth Connectivity**  
-  - Pairs with an ELM327 OBD2 Bluetooth interface.
-  - Fetches speed and RPM data using the OBD-II protocol.
+## Installation
+```bash
+git clone https://github.com/lankow/CAR-BT-HMI.git
+cd CAR-BT-HMI
+```
 
-- **Cross-Platform Compatibility**  
-  - Tested on Windows desktops for development.
-  - Intended for deployment on Raspberry Pi, with compatibility for other Linux systems featuring Bluetooth.
+## Building
 
----
+### Desktop (Linux/Windows/Raspberry Pi)
+Configure the build:
+```bash
+cmake -B build -S .
+```
 
-### Why Use CAR-BT-HMI?  
-This application simplifies the process of visualizing vehicle data on custom hardware. By leveraging the ELM327 OBD2 interface and Raspberry Pi, it provides an affordable and accessible way to build a functional car dashboard interface. The modularity of the design allows for further expansion, such as adding more gauges or integrating additional data sources.
+Compile:
+```bash
+cmake --build build
+```
 
----
+### Android
+Use the Gradle wrapper in the android/ directory:
+```bash
+cd android
+./gradlew assembleDebug    # or assembleRelease
+```
+The resulting APK will be located in `android/app/build/outputs/apk/`.
 
-### Requirements  
+## Running
 
-#### Hardware  
-- Raspberry Pi or any Linux-compatible device with Bluetooth.  
-- ELM327 OBD2 Bluetooth adapter.  
-- Optional: 7-inch display for Raspberry Pi.  
+### Desktop
+After a successful build:
+```bash
+./build/appcar-bt-hmi
+```
+Ensure Bluetooth is enabled, then follow the on-screen menu to pair with an ELM327 device and start displaying vehicle data.
 
-#### Software  
-- Qt framework (version 5 or later).  
-- Raspbian OS or another Linux distribution with Bluetooth support.  
-- Windows (for desktop testing).  
+### Android
+Install the generated APK on your device and launch the app. Enable Bluetooth and select your ELM327 adapter from the in-app device list to begin streaming data.
 
----
+## Project Structure
+```
+.
+├─ android/     # Android packaging (Gradle project)
+├─ demo/        # Demo assets (e.g., GIFs)
+├─ fonts/       # Custom fonts (Orbitron)
+├─ include/     # C++ headers (BluetoothManager, DataProvider, etc.)
+├─ qml/         # QML interface components
+├─ resources/   # SVGs and additional assets
+├─ src/         # C++ implementations
+└─ main.cpp     # Application entry point
+```
 
-### Installation  
-
-1. **Clone the Repository:**  
-   ```bash
-   git clone https://github.com/lankow/CAR-BT-HMI.git
-   cd CAR-BT-HMI
+## License
+This project currently has no explicit license. If you plan to publish or distribute it, consider adding an open-source license file (e.g., MIT, Apache 2.0) in the repository root.
