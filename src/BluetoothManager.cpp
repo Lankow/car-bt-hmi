@@ -1,8 +1,8 @@
-#include "BluetoothManager.hpp"
 #include <QBluetoothPermission>
 #include <QCoreApplication>
 #include <QDebug>
 #include <QPermission>
+#include "BluetoothManager.hpp"
 
 BluetoothManager::BluetoothManager(DeviceModel *model, SettingsManager *settingsManager, DataProvider *dataProvider, QObject *parent)
     : m_model(model), m_settingsManager(settingsManager), m_dataProvider(dataProvider), QObject(parent),

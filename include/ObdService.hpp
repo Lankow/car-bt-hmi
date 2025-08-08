@@ -1,5 +1,6 @@
 #ifndef OBDSERVICE_HPP
 #define OBDSERVICE_HPP
+
 #include <QObject>
 #include <QTimer>
 #include "BluetoothManager.hpp"

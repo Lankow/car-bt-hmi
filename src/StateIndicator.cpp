@@ -1,6 +1,6 @@
-#include "StateIndicator.hpp"
 #include <QPainter>
 #include <QtMath>
+#include "StateIndicator.hpp"
 
 namespace
 {

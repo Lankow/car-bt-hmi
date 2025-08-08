@@ -1,5 +1,6 @@
 #ifndef CONNECTIONSTATE_HPP
 #define CONNECTIONSTATE_HPP
+
 #include <QObject>
 
 class ConnectionStateHelper : public QObject {
@@ -17,4 +18,5 @@ public:
     };
     Q_ENUM(ConnectionState)
 };
+
 #endif // CONNECTIONSTATE_HPP

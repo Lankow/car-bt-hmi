@@ -1,5 +1,5 @@
-#include "DataProvider.hpp"
 #include <QtGlobal>
+#include "DataProvider.hpp"
 
 constexpr int DEFAULT_VEH_SPEED = 0;
 constexpr int DEFAULT_ENG_SPEED = 0;

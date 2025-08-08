@@ -68,7 +68,6 @@ void ObdService::onMessageReceived(const QByteArray &message)
         }
     }
 
-
     if (normalized.startsWith(ObdPids::ENGINE_RPM_RESP)) {
         qint64 rawRPM = parseResponse(normalized, 2, 2);
         if (rawRPM != -1) {

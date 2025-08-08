@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STATEINDICATOR_HPP
+#define STATEINDICATOR_HPP
 
 #include <QQuickPaintedItem>
 #include <QTimer>
@@ -39,3 +40,5 @@ private:
     QTimer m_timer;
     qreal m_blinkPhase = 0.0;
 };
+
+#endif // STATEINDICATOR_HPP

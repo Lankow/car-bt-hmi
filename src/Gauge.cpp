@@ -1,7 +1,7 @@
-#include "Gauge.hpp"
 #include <QPainter>
 #include <QFont>
 #include <QRadialGradient>
+#include "Gauge.hpp"
 
 namespace {
 constexpr qreal kDefaultValue = 0;
