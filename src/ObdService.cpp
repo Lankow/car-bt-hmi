@@ -40,6 +40,18 @@ void ObdService::sendNextRequest()
     {
         m_currentRequestIndex = (m_currentRequestIndex + 1) % m_requests.size();
     }
+    else
+    {
+        if (m_btManager->getConnectionState() == ConnectionState::Connected)
+        {
+            m_currentRequestIndex = (m_currentRequestIndex + 1) % m_requests.size();
+        }
+        else
+        {
+            m_requestTimer.stop();
+            qWarning() << "Failed to send OBD request. Stopping request timer.";
+        }
+    }
 }
 
 void ObdService::onMessageReceived(const QByteArray &message)

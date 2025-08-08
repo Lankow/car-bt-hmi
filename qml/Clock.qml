@@ -10,7 +10,7 @@ Rectangle {
     Timer {
         id: timer
         interval: 1000
-        running: true
+        running: clockRoot.visible
         repeat: true
         onTriggered: {
             const now = new Date()

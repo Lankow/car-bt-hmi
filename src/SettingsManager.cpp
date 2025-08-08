@@ -19,8 +19,7 @@ const int MAX_CYCLE_INTERVAL_MS = 1000;
 const QRegularExpression pidRegex("^[0-9A-Fa-f]{4}$");
 }
 
-SettingsManager::SettingsManager(QObject *parent)
-    : QObject(parent) {
+SettingsManager::SettingsManager(QObject *parent) : QObject(parent) {
     QSettings settings;
     if (!settings.value(KEY_SETTINGS_INITIALIZED, false).toBool()) {
         resetSettings();
@@ -31,6 +30,7 @@ SettingsManager::SettingsManager(QObject *parent)
 void SettingsManager::resetSettings() {
     QSettings settings;
     settings.setValue(KEY_OBD_PID_LIST, QStringList());
+
 
     setLastDeviceName("");
     setLastDeviceAddress("");
