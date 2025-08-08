@@ -100,11 +100,7 @@ void ObdService::handleObdPidListChanged()
     stop();
     m_requests = m_settingsManager->getObdPidList();
     m_currentRequestIndex = 0;
-    if(m_requests.isEmpty())
-    {
-        stop();
-        return;
-    }
+    if(m_requests.isEmpty()) return;
     start(m_settingsManager->getCycleIntervalMs());
     qDebug() << "Started requests transmission with updated OBD PIDs.";
 }

@@ -46,6 +46,7 @@ void Gauge::setSize(qreal size)
 {
     if (!qFuzzyCompare(m_size, size)) {
         m_size = size;
+        update();
         emit sizeChanged();
     }
 }
@@ -54,6 +55,7 @@ void Gauge::setMinValue(qreal minValue)
 {
     if (!qFuzzyCompare(m_minValue, minValue)) {
         m_minValue = minValue;
+        update();
         emit minValueChanged();
     }
 }
@@ -62,6 +64,7 @@ void Gauge::setMaxValue(qreal maxValue)
 {
     if (!qFuzzyCompare(m_maxValue, maxValue)) {
         m_maxValue = maxValue;
+        update();
         emit maxValueChanged();
     }
 }
@@ -70,6 +73,7 @@ void Gauge::setUnit(QString unit)
 {
     if (m_unit != unit) {
         m_unit = std::move(unit);
+        update();
         emit unitChanged();
     }
 }

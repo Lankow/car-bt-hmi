@@ -19,7 +19,6 @@ StateIndicator::StateIndicator(QQuickItem* parent)
 {
     setWidth(m_size);
     setHeight(m_size);
-    m_currentColor = InitialColor;
 
     m_timer.setInterval(24);
     connect(&m_timer, &QTimer::timeout, this, [this]() {
