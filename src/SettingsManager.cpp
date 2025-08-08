@@ -1,7 +1,7 @@
-#include "SettingsManager.hpp"
-#include <QSettings>
 #include <QDebug>
 #include <QRegularExpression>
+#include "SettingsManager.hpp"
+#include "ObdPids.hpp"
 
 namespace {
 const QString KEY_SETTINGS_INITIALIZED = QStringLiteral("settingsInitialized");
@@ -20,106 +20,99 @@ const QRegularExpression pidRegex("^[0-9A-Fa-f]{4}$");
 }
 
 SettingsManager::SettingsManager(QObject *parent) : QObject(parent) {
-    QSettings settings;
-    if (!settings.value(KEY_SETTINGS_INITIALIZED, false).toBool()) {
+    if (!m_settings.value(KEY_SETTINGS_INITIALIZED, false).toBool()) {
         resetSettings();
-        settings.setValue(KEY_SETTINGS_INITIALIZED, true);
+        m_settings.setValue(KEY_SETTINGS_INITIALIZED, true);
     }
 }
 
 void SettingsManager::resetSettings() {
-    QSettings settings;
-    settings.setValue(KEY_OBD_PID_LIST, QStringList());
+    m_settings.setValue(KEY_LAST_DEVICE_NAME, "");
+    m_settings.setValue(KEY_LAST_DEVICE_ADDRESS, "");
+    m_settings.setValue(KEY_LOGGING_ENABLED, false);
+    m_settings.setValue(KEY_CLOCK_ENABLED, true);
+    m_settings.setValue(KEY_CYCLE_INTERVAL_MS, DEFAULT_CYCLE_INTERVAL_MS);
 
+    addObdPid(ObdPids::VEHICLE_SPEED);
+    addObdPid(ObdPids::ENGINE_RPM);
 
-    setLastDeviceName("");
-    setLastDeviceAddress("");
-    setLoggingEnabled(false);
-    setClockEnabled(true);
-    setCycleIntervalMs(DEFAULT_CYCLE_INTERVAL_MS);
-
-    addObdPid("010D"); // Vehicle Speed
-    addObdPid("010C"); // Engine RPM
+    emit lastDeviceNameChanged();
+    emit lastDeviceAddressChanged();
+    emit loggingEnabledChanged();
+    emit clockEnabledChanged();
+    emit cycleIntervalMsChanged();
+    emit vehicleSpeedEnabledChanged();
+    emit engineSpeedEnabledChanged();
+    emit obdPidListChanged();
 }
 
 bool SettingsManager::getLoggingEnabled() const {
-    QSettings settings;
-    return settings.value(KEY_LOGGING_ENABLED, false).toBool();
+    return m_settings.value(KEY_LOGGING_ENABLED, false).toBool();
 }
 
 void SettingsManager::setLoggingEnabled(bool enabled) {
-    QSettings settings;
-    if (settings.value(KEY_LOGGING_ENABLED, false).toBool() == enabled)
+    if (m_settings.value(KEY_LOGGING_ENABLED, false).toBool() == enabled)
         return;
 
-    settings.setValue(KEY_LOGGING_ENABLED, enabled);
+    m_settings.setValue(KEY_LOGGING_ENABLED, enabled);
     emit loggingEnabledChanged();
 }
 
 bool SettingsManager::getClockEnabled() const {
-    QSettings settings;
-    return settings.value(KEY_CLOCK_ENABLED, true).toBool();
+    return m_settings.value(KEY_CLOCK_ENABLED, true).toBool();
 }
 
 void SettingsManager::setClockEnabled(bool enabled) {
-    QSettings settings;
-    if (settings.value(KEY_CLOCK_ENABLED, false).toBool() == enabled)
+    if (m_settings.value(KEY_CLOCK_ENABLED, false).toBool() == enabled)
         return;
 
-    settings.setValue(KEY_CLOCK_ENABLED, enabled);
+    m_settings.setValue(KEY_CLOCK_ENABLED, enabled);
     emit clockEnabledChanged();
 }
 
 QString SettingsManager::getLastDeviceName() const {
-    QSettings settings;
-    return settings.value(KEY_LAST_DEVICE_NAME, "").toString();
+    return m_settings.value(KEY_LAST_DEVICE_NAME, "").toString();
 }
 
 QString SettingsManager::getLastDeviceAddress() const {
-    QSettings settings;
-    return settings.value(KEY_LAST_DEVICE_ADDRESS, "").toString();
+    return m_settings.value(KEY_LAST_DEVICE_ADDRESS, "").toString();
 }
 
 void SettingsManager::setLastDeviceName(const QString &name) {
-    QSettings settings;
-    if (settings.value(KEY_LAST_DEVICE_NAME, "").toString() == name)
+    if (m_settings.value(KEY_LAST_DEVICE_NAME, "").toString() == name)
         return;
 
-    settings.setValue(KEY_LAST_DEVICE_NAME, name);
+    m_settings.setValue(KEY_LAST_DEVICE_NAME, name);
     emit lastDeviceNameChanged();
 }
 
 void SettingsManager::setLastDeviceAddress(const QString &address) {
-    QSettings settings;
-    if (settings.value(KEY_LAST_DEVICE_ADDRESS, "").toString() == address)
+    if (m_settings.value(KEY_LAST_DEVICE_ADDRESS, "").toString() == address)
         return;
 
-    settings.setValue(KEY_LAST_DEVICE_ADDRESS, address);
+    m_settings.setValue(KEY_LAST_DEVICE_ADDRESS, address);
     emit lastDeviceAddressChanged();
 }
 
 int SettingsManager::getCycleIntervalMs() const {
-    QSettings settings;
-    return settings.value(KEY_CYCLE_INTERVAL_MS, DEFAULT_CYCLE_INTERVAL_MS).toInt();
+    return m_settings.value(KEY_CYCLE_INTERVAL_MS, DEFAULT_CYCLE_INTERVAL_MS).toInt();
 }
 
 void SettingsManager::setCycleIntervalMs(int intervalMs) {
-    QSettings settings;
     int correctedInterval = qBound(MIN_CYCLE_INTERVAL_MS, intervalMs, MAX_CYCLE_INTERVAL_MS);
 
     if (correctedInterval != intervalMs)
         qWarning() << "setCycleIntervalMs: corrected" << intervalMs << "to" << correctedInterval;
 
-    if (settings.value(KEY_CYCLE_INTERVAL_MS, DEFAULT_CYCLE_INTERVAL_MS).toInt() == correctedInterval)
+    if (m_settings.value(KEY_CYCLE_INTERVAL_MS, DEFAULT_CYCLE_INTERVAL_MS).toInt() == correctedInterval)
         return;
 
-    settings.setValue(KEY_CYCLE_INTERVAL_MS, correctedInterval);
+    m_settings.setValue(KEY_CYCLE_INTERVAL_MS, correctedInterval);
     emit cycleIntervalMsChanged();
 }
 
 QStringList SettingsManager::getObdPidList() const {
-    QSettings settings;
-    return settings.value(KEY_OBD_PID_LIST, QStringList()).toStringList();
+    return m_settings.value(KEY_OBD_PID_LIST, QStringList()).toStringList();
 }
 
 void SettingsManager::toggleSetting(SettingsManager::SettingKey key) {
@@ -163,23 +156,21 @@ void SettingsManager::addObdPid(const QString &pid) {
     }
     QString normalized = pid.toUpper();
 
-    QSettings settings;
-    QStringList list = settings.value(KEY_OBD_PID_LIST, QStringList()).toStringList();
+    QStringList list = m_settings.value(KEY_OBD_PID_LIST, QStringList()).toStringList();
 
     if (!list.contains(normalized)) {
         list.append(normalized);
-        settings.setValue(KEY_OBD_PID_LIST, list);
+        m_settings.setValue(KEY_OBD_PID_LIST, list);
         emit obdPidListChanged();
     }
 }
 
 void SettingsManager::removeObdPid(const QString &pid) {
-    QSettings settings;
     QString normalized = pid.toUpper();
-    QStringList list = settings.value(KEY_OBD_PID_LIST, QStringList()).toStringList();
+    QStringList list = m_settings.value(KEY_OBD_PID_LIST, QStringList()).toStringList();
 
     if (list.removeAll(normalized) > 0) {
-        settings.setValue(KEY_OBD_PID_LIST, list);
+        m_settings.setValue(KEY_OBD_PID_LIST, list);
         emit obdPidListChanged();
     }
 }
@@ -207,11 +198,11 @@ bool SettingsManager::getEngineSpeedEnabled() const {
 }
 
 void SettingsManager::setEngineSpeedEnabled(bool enabled) {
-    if (enabled && !hasObdPid("010C")) {
-        addObdPid("010C");
+    if (enabled && !hasObdPid(ObdPids::ENGINE_RPM)) {
+        addObdPid(ObdPids::ENGINE_RPM);
         emit engineSpeedEnabledChanged();
-    } else if (!enabled && hasObdPid("010C")) {
-        removeObdPid("010C");
+    } else if (!enabled && hasObdPid(ObdPids::ENGINE_RPM)) {
+        removeObdPid(ObdPids::ENGINE_RPM);
         emit engineSpeedEnabledChanged();
     }
 }

@@ -1,4 +1,5 @@
 #include "ObdService.hpp"
+#include "ObdPids.hpp"
 
 ObdService::ObdService(BluetoothManager* btManager, SettingsManager* settingsManager, DataProvider* provider, QObject* parent)
     : QObject(parent), m_btManager(btManager), m_settingsManager(settingsManager), m_dataProvider(provider), m_currentRequestIndex(0)
@@ -59,16 +60,17 @@ void ObdService::onMessageReceived(const QByteArray &message)
     QByteArray normalized = message.trimmed().toUpper();
     qDebug() << "Received Message:" << normalized;
 
-    if (normalized.startsWith("41 0D")) {
-        qint64 speed = parseResponse(normalized, 6, 2);
+    if (normalized.startsWith(ObdPids::VEHICLE_SPEED_RESP)) {
+        qint64 speed = parseResponse(normalized, 2, 1);
         if (speed != -1) {
             qDebug() << "Speed: " << speed;
             m_dataProvider->setVehicleSpeed(speed);
         }
     }
 
-    if (normalized.startsWith("41 0C")) {
-        qint64 rawRPM = parseResponse(normalized, 6, 5);
+
+    if (normalized.startsWith(ObdPids::ENGINE_RPM_RESP)) {
+        qint64 rawRPM = parseResponse(normalized, 2, 2);
         if (rawRPM != -1) {
             qint64 rpm = rawRPM / 4;
             qDebug() << "RPM: " << rpm;
@@ -117,20 +119,25 @@ void ObdService::handleObdPidListChanged()
     qDebug() << "Started requests transmission with updated OBD PIDs.";
 }
 
-qint64 ObdService::parseResponse(const QByteArray &data, int startByte, int byteCount) {
-    if (data.size() < startByte + byteCount) {
-        qWarning() << "Invalid data length for parsing!";
+qint64 ObdService::parseResponse(const QByteArray &data, int startToken, int tokenCount) {
+    QByteArray simplifiedData = data.simplified();
+    QList<QByteArray> tokens = simplifiedData.split(' ');
+
+    if (tokens.size() < startToken + tokenCount) {
+        qWarning() << "Invalid token count for parsing!";
         return -1;
     }
 
-    QByteArray hexValue = data.mid(startByte, byteCount);
-    hexValue.replace(" ", "");
-
-    bool ok = false;
-    uint value = hexValue.toUInt(&ok, 16);
-    if (!ok) {
-        qWarning() << "Failed to convert" << hexValue;
-        return -1;
+    qint64 value = 0;
+    for (int i = 0; i < tokenCount; ++i) {
+        const QByteArray &token = tokens.at(startToken + i);
+        bool ok = false;
+        uint byte = token.toUInt(&ok, 16);
+        if (!ok) {
+            qWarning() << "Failed to convert token" << token;
+            return -1;
+        }
+        value = (value << 8) | byte;
     }
     return value;
 }

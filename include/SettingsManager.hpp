@@ -2,6 +2,7 @@
 #define SETTINGSMANAGER_HPP
 
 #include <QObject>
+#include <QSettings>
 
 class SettingsManager : public QObject
 {
@@ -65,6 +66,9 @@ signals:
     void vehicleSpeedEnabledChanged();
     void engineSpeedEnabledChanged();
     void obdPidListChanged();
+
+private:
+    QSettings m_settings;
 };
 
 #endif // SETTINGSMANAGER_HPP

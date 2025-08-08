@@ -29,10 +29,11 @@ QVariant DeviceModel::data(const QModelIndex &index, int role) const
 
 QHash<int, QByteArray> DeviceModel::roleNames() const
 {
-    QHash<int, QByteArray> names;
-    names[NameRole] = "name";
-    names[AddressRole] = "address";
-    names[DeviceRole] = "device";
+    static const QHash<int, QByteArray> names{
+                                              {NameRole, "name"},
+                                              {AddressRole, "address"},
+                                              {DeviceRole, "device"},
+                                              };
     return names;
 }
 

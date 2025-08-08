@@ -1,24 +1,28 @@
 #ifndef BLUETOOTHMANAGER_HPP
 #define BLUETOOTHMANAGER_HPP
 
-#include <QObject>
 #include <QBluetoothDeviceDiscoveryAgent>
-#include <QBluetoothSocket>
 #include <QBluetoothDeviceInfo>
-#include "DeviceModel.hpp"
+#include <QBluetoothSocket>
+#include <QObject>
+#include <memory>
 #include "ConnectionState.hpp"
+#include "DeviceModel.hpp"
 #include "SettingsManager.hpp"
+#include "DataProvider.hpp"
 
 using ConnectionState = ConnectionStateHelper::ConnectionState;
 
-class BluetoothManager : public QObject
-{
+class BluetoothManager : public QObject {
     Q_OBJECT
-    Q_PROPERTY(ConnectionState connectionState READ getConnectionState NOTIFY connectionStateChanged)
-    Q_PROPERTY(QString activeDeviceName READ getActiveDeviceName NOTIFY activeDeviceNameChanged)
+    Q_PROPERTY(ConnectionState connectionState READ getConnectionState NOTIFY
+                   connectionStateChanged)
+    Q_PROPERTY(QString activeDeviceName READ getActiveDeviceName NOTIFY
+                   activeDeviceNameChanged)
 
 public:
-    explicit BluetoothManager(DeviceModel *model, SettingsManager *settingsManager, QObject *parent = nullptr);
+    explicit BluetoothManager(DeviceModel *model, SettingsManager *settingsManager, DataProvider *dataProvider, QObject *parent = nullptr);
+
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
     Q_INVOKABLE void clearResults();
@@ -47,12 +51,13 @@ private slots:
 
 private:
     QBluetoothDeviceDiscoveryAgent *m_discoveryAgent;
-    QBluetoothSocket *m_socket;
+    std::unique_ptr<QBluetoothSocket> m_socket;
     QBluetoothDeviceInfo m_pendingObdDevice;
     QBluetoothDeviceInfo m_obdDevice;
     ConnectionState m_connectionState;
     DeviceModel *m_model;
     SettingsManager *m_settingsManager;
+    DataProvider *m_dataProvider;
 
     QBluetoothAddress m_restoredAddress;
     bool m_attemptReconnect = false;
@@ -62,5 +67,4 @@ private:
     void requestBluetoothPermission();
 };
 
-
-#endif // BLUETOOTHMANAGER_H
+#endif // BLUETOOTHMANAGER_HPP

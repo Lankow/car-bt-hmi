@@ -24,7 +24,7 @@ private slots:
     void sendNextRequest();
 
 private:
-    qint64 parseResponse(const QByteArray &data, int startByte, int byteCount);
+    qint64 parseResponse(const QByteArray &data, int startToken, int tokenCount);
 
     BluetoothManager* m_btManager;
     SettingsManager* m_settingsManager;

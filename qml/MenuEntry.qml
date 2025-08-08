@@ -4,7 +4,7 @@ Rectangle {
     id: menuItemRoot
     height: 50
     width: parent.width
-    color: clickable && menuButtonMouseArea.pressed ? "#606162" : "#404142"
+    color: clickable ? (menuButtonMouseArea.pressed ? "#606162" : "#404142") : "#292828"
 
     property string buttontext: ""
     property bool hasCheckbox: false
@@ -24,7 +24,7 @@ Rectangle {
         text: buttontext
         font.family: "Orbitron"
         font.pointSize: 14
-        color: "#cfcccc"
+        color: menuItemRoot.clickable ? "#cfcccc" : "#7f7f7f"
         anchors {
             left: parent.left
             verticalCenter: parent.verticalCenter

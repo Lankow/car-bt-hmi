@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     DataProvider dataProvider;
     DeviceModel deviceModel;
     SettingsManager settingsManager;
-    BluetoothManager btManager(&deviceModel, &settingsManager);
+    BluetoothManager btManager(&deviceModel, &settingsManager, &dataProvider);
     ObdService obdService(&btManager, &settingsManager, &dataProvider);
 
     QQmlApplicationEngine engine;

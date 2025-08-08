@@ -18,6 +18,8 @@ public:
     void setVehicleSpeed(int speed);
     void setEngineSpeed(int speed);
 
+    void reset();
+
 signals:
     void vehicleSpeedChanged();
     void engineSpeedChanged();

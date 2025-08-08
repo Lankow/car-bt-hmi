@@ -4,32 +4,32 @@
 #include <QDebug>
 #include <QPermission>
 
-BluetoothManager::BluetoothManager(DeviceModel *model, SettingsManager *settingsManager, QObject *parent)
-    : m_model(model), m_settingsManager(settingsManager), QObject(parent),
+BluetoothManager::BluetoothManager(DeviceModel *model, SettingsManager *settingsManager, DataProvider *dataProvider, QObject *parent)
+    : m_model(model), m_settingsManager(settingsManager), m_dataProvider(dataProvider), QObject(parent),
     m_discoveryAgent(new QBluetoothDeviceDiscoveryAgent(this)),
     m_socket(nullptr),
     m_connectionState(ConnectionState::Initial)
 {
-    connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceDiscovered, this, &BluetoothManager::deviceDiscovered);
-    connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::finished, this, &BluetoothManager::discoveryFinished);
-    connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::errorOccurred, this, &BluetoothManager::discoveryError);
+    connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::deviceDiscovered,
+            this, &BluetoothManager::deviceDiscovered);
+    connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::finished, this,
+            &BluetoothManager::discoveryFinished);
+    connect(m_discoveryAgent, &QBluetoothDeviceDiscoveryAgent::errorOccurred,
+            this, &BluetoothManager::discoveryError);
 
     createSocket();
 
     init();
 }
 
-void BluetoothManager::setConnectionState(ConnectionState state)
-{
-    if(m_connectionState != state)
-    {
+void BluetoothManager::setConnectionState(ConnectionState state) {
+    if (m_connectionState != state) {
         m_connectionState = state;
         emit connectionStateChanged();
     }
 }
 
-void BluetoothManager::init()
-{
+void BluetoothManager::init() {
     QString address = m_settingsManager->getLastDeviceAddress();
     QString name = m_settingsManager->getLastDeviceName();
 
@@ -43,15 +43,15 @@ void BluetoothManager::init()
     }
 }
 
-void BluetoothManager::startDiscovery()
-{
+void BluetoothManager::startDiscovery() {
     if (m_discoveryAgent->isActive())
         return;
 
     QBluetoothPermission permission;
     permission.setCommunicationModes(QBluetoothPermission::Access);
 
-    auto permissionStatus = QCoreApplication::instance()->checkPermission(permission);
+    auto permissionStatus =
+        QCoreApplication::instance()->checkPermission(permission);
 
     if (permissionStatus == Qt::PermissionStatus::Granted) {
         qDebug() << "Starting Bluetooth discovery...";
@@ -66,18 +66,14 @@ void BluetoothManager::startDiscovery()
     }
 }
 
-void BluetoothManager::stopDiscovery()
-{
+void BluetoothManager::stopDiscovery() {
     qDebug() << "Stopping Bluetooth discovery.";
     if (m_discoveryAgent->isActive())
         m_discoveryAgent->stop();
 
-    if (m_socket->state() != QBluetoothSocket::SocketState::ConnectedState)
-    {
+    if (m_socket->state() != QBluetoothSocket::SocketState::ConnectedState) {
         setConnectionState(ConnectionState::Initial);
-    }
-    else
-    {
+    } else {
         setConnectionState(ConnectionState::Connected);
     }
 }
@@ -93,27 +89,22 @@ void BluetoothManager::deviceDiscovered(const QBluetoothDeviceInfo &device) {
     }
 }
 
-void BluetoothManager::discoveryFinished()
-{
+void BluetoothManager::discoveryFinished() {
     qDebug() << "Discovery Finished.";
-    if (m_socket->state() != QBluetoothSocket::SocketState::ConnectedState)
-    {
+    if (m_socket->state() != QBluetoothSocket::SocketState::ConnectedState) {
         setConnectionState(ConnectionState::Initial);
-    }
-    else
-    {
+    } else {
         setConnectionState(ConnectionState::Connected);
     }
 }
 
-void BluetoothManager::discoveryError(QBluetoothDeviceDiscoveryAgent::Error error)
-{
+void BluetoothManager::discoveryError(
+    QBluetoothDeviceDiscoveryAgent::Error error) {
     qWarning() << "Discovery error:" << error;
     setConnectionState(ConnectionState::Error);
 }
 
-void BluetoothManager::onConnected()
-{
+void BluetoothManager::onConnected() {
     m_obdDevice = m_pendingObdDevice;
     emit activeDeviceNameChanged();
 
@@ -125,25 +116,20 @@ void BluetoothManager::onConnected()
     m_settingsManager->setLastDeviceName(m_obdDevice.name());
 }
 
-bool BluetoothManager::sendMessage(const QString &message)
-{
-    if (m_socket->state() == QBluetoothSocket::SocketState::ConnectedState)
-    {
+bool BluetoothManager::sendMessage(const QString &message) {
+    if (m_socket->state() == QBluetoothSocket::SocketState::ConnectedState) {
         QString formattedMessage = message + "\r";
         QByteArray data = formattedMessage.toUtf8();
         qint64 bytesWritten = m_socket->write(data);
 
-        if (bytesWritten != data.size())
-        {
+        if (bytesWritten != data.size()) {
             qWarning() << "Failed to write message:" << formattedMessage;
             return false;
         }
 
         qDebug() << "Sent:" << formattedMessage;
         return true;
-    }
-    else
-    {
+    } else {
         qDebug() << "Not connected!";
         return false;
     }
@@ -154,22 +140,20 @@ ConnectionState BluetoothManager::getConnectionState() const {
 }
 
 QString BluetoothManager::getActiveDeviceName() const {
-    if (m_connectionState == ConnectionState::Connecting && m_pendingObdDevice.isValid()) {
+    if (m_connectionState == ConnectionState::Connecting &&
+        m_pendingObdDevice.isValid()) {
         return m_pendingObdDevice.name();
     }
-    if (m_connectionState == ConnectionState::Connected && m_obdDevice.isValid()) {
+    if (m_connectionState == ConnectionState::Connected &&
+        m_obdDevice.isValid()) {
         return m_obdDevice.name();
     }
     return "";
 }
 
-void BluetoothManager::clearResults()
-{
-    m_model->clear();
-}
+void BluetoothManager::clearResults() { m_model->clear(); }
 
-void BluetoothManager::connectToOBD(const QBluetoothDeviceInfo &device)
-{
+void BluetoothManager::connectToOBD(const QBluetoothDeviceInfo &device) {
     if (!device.isValid()) {
         qWarning() << "Invalid OBD Device!";
         return;
@@ -183,17 +167,17 @@ void BluetoothManager::connectToOBD(const QBluetoothDeviceInfo &device)
     emit activeDeviceNameChanged();
 
     qDebug() << "Connecting to OBD Device at" << device.address().toString();
-    m_socket->connectToService(device.address(), QBluetoothUuid(QStringLiteral("00001101-0000-1000-8000-00805F9B34FB")));
+    m_socket->connectToService(
+        device.address(),
+        QBluetoothUuid(QStringLiteral("00001101-0000-1000-8000-00805F9B34FB")));
 }
 
-void BluetoothManager::onReadyRead()
-{
+void BluetoothManager::onReadyRead() {
     QByteArray data = m_socket->readAll();
     emit messageReceived(data);
 }
 
-void BluetoothManager::onErrorOccurred(QBluetoothSocket::SocketError error)
-{
+void BluetoothManager::onErrorOccurred(QBluetoothSocket::SocketError error) {
     qDebug() << "Bluetooth Error:" << error;
     m_pendingObdDevice = QBluetoothDeviceInfo();
     setConnectionState(ConnectionState::Error);
@@ -201,43 +185,44 @@ void BluetoothManager::onErrorOccurred(QBluetoothSocket::SocketError error)
     resetSocket();
 }
 
-void BluetoothManager::onDisconnected()
-{
+void BluetoothManager::onDisconnected() {
     qDebug() << "OBD Device disconnected!";
     m_obdDevice = QBluetoothDeviceInfo();
     m_pendingObdDevice = QBluetoothDeviceInfo();
     resetSocket();
+    if (m_dataProvider)
+        m_dataProvider->reset();
     setConnectionState(ConnectionState::Disconnected);
 }
 
-void BluetoothManager::createSocket()
-{
-    m_socket = new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this);
+void BluetoothManager::createSocket() {
+    m_socket =
+        std::make_unique<QBluetoothSocket>(QBluetoothServiceInfo::RfcommProtocol);
 
-    connect(m_socket, &QBluetoothSocket::connected, this, &BluetoothManager::onConnected);
-    connect(m_socket, &QBluetoothSocket::readyRead, this, &BluetoothManager::onReadyRead);
-    connect(m_socket, &QBluetoothSocket::errorOccurred, this, &BluetoothManager::onErrorOccurred);
-    connect(m_socket, &QBluetoothSocket::disconnected, this, &BluetoothManager::onDisconnected);
+    connect(m_socket.get(), &QBluetoothSocket::connected, this,
+            &BluetoothManager::onConnected);
+    connect(m_socket.get(), &QBluetoothSocket::readyRead, this,
+            &BluetoothManager::onReadyRead);
+    connect(m_socket.get(), &QBluetoothSocket::errorOccurred, this,
+            &BluetoothManager::onErrorOccurred);
+    connect(m_socket.get(), &QBluetoothSocket::disconnected, this,
+            &BluetoothManager::onDisconnected);
 }
 
-void BluetoothManager::resetSocket()
-{
+void BluetoothManager::resetSocket() {
     if (m_socket) {
         m_socket->disconnectFromService();
         m_socket->close();
-        m_socket->deleteLater();
-        m_socket = nullptr;
     }
 
     createSocket();
 }
 
-void BluetoothManager::requestBluetoothPermission()
-{
+void BluetoothManager::requestBluetoothPermission() {
     QBluetoothPermission permission;
     permission.setCommunicationModes(QBluetoothPermission::Access);
 
-    qApp->requestPermission(permission, [this](const QPermission &perm){
+    qApp->requestPermission(permission, [this](const QPermission &perm) {
         if (perm.status() == Qt::PermissionStatus::Granted) {
             qDebug() << "Bluetooth permission granted.";
             startDiscovery();
