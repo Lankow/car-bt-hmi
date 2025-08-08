@@ -197,6 +197,8 @@ void BluetoothManager::onErrorOccurred(QBluetoothSocket::SocketError error)
     qDebug() << "Bluetooth Error:" << error;
     m_pendingObdDevice = QBluetoothDeviceInfo();
     setConnectionState(ConnectionState::Error);
+    qDebug() << "Resetting Bluetooth socket after error";
+    resetSocket();
 }
 
 void BluetoothManager::onDisconnected()

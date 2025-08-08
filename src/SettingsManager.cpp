@@ -157,8 +157,10 @@ void SettingsManager::toggleSetting(SettingsManager::SettingKey key) {
 }
 
 void SettingsManager::addObdPid(const QString &pid) {
-    if (!pidRegex.match(pid).hasMatch())
+    if (!pidRegex.match(pid).hasMatch()) {
+        qWarning() << "Invalid PID format:" << pid;
         return;
+    }
     QString normalized = pid.toUpper();
 
     QSettings settings;

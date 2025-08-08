@@ -11,7 +11,7 @@ class ObdService : public QObject
     Q_OBJECT
 
 public:
-    ObdService(BluetoothManager* btManager, SettingsManager* settingsManagers, DataProvider* provider, QObject* parent = nullptr);
+    ObdService(BluetoothManager* btManager, SettingsManager* settingsManager, DataProvider* provider, QObject* parent = nullptr);
 
     void start(int intervalMs);
     void stop();
